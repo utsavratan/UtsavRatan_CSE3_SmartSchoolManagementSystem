@@ -2,6 +2,15 @@
 
 ---
 
+## 👨‍💻 Developers
+
+| Name          | Course                            | University                | Email                    |
+|:--------------|:----------------------------------|:---------------------------|:--------------------------|
+| **UTSAV RATAN** | B.Tech Computer Science Engineering | K.R. Mangalam University   | 2401010046@krmu.edu.in    |
+| **ISHAN JHA** | B.Tech Computer Science Engineering | K.R. Mangalam University | 2401010022@krmu.edu.in    |
+
+---
+
 ## 🚀 Project Overview
 
 **EduTrack** is a full-fledged Smart School Management System built with **React.js**. It provides efficient access to students' academic and administrative data through role-based dashboards for **Students**, **Teachers**, **Parents**, and **Admins**.
@@ -60,15 +69,6 @@ The platform is designed to streamline the management of student details, attend
 - **Mobile App Development** to extend EduTrack's reach on Android and iOS devices.
 - **Payment Gateway Integration** for online fee submission.
 - **Multi-language Support** for broader accessibility.
-
----
-
-## 👨‍💻 Developers
-
-| Name          | Course                            | University                | Email                    |
-|:--------------|:----------------------------------|:---------------------------|:--------------------------|
-| **UTSAV RATAN** | B.Tech Computer Science Engineering | K.R. Mangalam University   | 2401010046@krmu.edu.in    |
-| **ISHAN JHA** | B.Tech Computer Science Engineering | K.R. Mangalam University | 2401010022@krmu.edu.in    |
 
 ---
 
