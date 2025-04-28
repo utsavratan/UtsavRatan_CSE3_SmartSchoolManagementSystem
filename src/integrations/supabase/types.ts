@@ -9,7 +9,195 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      assignments: {
+        Row: {
+          class_level: string
+          created_at: string | null
+          description: string | null
+          due_date: string
+          id: string
+          subject: string
+          teacher_id: string | null
+          title: string
+        }
+        Insert: {
+          class_level: string
+          created_at?: string | null
+          description?: string | null
+          due_date: string
+          id?: string
+          subject: string
+          teacher_id?: string | null
+          title: string
+        }
+        Update: {
+          class_level?: string
+          created_at?: string | null
+          description?: string | null
+          due_date?: string
+          id?: string
+          subject?: string
+          teacher_id?: string | null
+          title?: string
+        }
+        Relationships: []
+      }
+      exam_datesheets: {
+        Row: {
+          class_level: string
+          created_at: string | null
+          duration_minutes: number
+          exam_date: string
+          exam_type: string
+          id: string
+          subject: string
+        }
+        Insert: {
+          class_level: string
+          created_at?: string | null
+          duration_minutes: number
+          exam_date: string
+          exam_type: string
+          id?: string
+          subject: string
+        }
+        Update: {
+          class_level?: string
+          created_at?: string | null
+          duration_minutes?: number
+          exam_date?: string
+          exam_type?: string
+          id?: string
+          subject?: string
+        }
+        Relationships: []
+      }
+      fees: {
+        Row: {
+          amount: number
+          created_at: string | null
+          due_date: string
+          fee_type: string
+          id: string
+          status: string
+          student_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string | null
+          due_date: string
+          fee_type: string
+          id?: string
+          status: string
+          student_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string | null
+          due_date?: string
+          fee_type?: string
+          id?: string
+          status?: string
+          student_id?: string
+        }
+        Relationships: []
+      }
+      holidays: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          end_date: string
+          holiday_name: string
+          id: string
+          start_date: string
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          end_date: string
+          holiday_name: string
+          id?: string
+          start_date: string
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          end_date?: string
+          holiday_name?: string
+          id?: string
+          start_date?: string
+        }
+        Relationships: []
+      }
+      results: {
+        Row: {
+          class_level: string
+          created_at: string | null
+          exam_date: string
+          exam_type: string
+          id: string
+          marks_obtained: number
+          student_id: string
+          subject: string
+          total_marks: number
+        }
+        Insert: {
+          class_level: string
+          created_at?: string | null
+          exam_date: string
+          exam_type: string
+          id?: string
+          marks_obtained: number
+          student_id: string
+          subject: string
+          total_marks: number
+        }
+        Update: {
+          class_level?: string
+          created_at?: string | null
+          exam_date?: string
+          exam_type?: string
+          id?: string
+          marks_obtained?: number
+          student_id?: string
+          subject?: string
+          total_marks?: number
+        }
+        Relationships: []
+      }
+      timetable: {
+        Row: {
+          class_level: string
+          day_of_week: string
+          end_time: string
+          id: string
+          room_number: string
+          start_time: string
+          subject: string
+          teacher_id: string | null
+        }
+        Insert: {
+          class_level: string
+          day_of_week: string
+          end_time: string
+          id?: string
+          room_number: string
+          start_time: string
+          subject: string
+          teacher_id?: string | null
+        }
+        Update: {
+          class_level?: string
+          day_of_week?: string
+          end_time?: string
+          id?: string
+          room_number?: string
+          start_time?: string
+          subject?: string
+          teacher_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
