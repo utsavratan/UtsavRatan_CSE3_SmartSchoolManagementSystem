@@ -13,7 +13,6 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, user
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Navbar userRole={userRole} />
       <div className="flex flex-1">
-        <Sidebar userRole={userRole} />
         <main className="flex-1 p-6 overflow-auto">
           {children}
         </main>
