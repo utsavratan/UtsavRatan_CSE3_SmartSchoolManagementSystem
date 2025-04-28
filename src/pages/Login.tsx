@@ -35,28 +35,25 @@ const Login = () => {
       return;
     }
     
-    // In a real app, authenticate with backend here
-    
-    // For demo purposes, just redirect to appropriate dashboard
     toast.success(`Logged in as ${role}`);
     navigate(`/${role}/dashboard`);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
-      <div className="w-full max-w-md space-y-8 animate-fade-in">
-        <div className="text-center">
-          <h1 className="text-3xl md:text-4xl font-bold">
-            Edu<span className="text-edutrack">Track</span>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-white p-4">
+      <div className="w-full max-w-md space-y-8">
+        <div className="text-center animate-fade-in">
+          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-blue-400 bg-clip-text text-transparent">
+            EduTrack
           </h1>
           <p className="mt-2 text-gray-600">
             Complete Digital School Management System
           </p>
         </div>
         
-        <Card>
+        <Card className="backdrop-blur-sm bg-white/80 border-0 shadow-lg animate-scale-in">
           <CardHeader>
-            <CardTitle>Login to Your Account</CardTitle>
+            <CardTitle>Welcome Back</CardTitle>
             <CardDescription>
               Enter your credentials to access the platform
             </CardDescription>
@@ -69,7 +66,7 @@ const Login = () => {
                   value={role}
                   onValueChange={setRole}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger className="bg-white">
                     <SelectValue placeholder="Select your role" />
                   </SelectTrigger>
                   <SelectContent>
@@ -89,6 +86,7 @@ const Login = () => {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   placeholder="Enter your username"
+                  className="bg-white"
                 />
               </div>
               
@@ -100,13 +98,14 @@ const Login = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
+                  className="bg-white"
                 />
               </div>
             </CardContent>
             <CardFooter>
               <Button 
                 type="submit" 
-                className="w-full bg-blue-600 hover:bg-blue-700"
+                className="w-full bg-primary hover:bg-primary/90"
               >
                 Sign In
               </Button>
