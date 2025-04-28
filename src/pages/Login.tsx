@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -51,7 +50,7 @@ const Login = () => {
           </p>
         </div>
         
-        <Card className="backdrop-blur-sm bg-white/80 border-0 shadow-lg animate-scale-in">
+        <Card className="backdrop-blur-sm bg-white shadow-lg animate-scale-in w-full max-w-md">
           <CardHeader>
             <CardTitle>Welcome Back</CardTitle>
             <CardDescription>
@@ -66,10 +65,10 @@ const Login = () => {
                   value={role}
                   onValueChange={setRole}
                 >
-                  <SelectTrigger className="bg-white">
+                  <SelectTrigger className="bg-white/95 backdrop-blur-sm border-gray-200">
                     <SelectValue placeholder="Select your role" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-white border-gray-200">
                     <SelectItem value="admin">Administrator</SelectItem>
                     <SelectItem value="teacher">Teacher</SelectItem>
                     <SelectItem value="student">Student</SelectItem>

@@ -27,54 +27,72 @@ const AdminDashboard = () => {
             title="Student Details"
             link="/admin/students"
             delay={1}
+            count={450}
+            description="Total Students"
           />
           <DashboardCard
             icon={<Users size={32} />}
             title="Parents Details"
             link="/admin/parents"
             delay={2}
+            count={380}
+            description="Total Parents"
           />
           <DashboardCard
             icon={<Calendar size={32} />}
             title="Holidays"
             link="/admin/holidays"
             delay={3}
+            count={12}
+            description="This Year"
           />
           <DashboardCard
             icon={<FileText size={32} />}
             title="Exams Datesheet"
             link="/admin/exams"
             delay={4}
+            count={3}
+            description="Upcoming Exams"
           />
           <DashboardCard
             icon={<FileText size={32} />}
             title="Results"
             link="/admin/results"
             delay={5}
+            count={6}
+            description="Classes Published"
           />
           <DashboardCard
             icon={<FileText size={32} />}
             title="Fees"
             link="/admin/fees"
             delay={6}
+            count={85}
+            description="Payment Complete %"
           />
           <DashboardCard
             icon={<Calendar size={32} />}
             title="Assignments"
             link="/admin/assignments"
             delay={7}
+            count={45}
+            description="This Week"
           />
           <DashboardCard
             icon={<Clock size={32} />}
             title="TimeTable"
             link="/admin/timetable"
             delay={8}
+            count={8}
+            description="Classes Per Day"
           />
           <DashboardCard
             icon={<MessageSquare size={32} />}
             title="ChatBot"
             link="/admin/chat"
             delay={9}
+            count={24}
+            description="Active Chats"
           />
         </div>
       </div>

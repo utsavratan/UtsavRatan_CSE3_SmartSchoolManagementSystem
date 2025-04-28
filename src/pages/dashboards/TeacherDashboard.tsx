@@ -27,42 +27,56 @@ const TeacherDashboard = () => {
             title="Student Details"
             link="/teacher/students"
             delay={1}
+            count={156}
+            description="Total Students"
           />
           <DashboardCard
             icon={<Clock size={32} />}
             title="Attendance"
             link="/teacher/attendance"
             delay={2}
+            count={92}
+            description="Present Today"
           />
           <DashboardCard
             icon={<FileText size={32} />}
             title="Exams Datesheet"
             link="/teacher/exams"
             delay={3}
+            count={3}
+            description="Upcoming Exams"
           />
           <DashboardCard
             icon={<FileText size={32} />}
             title="Results"
             link="/teacher/results"
             delay={4}
+            count={145}
+            description="Results Published"
           />
           <DashboardCard
             icon={<Calendar size={32} />}
             title="Assignments"
             link="/teacher/assignments"
             delay={5}
+            count={12}
+            description="Pending Review"
           />
           <DashboardCard
             icon={<Clock size={32} />}
             title="TimeTable"
             link="/teacher/timetable"
             delay={6}
+            count={6}
+            description="Classes Today"
           />
           <DashboardCard
             icon={<MessageSquare size={32} />}
             title="ChatBot"
             link="/teacher/chat"
             delay={7}
+            count={8}
+            description="New Messages"
           />
         </div>
       </div>
