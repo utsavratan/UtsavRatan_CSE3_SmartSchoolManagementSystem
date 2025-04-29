@@ -9,7 +9,7 @@ export const Fees = () => {
       type: 'Tuition',
       amount: 5000,
       due_date: '2025-04-01',
-      status: 'Paid',
+      status: 'UnPaid',
     },
     {
       id: 2,
