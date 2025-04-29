@@ -20,11 +20,8 @@ export const Attendance = () => {
   const { data: attendance, isLoading } = useQuery({
     queryKey: ['attendance'],
     queryFn: async () => {
-      // Use a raw query instead of the typed client since the types don't include the attendance table yet
-      const { data, error } = await supabase
-        .from('attendance')
-        .select('*')
-        .order('class_date', { ascending: false }) as { data: AttendanceRecord[] | null, error: any };
+      // Use the generic query method since the types don't include the attendance table yet
+      const { data, error } = await supabase.rpc('select_all_from_attendance') as { data: AttendanceRecord[] | null, error: any };
       
       if (error) throw error;
       return data || [];
