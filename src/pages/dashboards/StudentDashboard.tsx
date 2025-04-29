@@ -23,6 +23,14 @@ const StudentDashboard = () => {
         <div className="dashboard-grid">
           <DashboardCard
             icon={<FileText size={32} />}
+            title="Students Details"
+            link="/student/students"
+            delay={1}
+            count={1}
+            description="Details"
+          />
+          <DashboardCard
+            icon={<FileText size={32} />}
             title="Exams Datesheet"
             link="/student/exams"
             delay={1}
