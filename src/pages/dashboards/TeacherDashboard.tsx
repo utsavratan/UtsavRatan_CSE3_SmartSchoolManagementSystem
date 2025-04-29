@@ -59,7 +59,7 @@ const TeacherDashboard = () => {
             title="Assignments"
             link="/teacher/assignments"
             delay={5}
-            count={5}
+            count={6}
             description="Pending Review"
           />
           <DashboardCard
@@ -67,7 +67,7 @@ const TeacherDashboard = () => {
             title="TimeTable"
             link="/teacher/timetable"
             delay={6}
-            count={6}
+            count={4}
             description="Classes Today"
           />
           <DashboardCard
