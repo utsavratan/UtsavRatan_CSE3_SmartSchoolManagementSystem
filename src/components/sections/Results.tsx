@@ -1,8 +1,16 @@
 import React from 'react';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 
-export const Result = () => {
-  const results = [
+interface Result {
+  id: number;
+  subject: string;
+  score: number;
+  grade: string;
+  remarks: string;
+}
+
+export const Result: React.FC = () => {
+  const results: Result[] = [
     {
       id: 1,
       subject: 'Mathematics',
@@ -52,10 +60,10 @@ export const Result = () => {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Subject</TableHead>
-            <TableHead>Score</TableHead>
-            <TableHead>Grade</TableHead>
-            <TableHead>Remarks</TableHead>
+            <TableHead className="w-[200px]">Subject</TableHead>
+            <TableHead className="w-[100px]">Score</TableHead>
+            <TableHead className="w-[100px]">Grade</TableHead>
+            <TableHead className="w-[200px]">Remarks</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
