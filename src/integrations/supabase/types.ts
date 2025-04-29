@@ -21,14 +21,14 @@ export type Database = {
           title: string
         }
         Insert: {
-          class_level: string
+          class_level?: string
           created_at?: string | null
           description?: string | null
-          due_date: string
+          due_date?: string
           id?: string
-          subject: string
+          subject?: string
           teacher_id?: string | null
-          title: string
+          title?: string
         }
         Update: {
           class_level?: string
@@ -44,30 +44,39 @@ export type Database = {
       }
       exam_datesheets: {
         Row: {
+          "C++": string
+          Chemistry: string
           class_level: string
           created_at: string | null
           duration_minutes: number
           exam_date: string
           exam_type: string
           id: string
+          Maths: string
           subject: string
         }
         Insert: {
+          "C++"?: string
+          Chemistry?: string
           class_level: string
           created_at?: string | null
           duration_minutes: number
           exam_date: string
           exam_type: string
           id?: string
+          Maths?: string
           subject: string
         }
         Update: {
+          "C++"?: string
+          Chemistry?: string
           class_level?: string
           created_at?: string | null
           duration_minutes?: number
           exam_date?: string
           exam_type?: string
           id?: string
+          Maths?: string
           subject?: string
         }
         Relationships: []
