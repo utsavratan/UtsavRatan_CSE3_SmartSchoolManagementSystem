@@ -1,36 +1,31 @@
-
 import React from 'react';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
-import { useQuery } from '@tanstack/react-query';
-import { supabase } from "@/integrations/supabase/client";
-
-// Define a type for the attendance records to avoid TypeScript errors
-interface AttendanceRecord {
-  id: string;
-  student_id: string | null;
-  class_date: string;
-  status: 'Present' | 'Absent' | 'Late';
-  class_level: string;
-  subject: string;
-  created_at: string;
-}
 
 export const Attendance = () => {
-  // Use explicit typing for the data returned by the query
-  const { data: attendance, isLoading } = useQuery({
-    queryKey: ['attendance'],
-    queryFn: async () => {
-      // Use the rpc method to call the stored procedure
-      const { data, error } = await supabase.rpc('select_all_from_attendance') as { data: AttendanceRecord[] | null, error: any };
+  // Generate one week of attendance data with 4 classes per day
+  const generateAttendanceData = () => {
+    const data = [];
+    const startDate = new Date('2024-03-11'); // Starting from a Monday
+    const statuses = ['Present', 'Absent', 'Late'];
+    
+    for (let day = 0; day < 7; day++) {
+      const currentDate = new Date(startDate);
+      currentDate.setDate(startDate.getDate() + day);
       
-      if (error) throw error;
-      return data || [];
+      // 4 classes per day
+      for (let classNum = 1; classNum <= 4; classNum++) {
+        data.push({
+          id: `${day}-${classNum}`,
+          date: currentDate,
+          student_id: `STU${Math.floor(1000 + Math.random() * 9000)}`, // Random 4-digit student ID
+          status: statuses[Math.floor(Math.random() * statuses.length)]
+        });
+      }
     }
-  });
+    return data;
+  };
 
-  if (isLoading) {
-    return <div>Loading attendance data...</div>;
-  }
+  const attendance = generateAttendanceData();
 
   return (
     <div className="rounded-md border">
@@ -38,34 +33,18 @@ export const Attendance = () => {
         <TableHeader>
           <TableRow>
             <TableHead>Date</TableHead>
-            <TableHead>Subject</TableHead>
+            <TableHead>Student ID</TableHead>
             <TableHead>Status</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {attendance && attendance.length > 0 ? (
-            attendance.map((record: AttendanceRecord) => (
-              <TableRow key={record.id}>
-                <TableCell className="font-medium">{new Date(record.class_date).toLocaleDateString()}</TableCell>
-                <TableCell>{record.subject}</TableCell>
-                <TableCell>
-                  <span className={`px-2 py-1 rounded-full text-xs ${
-                    record.status === 'Present' ? 'bg-green-100 text-green-800' : 
-                    record.status === 'Late' ? 'bg-yellow-100 text-yellow-800' : 
-                    'bg-red-100 text-red-800'
-                  }`}>
-                    {record.status}
-                  </span>
-                </TableCell>
-              </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={3} className="text-center py-4 text-gray-500">
-                No attendance records found
-              </TableCell>
+          {attendance.map((record) => (
+            <TableRow key={record.id}>
+              <TableCell className="font-medium">{record.date.toLocaleDateString()}</TableCell>
+              <TableCell>{record.student_id}</TableCell>
+              <TableCell>{record.status}</TableCell>
             </TableRow>
-          )}
+          ))}
         </TableBody>
       </Table>
     </div>
