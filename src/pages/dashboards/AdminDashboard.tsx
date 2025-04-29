@@ -27,7 +27,7 @@ const AdminDashboard = () => {
             title="Student Details"
             link="/admin/students"
             delay={1}
-            count={450}
+            count={15}
             description="Total Students"
           />
           <DashboardCard
@@ -35,7 +35,7 @@ const AdminDashboard = () => {
             title="Parents Details"
             link="/admin/parents"
             delay={2}
-            count={380}
+            count={15}
             description="Total Parents"
           />
           <DashboardCard
@@ -43,7 +43,7 @@ const AdminDashboard = () => {
             title="Holidays"
             link="/admin/holidays"
             delay={3}
-            count={12}
+            count={45}
             description="This Year"
           />
           <DashboardCard
@@ -51,7 +51,7 @@ const AdminDashboard = () => {
             title="Exams Datesheet"
             link="/admin/exams"
             delay={4}
-            count={3}
+            count={6}
             description="Upcoming Exams"
           />
           <DashboardCard
@@ -67,15 +67,15 @@ const AdminDashboard = () => {
             title="Fees"
             link="/admin/fees"
             delay={6}
-            count={85}
-            description="Payment Complete %"
+            count={3}
+            description="Total Payment Complete"
           />
           <DashboardCard
             icon={<Calendar size={32} />}
             title="Assignments"
             link="/admin/assignments"
             delay={7}
-            count={45}
+            count={6}
             description="This Week"
           />
           <DashboardCard
@@ -83,7 +83,7 @@ const AdminDashboard = () => {
             title="TimeTable"
             link="/admin/timetable"
             delay={8}
-            count={8}
+            count={4}
             description="Classes Per Day"
           />
           <DashboardCard
@@ -91,7 +91,7 @@ const AdminDashboard = () => {
             title="ChatBot"
             link="/admin/chat"
             delay={9}
-            count={24}
+            count={"No"}
             description="Active Chats"
           />
         </div>
