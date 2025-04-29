@@ -12,6 +12,30 @@ export const Timetable = () => {
       end_time: '10:00',
       room_number: '101',
     },
+    {
+      id: 1,
+      subject: 'Science',
+      day_of_week: 'Monday',
+      start_time: '10:00',
+      end_time: '11:00',
+      room_number: '101',
+    },
+    {
+      id: 1,
+      subject: 'English',
+      day_of_week: 'Monday',
+      start_time: '12:00',
+      end_time: '01:00',
+      room_number: '101',
+    },
+    {
+      id: 1,
+      subject: 'Computer',
+      day_of_week: 'Monday',
+      start_time: '01:00',
+      end_time: '02:00',
+      room_number: '101',
+    },
     // Add more sample timetable entries if needed
   ];
 
