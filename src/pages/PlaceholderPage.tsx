@@ -1,53 +1,50 @@
-
 import React from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { DashboardLayout } from '@/components/DashboardLayout';
 import { ExamDatesheet } from '@/components/sections/ExamDatesheet';
-import Results from '@/components/sections/Results';
+import { Results } from '@/components/sections/Results';
 import { Fees } from '@/components/sections/Fees';
 import { Assignments } from '@/components/sections/Assignments';
 import { Timetable } from '@/components/sections/Timetable';
 import { Holidays } from '@/components/sections/Holidays';
-import { Attendance } from '@/components/sections/Attendance';
 
-const PlaceholderPage = () => {
+type SectionComponentKey = 'exams' | 'results' | 'fees' | 'assignments' | 'timetable' | 'holidays';
+
+const SECTION_COMPONENTS: Record<SectionComponentKey, React.ComponentType> = {
+  exams: ExamDatesheet,
+  results: Results,
+  fees: Fees,
+  assignments: Assignments,
+  timetable: Timetable,
+  holidays: Holidays,
+} as const;
+
+const PlaceholderPage: React.FC = () => {
   const { section } = useParams<{ section: string }>();
   const location = useLocation();
   const role = location.pathname.split('/')[1];
   
-  const getPageTitle = () => {
+  const getPageTitle = (): string => {
     const path = location.pathname.split('/').pop();
     return path ? path.charAt(0).toUpperCase() + path.slice(1) : 'Unknown';
   };
 
-  const renderSection = () => {
-    switch(section) {
-      case 'exams':
-        return <ExamDatesheet />;
-      case 'results':
-        return <Results />;
-      case 'fees':
-        return <Fees />;
-      case 'assignments':
-        return <Assignments />;
-      case 'timetable':
-        return <Timetable />;
-      case 'holidays':
-        return <Holidays />;
-      case 'attendance':
-        return <Attendance />;
-      default:
-        return (
-          <div className="text-center">
-            <h3 className="mt-4 text-lg font-semibold">
-              {getPageTitle()} Content Coming Soon
-            </h3>
-            <p className="mt-2 text-sm text-muted-foreground">
-              This section is under development.
-            </p>
-          </div>
-        );
+  const renderSection = (): JSX.Element => {
+    if (section && section in SECTION_COMPONENTS) {
+      const Component = SECTION_COMPONENTS[section as SectionComponentKey];
+      return <Component />;
     }
+
+    return (
+      <div className="text-center">
+        <h3 className="mt-4 text-lg font-semibold">
+          {getPageTitle()} Content Coming Soon
+        </h3>
+        <p className="mt-2 text-sm text-muted-foreground">
+          This section is under development.
+        </p>
+      </div>
+    );
   };
   
   return (
