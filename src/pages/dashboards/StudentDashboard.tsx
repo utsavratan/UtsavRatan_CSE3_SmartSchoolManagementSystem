@@ -26,7 +26,7 @@ const StudentDashboard = () => {
             title="Exams Datesheet"
             link="/student/exams"
             delay={1}
-            count={3}
+            count={6}
             description="Upcoming Exams"
           />
           <DashboardCard
@@ -42,23 +42,23 @@ const StudentDashboard = () => {
             title="Fees"
             link="/student/fees"
             delay={3}
-            count={2}
-            description="Pending Payments"
+            count={3}
+            description="Total Payments"
           />
           <DashboardCard
             icon={<Calendar size={32} />}
             title="Assignments"
             link="/student/assignments"
             delay={4}
-            count={5}
-            description="Due This Week"
+            count={6}
+            description="Total Assignmnets"
           />
           <DashboardCard
             icon={<Clock size={32} />}
             title="TimeTable"
             link="/student/timetable"
             delay={5}
-            count={8}
+            count={6}
             description="Classes Today"
           />
           <DashboardCard
@@ -66,7 +66,7 @@ const StudentDashboard = () => {
             title="Holidays"
             link="/student/holidays"
             delay={6}
-            count={12}
+            count={45}
             description="This Year"
           />
           <DashboardCard
@@ -82,7 +82,7 @@ const StudentDashboard = () => {
             title="ChatBot"
             link="/student/chat"
             delay={8}
-            count={3}
+            count={0}
             description="New Messages"
           />
         </div>
