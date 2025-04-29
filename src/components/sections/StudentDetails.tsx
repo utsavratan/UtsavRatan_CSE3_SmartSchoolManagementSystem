@@ -9,7 +9,7 @@ export const StudentDetails = () => {
     course: 'B.Tech CSE',
     address: 'New Delhi , India',
     parentsDetails: 'Mr. Rajeev Kumar and Mrs. Priyanka Kumari',
-    profileImage: '/public/lovable-uploads/utsav.jpeg', // Replace with actual image path
+    profileImage: '/lovable-uploads/utsav.jpeg', // Replace with actual image path
   };
 
   return (
