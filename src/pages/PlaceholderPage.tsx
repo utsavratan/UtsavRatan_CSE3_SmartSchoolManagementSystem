@@ -23,7 +23,7 @@ const PlaceholderPage = () => {
 
   const renderSection = () => {
     switch(section) {
-      case 'student-details':
+      case 'studentdetails':
         return <StudentDetails />;
       case 'exams':
         return <ExamDatesheet />;
