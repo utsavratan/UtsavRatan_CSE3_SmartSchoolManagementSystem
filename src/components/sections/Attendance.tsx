@@ -4,14 +4,27 @@ import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from "@/integrations/supabase/client";
 
+// Define a type for the attendance records to avoid TypeScript errors
+interface AttendanceRecord {
+  id: string;
+  student_id: string;
+  class_date: string;
+  status: 'Present' | 'Absent' | 'Late';
+  class_level: string;
+  subject: string;
+  created_at: string;
+}
+
 export const Attendance = () => {
+  // Use explicit typing for the data returned by the query
   const { data: attendance, isLoading } = useQuery({
     queryKey: ['attendance'],
     queryFn: async () => {
+      // Use a raw query instead of the typed client since the types don't include the attendance table yet
       const { data, error } = await supabase
         .from('attendance')
         .select('*')
-        .order('class_date', { ascending: false });
+        .order('class_date', { ascending: false }) as { data: AttendanceRecord[] | null, error: any };
       
       if (error) throw error;
       return data || [];
@@ -34,7 +47,7 @@ export const Attendance = () => {
         </TableHeader>
         <TableBody>
           {attendance && attendance.length > 0 ? (
-            attendance.map((record) => (
+            attendance.map((record: AttendanceRecord) => (
               <TableRow key={record.id}>
                 <TableCell className="font-medium">{new Date(record.class_date).toLocaleDateString()}</TableCell>
                 <TableCell>{record.subject}</TableCell>
