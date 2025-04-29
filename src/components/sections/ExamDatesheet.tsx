@@ -1,26 +1,18 @@
 
 import React from 'react';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
-import { useQuery } from '@tanstack/react-query';
-import { supabase } from "@/integrations/supabase/client";
 
 export const ExamDatesheet = () => {
-  const { data: exams, isLoading } = useQuery({
-    queryKey: ['exams'],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('exam_datesheets')
-        .select('*')
-        .order('exam_date', { ascending: true });
-      
-      if (error) throw error;
-      return data;
-    }
-  });
-
-  if (isLoading) {
-    return <div>Loading exam schedule...</div>;
-  }
+  const exams = [
+    {
+      id: 1,
+      subject: 'Mathematics',
+      exam_date: '2023-12-01',
+      duration_minutes: 90,
+      exam_type: 'Final',
+    },
+    // Add more sample exams if needed
+  ];
 
   return (
     <div className="rounded-md border">
@@ -34,7 +26,7 @@ export const ExamDatesheet = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {exams?.map((exam) => (
+          {exams.map((exam) => (
             <TableRow key={exam.id}>
               <TableCell className="font-medium">{exam.subject}</TableCell>
               <TableCell>{new Date(exam.exam_date).toLocaleDateString()}</TableCell>
