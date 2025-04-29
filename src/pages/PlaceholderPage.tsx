@@ -2,6 +2,7 @@
 import React from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { DashboardLayout } from '@/components/DashboardLayout';
+import { StudentDetails } from '@/components/sections/StudentDetails';
 import { ExamDatesheet } from '@/components/sections/ExamDatesheet';
 import { Results } from '@/components/sections/Results';
 import { Fees } from '@/components/sections/Fees';
