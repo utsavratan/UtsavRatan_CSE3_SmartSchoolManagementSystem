@@ -27,7 +27,7 @@ const TeacherDashboard = () => {
             title="Student Details"
             link="/teacher/students"
             delay={1}
-            count={156}
+            count={15}
             description="Total Students"
           />
           <DashboardCard
@@ -35,7 +35,7 @@ const TeacherDashboard = () => {
             title="Attendance"
             link="/teacher/attendance"
             delay={2}
-            count={92}
+            count={11}
             description="Present Today"
           />
           <DashboardCard
@@ -43,7 +43,7 @@ const TeacherDashboard = () => {
             title="Exams Datesheet"
             link="/teacher/exams"
             delay={3}
-            count={3}
+            count={6}
             description="Upcoming Exams"
           />
           <DashboardCard
@@ -51,7 +51,7 @@ const TeacherDashboard = () => {
             title="Results"
             link="/teacher/results"
             delay={4}
-            count={145}
+            count={6}
             description="Results Published"
           />
           <DashboardCard
@@ -59,7 +59,7 @@ const TeacherDashboard = () => {
             title="Assignments"
             link="/teacher/assignments"
             delay={5}
-            count={12}
+            count={5}
             description="Pending Review"
           />
           <DashboardCard
@@ -75,7 +75,7 @@ const TeacherDashboard = () => {
             title="ChatBot"
             link="/teacher/chat"
             delay={7}
-            count={8}
+            count={"No"}
             description="New Messages"
           />
         </div>
