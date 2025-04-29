@@ -58,7 +58,7 @@ const StudentDashboard = () => {
             title="TimeTable"
             link="/student/timetable"
             delay={5}
-            count={6}
+            count={4}
             description="Classes Today"
           />
           <DashboardCard
