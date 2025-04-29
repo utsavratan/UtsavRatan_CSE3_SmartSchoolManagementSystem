@@ -45,7 +45,6 @@ export const Result = () => {
       grade: 'A',
       remarks: 'Excellent',
     },
-    // Add more sample results if needed
   ];
 
   return (
