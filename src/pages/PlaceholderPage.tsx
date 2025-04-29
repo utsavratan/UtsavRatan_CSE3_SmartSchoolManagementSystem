@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { DashboardLayout } from '@/components/DashboardLayout';
@@ -7,15 +8,6 @@ import { Fees } from '@/components/sections/Fees';
 import { Assignments } from '@/components/sections/Assignments';
 import { Timetable } from '@/components/sections/Timetable';
 import { Holidays } from '@/components/sections/Holidays';
-
-const SECTION_COMPONENTS = {
-  exams: ExamDatesheet,
-  results: Results,
-  fees: Fees,
-  assignments: Assignments,
-  timetable: Timetable,
-  holidays: Holidays,
-} as const;
 
 const PlaceholderPage = () => {
   const { section } = useParams<{ section: string }>();
@@ -28,22 +20,31 @@ const PlaceholderPage = () => {
   };
 
   const renderSection = () => {
-    const Component = section ? SECTION_COMPONENTS[section as keyof typeof SECTION_COMPONENTS] : null;
-    
-    if (Component) {
-      return <Component />;
+    switch(section) {
+      case 'exams':
+        return <ExamDatesheet />;
+      case 'results':
+        return <Results />;
+      case 'fees':
+        return <Fees />;
+      case 'assignments':
+        return <Assignments />;
+      case 'timetable':
+        return <Timetable />;
+      case 'holidays':
+        return <Holidays />;
+      default:
+        return (
+          <div className="text-center">
+            <h3 className="mt-4 text-lg font-semibold">
+              {getPageTitle()} Content Coming Soon
+            </h3>
+            <p className="mt-2 text-sm text-muted-foreground">
+              This section is under development.
+            </p>
+          </div>
+        );
     }
-
-    return (
-      <div className="text-center">
-        <h3 className="mt-4 text-lg font-semibold">
-          {getPageTitle()} Content Coming Soon
-        </h3>
-        <p className="mt-2 text-sm text-muted-foreground">
-          This section is under development.
-        </p>
-      </div>
-    );
   };
   
   return (
