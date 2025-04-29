@@ -1,4 +1,3 @@
-import React from 'react';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 
 interface Result {
@@ -9,7 +8,7 @@ interface Result {
   remarks: string;
 }
 
-export const Result: React.FC = () => {
+export const Result = () => {
   const results: Result[] = [
     {
       id: 1,
@@ -61,8 +60,8 @@ export const Result: React.FC = () => {
         <TableHeader>
           <TableRow>
             <TableHead className="w-[200px]">Subject</TableHead>
-            <TableHead className="w-[100px]">Score</TableHead>
-            <TableHead className="w-[100px]">Grade</TableHead>
+            <TableHead className="w-[100px] text-right">Score</TableHead>
+            <TableHead className="w-[100px] text-center">Grade</TableHead>
             <TableHead className="w-[200px]">Remarks</TableHead>
           </TableRow>
         </TableHeader>
@@ -70,8 +69,8 @@ export const Result: React.FC = () => {
           {results.map((result) => (
             <TableRow key={result.id}>
               <TableCell className="font-medium">{result.subject}</TableCell>
-              <TableCell>{result.score}</TableCell>
-              <TableCell>{result.grade}</TableCell>
+              <TableCell className="text-right">{result.score}</TableCell>
+              <TableCell className="text-center">{result.grade}</TableCell>
               <TableCell>{result.remarks}</TableCell>
             </TableRow>
           ))}
