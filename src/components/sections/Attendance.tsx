@@ -2,11 +2,15 @@ import React from 'react';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 
 export const Attendance = () => {
-  // Generate one week of attendance data with 4 classes per day
+  // Generate one week of attendance data with 4 classes per day for a specific student
   const generateAttendanceData = () => {
     const data = [];
     const startDate = new Date('2024-03-11'); // Starting from a Monday
     const statuses = ['Present', 'Absent', 'Late'];
+    const subjects = ['Mathematics', 'Science', 'English', 'Computer'];
+    const teachers = ['Rupesh Sir', 'Pankaj Sir', 'Mayank Sir', 'Rahul Sir'];
+    const rooms = ['101', '101', '101', '101'];
+    const studentName = 'Utsav Ratan'; // Specific student name
     
     for (let day = 0; day < 7; day++) {
       const currentDate = new Date(startDate);
@@ -17,8 +21,13 @@ export const Attendance = () => {
         data.push({
           id: `${day}-${classNum}`,
           date: currentDate,
-          student_id: `STU${Math.floor(1000 + Math.random() * 9000)}`, // Random 4-digit student ID
-          status: statuses[Math.floor(Math.random() * statuses.length)]
+          student_name: studentName,
+          status: statuses[Math.floor(Math.random() * statuses.length)],
+          subject: subjects[classNum - 1],
+          teacher: teachers[classNum - 1],
+          room: rooms[classNum - 1],
+          grade: Math.floor(Math.random() * 31) + 70, // Random grade between 70-100
+          notes: Math.random() > 0.7 ? 'Needs improvement' : 'Good performance'
         });
       }
     }
@@ -33,16 +42,26 @@ export const Attendance = () => {
         <TableHeader>
           <TableRow>
             <TableHead>Date</TableHead>
-            <TableHead>Student ID</TableHead>
+            <TableHead>Student Name</TableHead>
+            <TableHead>Subject</TableHead>
+            <TableHead>Teacher</TableHead>
+            <TableHead>Room</TableHead>
             <TableHead>Status</TableHead>
+            <TableHead>Grade</TableHead>
+            <TableHead>Notes</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {attendance.map((record) => (
-            <TableRow key={record.id}>
+            <TableRow key={record.id} className={record.status === 'Absent' ? 'bg-red-100' : record.status === 'Present' ? 'bg-green-100' : ''}>
               <TableCell className="font-medium">{record.date.toLocaleDateString()}</TableCell>
-              <TableCell>{record.student_id}</TableCell>
+              <TableCell>{record.student_name}</TableCell>
+              <TableCell>{record.subject}</TableCell>
+              <TableCell>{record.teacher}</TableCell>
+              <TableCell>{record.room}</TableCell>
               <TableCell>{record.status}</TableCell>
+              <TableCell>{record.grade}</TableCell>
+              <TableCell>{record.notes}</TableCell>
             </TableRow>
           ))}
         </TableBody>
