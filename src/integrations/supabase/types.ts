@@ -42,6 +42,36 @@ export type Database = {
         }
         Relationships: []
       }
+      attendance: {
+        Row: {
+          class_date: string
+          class_level: string
+          created_at: string | null
+          id: string
+          status: string
+          student_id: string | null
+          subject: string
+        }
+        Insert: {
+          class_date: string
+          class_level: string
+          created_at?: string | null
+          id?: string
+          status: string
+          student_id?: string | null
+          subject: string
+        }
+        Update: {
+          class_date?: string
+          class_level?: string
+          created_at?: string | null
+          id?: string
+          status?: string
+          student_id?: string | null
+          subject?: string
+        }
+        Relationships: []
+      }
       exam_datesheets: {
         Row: {
           "C++": string
@@ -212,7 +242,18 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      select_all_from_attendance: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          id: string
+          student_id: string
+          class_date: string
+          status: string
+          class_level: string
+          subject: string
+          created_at: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never

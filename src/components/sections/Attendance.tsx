@@ -7,7 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 // Define a type for the attendance records to avoid TypeScript errors
 interface AttendanceRecord {
   id: string;
-  student_id: string;
+  student_id: string | null;
   class_date: string;
   status: 'Present' | 'Absent' | 'Late';
   class_level: string;
@@ -20,7 +20,7 @@ export const Attendance = () => {
   const { data: attendance, isLoading } = useQuery({
     queryKey: ['attendance'],
     queryFn: async () => {
-      // Use the generic query method since the types don't include the attendance table yet
+      // Use the rpc method to call the stored procedure
       const { data, error } = await supabase.rpc('select_all_from_attendance') as { data: AttendanceRecord[] | null, error: any };
       
       if (error) throw error;
