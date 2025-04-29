@@ -1,26 +1,52 @@
-
 import React from 'react';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
-import { useQuery } from '@tanstack/react-query';
-import { supabase } from "@/integrations/supabase/client";
 
-export const Results = () => {
-  const { data: results, isLoading } = useQuery({
-    queryKey: ['results'],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('results')
-        .select('*')
-        .order('exam_date', { ascending: false });
-      
-      if (error) throw error;
-      return data;
-    }
-  });
-
-  if (isLoading) {
-    return <div>Loading results...</div>;
-  }
+export const Result = () => {
+  const results = [
+    {
+      id: 1,
+      subject: 'Mathematics',
+      score: 95,
+      grade: 'A',
+      remarks: 'Excellent',
+    },
+    {
+      id: 2,
+      subject: 'Science',
+      score: 95,
+      grade: 'A',
+      remarks: 'Excellent',
+    },
+    {
+      id: 3,
+      subject: 'English',
+      score: 92,
+      grade: 'A',
+      remarks: 'Excellent',
+    },
+    {
+      id: 4,
+      subject: 'Hindi',
+      score: 90,
+      grade: 'A',
+      remarks: 'Excellent',
+    },
+    {
+      id: 5,
+      subject: 'Computer',
+      score: 99,
+      grade: 'A',
+      remarks: 'Excellent',
+    },
+    {
+      id: 6,
+      subject: 'Social Science',
+      score: 98,
+      grade: 'A',
+      remarks: 'Excellent',
+    },
+    // Add more sample results if needed
+  ];
 
   return (
     <div className="rounded-md border">
@@ -28,24 +54,18 @@ export const Results = () => {
         <TableHeader>
           <TableRow>
             <TableHead>Subject</TableHead>
-            <TableHead>Marks Obtained</TableHead>
-            <TableHead>Total Marks</TableHead>
-            <TableHead>Percentage</TableHead>
-            <TableHead>Exam Type</TableHead>
-            <TableHead>Date</TableHead>
+            <TableHead>Score</TableHead>
+            <TableHead>Grade</TableHead>
+            <TableHead>Remarks</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {results?.map((result) => (
+          {results.map((result) => (
             <TableRow key={result.id}>
               <TableCell className="font-medium">{result.subject}</TableCell>
-              <TableCell>{result.marks_obtained}</TableCell>
-              <TableCell>{result.total_marks}</TableCell>
-              <TableCell>
-                {((result.marks_obtained / result.total_marks) * 100).toFixed(2)}%
-              </TableCell>
-              <TableCell>{result.exam_type}</TableCell>
-              <TableCell>{new Date(result.exam_date).toLocaleDateString()}</TableCell>
+              <TableCell>{result.score}</TableCell>
+              <TableCell>{result.grade}</TableCell>
+              <TableCell>{result.remarks}</TableCell>
             </TableRow>
           ))}
         </TableBody>
