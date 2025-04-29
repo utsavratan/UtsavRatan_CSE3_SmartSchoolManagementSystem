@@ -9,6 +9,7 @@ import { Fees } from '@/components/sections/Fees';
 import { Assignments } from '@/components/sections/Assignments';
 import { Timetable } from '@/components/sections/Timetable';
 import { Holidays } from '@/components/sections/Holidays';
+import { Attendance } from '@/components/sections/Attendance';
 
 const PlaceholderPage = () => {
   const { section } = useParams<{ section: string }>();
@@ -22,6 +23,8 @@ const PlaceholderPage = () => {
 
   const renderSection = () => {
     switch(section) {
+      case 'student-details':
+        return <StudentDetails />;
       case 'exams':
         return <ExamDatesheet />;
       case 'results':
@@ -34,6 +37,8 @@ const PlaceholderPage = () => {
         return <Timetable />;
       case 'holidays':
         return <Holidays />;
+      case 'attendance':
+        return <Attendance />;
       default:
         return (
           <div className="text-center">
