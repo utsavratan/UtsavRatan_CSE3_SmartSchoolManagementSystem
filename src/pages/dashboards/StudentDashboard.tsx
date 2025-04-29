@@ -24,7 +24,7 @@ const StudentDashboard = () => {
           <DashboardCard
             icon={<FileText size={32} />}
             title="Students Details"
-            link="/student/"
+            link="/student/student-details"
             delay={1}
             count={1}
             description="Details"
