@@ -27,7 +27,7 @@ const ParentDashboard = () => {
             title="Children"
             link="/parent/children"
             delay={1}
-            count={2}
+            count={1}
             description="Enrolled"
           />
           <DashboardCard
@@ -35,7 +35,7 @@ const ParentDashboard = () => {
             title="Results"
             link="/parent/results"
             delay={2}
-            count={12}
+            count={6}
             description="Total Subjects"
           />
           <DashboardCard
@@ -43,16 +43,16 @@ const ParentDashboard = () => {
             title="Fees"
             link="/parent/fees"
             delay={3}
-            count={2}
-            description="Pending Payments"
+            count={3}
+            description="Total Payments"
           />
           <DashboardCard
             icon={<Calendar size={32} />}
             title="Assignments"
             link="/parent/assignments"
             delay={4}
-            count={8}
-            description="Due This Week"
+            count={6}
+            description="This Week"
           />
           <DashboardCard
             icon={<Clock size={32} />}
@@ -67,7 +67,7 @@ const ParentDashboard = () => {
             title="Holidays"
             link="/parent/holidays"
             delay={6}
-            count={12}
+            count={45}
             description="This Year"
           />
           <DashboardCard
@@ -75,7 +75,7 @@ const ParentDashboard = () => {
             title="ChatBot"
             link="/parent/chat"
             delay={7}
-            count={5}
+            count={"No"}
             description="New Messages"
           />
         </div>
