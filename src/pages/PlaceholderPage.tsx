@@ -2,15 +2,13 @@ import React from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { DashboardLayout } from '@/components/DashboardLayout';
 import { ExamDatesheet } from '@/components/sections/ExamDatesheet';
-import { Results } from '@/components/sections/Result'; // Fixed import path
+import { Results } from '@/components/sections/Results';
 import { Fees } from '@/components/sections/Fees';
 import { Assignments } from '@/components/sections/Assignments';
 import { Timetable } from '@/components/sections/Timetable';
 import { Holidays } from '@/components/sections/Holidays';
 
-type SectionComponentKey = 'exams' | 'results' | 'fees' | 'assignments' | 'timetable' | 'holidays';
-
-const SECTION_COMPONENTS: Record<SectionComponentKey, React.ComponentType> = {
+const SECTION_COMPONENTS = {
   exams: ExamDatesheet,
   results: Results,
   fees: Fees,
@@ -19,19 +17,20 @@ const SECTION_COMPONENTS: Record<SectionComponentKey, React.ComponentType> = {
   holidays: Holidays,
 } as const;
 
-const PlaceholderPage: React.FC = () => {
+const PlaceholderPage = () => {
   const { section } = useParams<{ section: string }>();
   const location = useLocation();
   const role = location.pathname.split('/')[1];
   
-  const getPageTitle = (): string => {
+  const getPageTitle = () => {
     const path = location.pathname.split('/').pop();
     return path ? path.charAt(0).toUpperCase() + path.slice(1) : 'Unknown';
   };
 
-  const renderSection = (): JSX.Element => {
-    if (section && section in SECTION_COMPONENTS) {
-      const Component = SECTION_COMPONENTS[section as SectionComponentKey];
+  const renderSection = () => {
+    const Component = section ? SECTION_COMPONENTS[section as keyof typeof SECTION_COMPONENTS] : null;
+    
+    if (Component) {
       return <Component />;
     }
 
