@@ -17,7 +17,7 @@ const Index = () => {
                   Edu<span className="text-edutrack">Track</span>
                 </h1>
                 <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl">
-                  Complete Digital School Management System
+                  Smart School Management System
                 </p>
               </div>
               <div className="space-x-4">
@@ -83,7 +83,7 @@ const Index = () => {
                       <line x1="8" y1="2" x2="8" y2="6"></line>
                       <line x1="3" y1="10" x2="21" y2="10"></line>
                     </svg>
-                    <h3 className="text-lg font-semibold">Attendance Tracking</h3>
+                    <h3 className="text-lg font-semibold">Attendance Track</h3>
                   </div>
                   <div className="flex flex-col items-center space-y-2 border p-4 rounded-lg">
                     <svg
@@ -104,7 +104,7 @@ const Index = () => {
                       <line x1="16" y1="17" x2="8" y2="17"></line>
                       <polyline points="10 9 9 9 8 9"></polyline>
                     </svg>
-                    <h3 className="text-lg font-semibold">Examination Management</h3>
+                    <h3 className="text-lg font-semibold">Examinations</h3>
                   </div>
                   <div className="flex flex-col items-center space-y-2 border p-4 rounded-lg">
                     <svg
@@ -122,7 +122,7 @@ const Index = () => {
                       <circle cx="12" cy="12" r="10"></circle>
                       <polyline points="12 6 12 12 16 14"></polyline>
                     </svg>
-                    <h3 className="text-lg font-semibold">Real-Time Communication</h3>
+                    <h3 className="text-lg font-semibold">Communication</h3>
                   </div>
                 </div>
               </div>
@@ -135,10 +135,10 @@ const Index = () => {
             <div className="mx-auto flex max-w-5xl flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                  Ready to Streamline Your School Management?
+                  Ready to Streamline Your School Management ?
                 </h2>
                 <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl">
-                  Join thousands of educational institutions that trust EduTrack for their digital management needs.
+                  Join educational institutions that trust EduTrack for their digital management needs.
                 </p>
               </div>
               <div className="space-x-4">
@@ -158,15 +158,6 @@ const Index = () => {
             © 2025 EduTrack. All rights reserved.
           </p>
           <nav className="flex gap-4 sm:gap-6">
-            <Link to="#" className="text-sm hover:underline underline-offset-4">
-              Terms of Service
-            </Link>
-            <Link to="#" className="text-sm hover:underline underline-offset-4">
-              Privacy
-            </Link>
-            <Link to="#" className="text-sm hover:underline underline-offset-4">
-              Contact Us
-            </Link>
           </nav>
         </div>
       </footer>
