@@ -1,5 +1,6 @@
 import React from 'react';
 import QRCode from 'qrcode.react';
+import { Fees } from '/student/Fees';
 
 export const Fees = () => {
   const fees = [
