@@ -7,7 +7,21 @@ export const ExamDatesheet = () => {
     {
       id: 1,
       subject: 'Mathematics',
-      exam_date: '2023-12-01',
+      exam_date: '2025-06-01',
+      duration_minutes: 90,
+      exam_type: 'Final',
+    },
+    {
+      id: 1,
+      subject: 'Science',
+      exam_date: '2025-06-02',
+      duration_minutes: 90,
+      exam_type: 'Final',
+    },
+    {
+      id: 1,
+      subject: 'Computer',
+      exam_date: '2025-06-03',
       duration_minutes: 90,
       exam_type: 'Final',
     },
