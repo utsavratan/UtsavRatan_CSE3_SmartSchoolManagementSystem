@@ -1,26 +1,18 @@
 
 import React from 'react';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
-import { useQuery } from '@tanstack/react-query';
-import { supabase } from "@/integrations/supabase/client";
 
 export const Assignments = () => {
-  const { data: assignments, isLoading } = useQuery({
-    queryKey: ['assignments'],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('assignments')
-        .select('*')
-        .order('due_date', { ascending: true });
-      
-      if (error) throw error;
-      return data;
-    }
-  });
-
-  if (isLoading) {
-    return <div>Loading assignments...</div>;
-  }
+  const assignments = [
+    {
+      id: 1,
+      title: 'Chapter 5 Exercises',
+      subject: 'Mathematics',
+      due_date: '2023-11-15',
+      description: 'Complete the exercises on page 42',
+    },
+    // Add more sample assignments if needed
+  ];
 
   return (
     <div className="rounded-md border">
@@ -34,7 +26,7 @@ export const Assignments = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {assignments?.map((assignment) => (
+          {assignments.map((assignment) => (
             <TableRow key={assignment.id}>
               <TableCell className="font-medium">{assignment.title}</TableCell>
               <TableCell>{assignment.subject}</TableCell>
