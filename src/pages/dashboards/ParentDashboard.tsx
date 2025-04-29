@@ -25,7 +25,7 @@ const ParentDashboard = () => {
           <DashboardCard
             icon={<Users size={32} />}
             title="Children"
-            link="/parent/children"
+            link="/parent/student-details"
             delay={1}
             count={1}
             description="Enrolled"
