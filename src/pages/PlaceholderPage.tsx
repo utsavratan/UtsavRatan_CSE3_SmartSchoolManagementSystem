@@ -10,6 +10,7 @@ import { Assignments } from '@/components/sections/Assignments';
 import { Timetable } from '@/components/sections/Timetable';
 import { Holidays } from '@/components/sections/Holidays';
 import { Attendance } from '@/components/sections/Attendance';
+import { Chatbot } from '@/components/sections/chatbot';
 
 const PlaceholderPage = () => {
   const { section } = useParams<{ section: string }>();
@@ -39,6 +40,8 @@ const PlaceholderPage = () => {
         return <Holidays />;
       case 'attendance':
         return <Attendance />;
+      case 'chatbot':
+        return <chatbot />;
       default:
         return (
           <div className="text-center">
