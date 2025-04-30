@@ -164,7 +164,6 @@ const Index = () => {
           <p className="text-sm text-gray-500">
             © 2025 EduTrack. All rights reserved.
           </p>
-          </nav>
         </div>
       </footer>
 
