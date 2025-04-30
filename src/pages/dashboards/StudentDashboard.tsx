@@ -88,7 +88,7 @@ const StudentDashboard = () => {
           <DashboardCard
             icon={<MessageSquare size={32} />}
             title="ChatBot"
-            link="/student/chat"
+            link="/student/chatbot"
             delay={8}
             count={"No"}
             description="New Messages"
