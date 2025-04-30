@@ -26,6 +26,14 @@ const Login = () => {
   const [role, setRole] = useState('student');
   const navigate = useNavigate();
 
+  // Predefined credentials for each role
+  const credentials = {
+    admin: { username: 'admin', password: '4' },
+    teacher: { username: 'teacher', password: '3' },
+    student: { username: 'student', password: '1' },
+    parent: { username: 'parent', password: '2' }
+  };
+
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -33,9 +41,15 @@ const Login = () => {
       toast.error("Please enter both username and password");
       return;
     }
+
+    const roleCredentials = credentials[role as keyof typeof credentials];
     
-    toast.success(`Logged in as ${role}`);
-    navigate(`/${role}/dashboard`);
+    if (username === roleCredentials.username && password === roleCredentials.password) {
+      toast.success(`Logged in as ${role}`);
+      navigate(`/${role}/dashboard`);
+    } else {
+      toast.error("Invalid username or password");
+    }
   };
 
   return (
