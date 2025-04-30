@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
-import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 const Index = () => {
