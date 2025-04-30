@@ -164,10 +164,6 @@ const Index = () => {
           <p className="text-sm text-gray-500">
             © 2025 EduTrack. All rights reserved.
           </p>
-          <nav className="flex gap-4 sm:gap-6">
-            <Link to="/privacy" className="text-sm text-gray-500 hover:text-blue-600">Privacy Policy</Link>
-            <Link to="/terms" className="text-sm text-gray-500 hover:text-blue-600">Terms of Service</Link>
-            <Link to="/contact" className="text-sm text-gray-500 hover:text-blue-600">Contact</Link>
           </nav>
         </div>
       </footer>
