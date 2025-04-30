@@ -5,196 +5,94 @@
 
 @layer base {
   :root {
-    --background: 210 100% 98%;
+    --background: 210 40% 98%;
     --foreground: 222.2 84% 4.9%;
-
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
-
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 199 89% 52%;
+    --primary: 199 89% 57%;
     --primary-foreground: 210 40% 98%;
-
-    --secondary: 199 89% 85%;
+    --secondary: 217 92% 91%;
     --secondary-foreground: 222.2 47.4% 11.2%;
-
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
-
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 199 89% 52%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --ring: 221 83% 53%;
+    --radius: 0.75rem;
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-}
-
-@layer base {
   * {
-    @apply border-border;
+    @apply border-border scroll-smooth;
   }
 
   body {
-    @apply bg-background text-foreground;
-    scroll-behavior: smooth;
-  }
-
-  /* Custom scroll behavior */
-  html {
-    scroll-behavior: smooth;
-  }
-
-  /* Scroll animations */
-  .reveal {
-    position: relative;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease;
-  }
-
-  .reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .reveal-delay-200 {
-    transition-delay: 0.2s;
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
   
-  .reveal-delay-400 {
-    transition-delay: 0.4s;
-  }
-  
-  .reveal-delay-600 {
-    transition-delay: 0.6s;
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    @apply w-2;
   }
 
-  /* Animated background */
-  .animated-bg {
-    background: linear-gradient(45deg, rgba(51, 195, 240, 0.1), rgba(255, 255, 255, 0.3), rgba(135, 206, 235, 0.2));
-    background-size: 400% 400%;
-    animation: gradient-shift 15s ease infinite;
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
   }
 
-  .circle {
-    border-radius: 50%;
-    background: radial-gradient(circle at center, rgba(135, 206, 235, 0.8), rgba(255, 255, 255, 0.4));
-    position: absolute;
-    filter: blur(10px);
-    z-index: -1;
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/20 rounded-full hover:bg-primary/30 transition-colors;
   }
 
-  .bubble {
-    position: absolute;
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), rgba(135, 206, 235, 0.4));
-    box-shadow: 0 0 10px rgba(135, 206, 235, 0.3);
-    z-index: -1;
+  /* Animation Classes */
+  .fade-in-section {
+    @apply opacity-0 translate-y-8 transition-all duration-700;
   }
 
-  /* Feature card effects */
-  .feature-card {
-    transition: all 0.3s ease;
-    overflow: hidden;
-    position: relative;
+  .fade-in-section.is-visible {
+    @apply opacity-100 translate-y-0;
   }
 
-  .feature-card::before {
+  .slide-in-right {
+    @apply translate-x-8 opacity-0;
+    animation: slideInRight 0.6s ease forwards;
+  }
+
+  @keyframes slideInRight {
+    to {
+      @apply translate-x-0 opacity-100;
+    }
+  }
+
+  /* Card and Container Styles */
+  .dashboard-card {
+    @apply bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 
+           flex flex-col items-center justify-center gap-4 hover:-translate-y-1 cursor-pointer
+           relative overflow-hidden group;
+  }
+
+  .dashboard-card::before {
     content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(225deg, rgba(135, 206, 235, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    @apply absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 
+           opacity-0 transition-opacity duration-300;
   }
 
-  .feature-card:hover::before {
-    opacity: 1;
+  .dashboard-card:hover::before {
+    @apply opacity-100;
   }
 
-  .feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px -5px rgba(51, 195, 240, 0.3);
+  .dashboard-card-icon {
+    @apply w-16 h-16 flex items-center justify-center rounded-full 
+           bg-primary/10 text-primary transition-colors duration-300
+           group-hover:bg-primary group-hover:text-white;
   }
 
-  .feature-icon {
-    transition: all 0.3s ease;
-  }
-
-  .feature-card:hover .feature-icon {
-    transform: scale(1.1) translateY(-5px);
-    color: #33C3F0;
-  }
-
-  /* Button effects */
-  .cta-button {
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-  }
-
-  .cta-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left 0.7s ease;
-  }
-
-  .cta-button:hover::before {
-    left: 100%;
+  .dashboard-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6;
   }
 }
