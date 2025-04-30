@@ -1,5 +1,5 @@
 
-const API_KEY = "YOUR_GEMINI_API_KEY"; // Replace with your actual API key or use environment variables
+const API_KEY = "AIzaSyA9fMkh6lRMlVf9Mq-KVoWzQSlOkhb1lcE"; // Replace with your actual API key or use environment variables
 
 interface GeminiRequest {
   contents: {
@@ -23,7 +23,7 @@ export async function getGeminiResponse(userMessage: string): Promise<string> {
       return "Please configure your Gemini API key to use this chatbot feature.";
     }
     
-    const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent";
+    const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
     
     const requestBody: GeminiRequest = {
       contents: [
