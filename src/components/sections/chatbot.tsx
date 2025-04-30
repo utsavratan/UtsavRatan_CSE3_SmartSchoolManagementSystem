@@ -1,189 +1,153 @@
-// Chatbot.tsx
-import React, { useState, useRef, useEffect } from "react";
 
-// Add type definitions for window objects
-declare global {
-  interface Window {
-    responsiveVoice: any;
-    SpeechRecognition: any;
-    webkitSpeechRecognition: any;
-  }
+import { useState, useRef, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Send, Bot } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
+import AnimatedBackground from "@/components/AnimatedBackground";
+import { getGeminiResponse } from "@/services/geminiService";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+
+interface Message {
+  role: "user" | "assistant";
+  content: string;
 }
 
-const Chatbot: React.FC = () => {
-  const [messages, setMessages] = useState<{ type: "user" | "bot"; text: string }[]>([
-    { type: "bot", text: "Hello! How can I assist you today?" },
+const ChatBot = () => {
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      role: "assistant",
+      content: "Hello! I'm EduTrack's AI assistant. How can I help you today?",
+    },
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const chatBoxRef = useRef<HTMLDivElement>(null);
+  const [isSendHovered, setIsSendHovered] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const { toast } = useToast();
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   useEffect(() => {
-    chatBoxRef.current?.scrollTo(0, chatBoxRef.current.scrollHeight);
+    scrollToBottom();
   }, [messages]);
 
-  const sendMessage = async (text?: string) => {
-    const userInput = text ?? input.trim();
-    if (!userInput) return;
+  const handleSendMessage = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!input.trim()) return;
+    
+    // Add user message to the chat
+    const userMessage = { role: "user" as const, content: input };
+    setMessages((prev) => [...prev, userMessage]);
+    setInput("");
+    setIsLoading(true);
     
     try {
-      setIsLoading(true);
-      setMessages((prev) => [...prev, { type: "user", text: userInput }]);
-      setInput("");
-
-      const botResponse = await getGeminiResponse(userInput);
-      setMessages((prev) => [...prev, { type: "bot", text: botResponse }]);
-      speakText(botResponse);
+      // Get response from Gemini API
+      const response = await getGeminiResponse(input);
+      
+      // Add assistant message to the chat
+      setMessages((prev) => [...prev, { role: "assistant", content: response }]);
     } catch (error) {
-      console.error("Error sending message:", error);
-      setMessages((prev) => [...prev, { type: "bot", text: "Sorry, something went wrong. Please try again." }]);
+      console.error("Error fetching response:", error);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to get response. Please try again.",
+      });
     } finally {
       setIsLoading(false);
     }
   };
 
-  const getGeminiResponse = async (inputText: string): Promise<string> => {
-    const API_KEY = "AIzaSyA9fMkh6lRMlVf9Mq-KVoWzQSlOkhb1lcE";
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`;
-    
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: inputText }] }],
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      return data.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't process that.";
-    } catch (error) {
-      console.error("Error fetching Gemini response:", error);
-      return "Error fetching response. Please try again.";
-    }
-  };
-
-  const speakText = (text: string) => {
-    if (typeof window !== 'undefined' && window.responsiveVoice) {
-      window.responsiveVoice.speak(text, "UK English Female", { rate: 1 });
-    }
-  };
-
-  const startVoiceRecognition = () => {
-    if (typeof window === 'undefined') return;
-    
-    try {
-      const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!Recognition) {
-        alert("Speech recognition is not supported in this browser.");
-        return;
-      }
-
-      const recognition = new Recognition();
-      recognition.continuous = false;
-      recognition.interimResults = false;
-      recognition.lang = "en-US";
-      
-      recognition.onresult = (event: any) => {
-        const transcript = event.results[0][0].transcript;
-        setInput(transcript);
-        sendMessage(transcript);
-      };
-      
-      recognition.onerror = (event: any) => {
-        console.error("Speech recognition error:", event.error);
-        alert("Error with speech recognition. Please try again.");
-      };
-      
-      recognition.start();
-    } catch (error) {
-      console.error("Error starting voice recognition:", error);
-      alert("Could not start voice recognition. Please try again.");
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-800 p-6">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl font-bold mb-6 text-blue-500">ChatBot</h2>
-        <div className="bg-white rounded-lg shadow-md p-4">
-          <div
-            ref={chatBoxRef}
-            className="max-h-96 overflow-y-auto space-y-4 p-2"
-          >
-            {messages.map((msg, idx) => (
-              <div
-                key={idx}
-                className={`flex items-start gap-3 ${msg.type === "user" ? "justify-end" : "justify-start"}`}
-              >
-                {msg.type === "bot" && (
-                  <img
-                    src="/lovable-uploads/bot.png"
-                    alt="Bot"
-                    className="rounded-full w-10 h-10"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = 'https://via.placeholder.com/40';
-                    }}
-                  />
-                )}
+    <div className="min-h-screen flex flex-col">
+      <AnimatedBackground />
+      
+      {/* Header - Removed "Back to Home" button */}
+      <header className="bg-skyBlue/90 backdrop-blur-md p-4 shadow-md relative z-10">
+        <div className="container mx-auto flex justify-center items-center">
+          <h1 className="text-2xl font-bold text-white">EduTrack ChatBot</h1>
+        </div>
+      </header>
+
+      {/* Chat Container */}
+      <div className="flex-grow container mx-auto p-4 flex flex-col relative z-10">
+        <Card className="flex-grow flex flex-col bg-white/90 backdrop-blur-md shadow-xl overflow-hidden">
+          <CardContent className="p-0 flex flex-col h-full">
+            {/* Messages area */}
+            <div className="flex-grow p-4 overflow-y-auto space-y-6">
+              {messages.map((message, i) => (
                 <div
-                  className={`px-4 py-2 rounded-lg text-sm shadow-sm ${
-                    msg.type === "user"
-                      ? "bg-blue-100 text-blue-800"
-                      : "bg-gray-100 text-gray-700"
+                  key={i}
+                  className={`flex items-start gap-3 ${
+                    message.role === "user" ? "flex-row-reverse" : "flex-row"
                   }`}
                 >
-                  {msg.text}
+                  {/* Avatar */}
+                  <Avatar className={`${message.role === "assistant" ? "border-2 border-skyBlue" : "border-2 border-gray-300"}`}>
+                    {message.role === "assistant" ? (
+                      <AvatarImage src="/public/lovable-uploads/bot.png" alt="Bot" />
+                    ) : (
+                      <AvatarImage src="/public/lovable-uploads/img1.jpeg" alt="User" />
+                    )}
+                    <AvatarFallback>
+                      {message.role === "assistant" ? <Bot size={20} /> : "U"}
+                    </AvatarFallback>
+                  </Avatar>
+                  
+                  {/* Message bubble */}
+                  <div
+                    className={`p-3 rounded-lg max-w-[80%] ${
+                      message.role === "user"
+                        ? "bg-skyBlue text-white rounded-tr-none"
+                        : "bg-gray-100 text-gray-800 rounded-tl-none"
+                    }`}
+                  >
+                    {message.content}
+                  </div>
                 </div>
-                {msg.type === "user" && (
-                  <img
-                    src="/lovable-uploads/img1.jpeg"
-                    alt="User"
-                    className="rounded-full w-10 h-10"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = 'https://via.placeholder.com/40';
-                    }}
-                  />
-                )}
+              ))}
+              <div ref={messagesEndRef} />
+            </div>
+            
+            {/* Input area */}
+            <form onSubmit={handleSendMessage} className="border-t p-4">
+              <div className="flex gap-2">
+                <Textarea
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="Type your question here..."
+                  className="flex-grow resize-none"
+                  rows={1}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      e.preventDefault();
+                      handleSendMessage(e);
+                    }
+                  }}
+                />
+                <Button 
+                  type="submit" 
+                  className={`bg-skyBlue hover:bg-skyBlueDark text-white flex items-center gap-2 transition-all duration-300 ${isSendHovered ? 'scale-110 shadow-lg' : ''}`}
+                  disabled={isLoading}
+                  onMouseEnter={() => setIsSendHovered(true)}
+                  onMouseLeave={() => setIsSendHovered(false)}
+                >
+                  <Send size={18} className={`transition-transform duration-300 ${isSendHovered ? 'translate-x-1' : ''}`} />
+                  {isLoading ? "Sending..." : "Send"}
+                </Button>
               </div>
-            ))}
-          </div>
-          <div className="mt-4 flex">
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && !isLoading && sendMessage()}
-              className="flex-1 p-2 rounded-l-md border border-gray-300 focus:outline-blue-400"
-              placeholder="Type your message..."
-              disabled={isLoading}
-            />
-            <button
-              onClick={() => sendMessage()}
-              className={`bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-r-md ${
-                isLoading ? 'opacity-50 cursor-not-allowed' : ''
-              }`}
-              disabled={isLoading}
-            >
-              {isLoading ? 'Sending...' : 'Send'}
-            </button>
-            <button
-              onClick={startVoiceRecognition}
-              className={`ml-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md ${
-                isLoading ? 'opacity-50 cursor-not-allowed' : ''
-              }`}
-              disabled={isLoading}
-            >
-              🎤
-            </button>
-          </div>
-        </div>
+            </form>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
 };
 
-export default Chatbot;
+export default ChatBot;
