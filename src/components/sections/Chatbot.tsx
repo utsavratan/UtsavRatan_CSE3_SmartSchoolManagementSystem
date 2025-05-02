@@ -65,55 +65,50 @@ export const Chatbot = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-200px)] flex flex-col">
+    <div className="min-h-[calc(100vh-150px)] flex flex-col">
       <AnimatedBackground />
       
       {/* Header */}
-      <header className="bg-gradient-to-r from-primary to-primary/80 py-3 px-4 shadow-md relative z-10 rounded-t-lg mx-4 mt-4">
+      <header className="bg-primary/90 backdrop-blur-md p-4 shadow-md relative z-10">
         <div className="container mx-auto flex justify-center items-center">
-          <Bot className="text-white mr-2" size={22} />
-          <h1 className="text-xl font-bold text-white">EduTrack AI Assistant</h1>
+          <h1 className="text-2xl font-bold text-white">EduTrack ChatBot</h1>
         </div>
       </header>
 
       {/* Chat Container */}
-      <div className="flex-grow container mx-auto px-4 pb-4 flex flex-col relative z-10">
-        <Card className="flex-grow flex flex-col bg-white/95 backdrop-blur-md shadow-xl overflow-hidden border border-gray-100 rounded-b-lg">
+      <div className="flex-grow container mx-auto p-4 flex flex-col relative z-10">
+        <Card className="flex-grow flex flex-col bg-white/90 backdrop-blur-md shadow-xl overflow-hidden">
           <CardContent className="p-0 flex flex-col h-full">
             {/* Messages area */}
-            <div className="flex-grow p-4 overflow-y-auto space-y-4 max-h-[calc(100vh-300px)]">
+            <div className="flex-grow p-4 overflow-y-auto space-y-6">
               {messages.map((message, i) => (
                 <div
                   key={i}
                   className={`flex items-start gap-3 ${
                     message.role === "user" ? "flex-row-reverse" : "flex-row"
-                  } animate-fade-in`}
+                  }`}
                 >
                   {/* Avatar */}
-                  <Avatar className={`${
-                    message.role === "assistant" 
-                      ? "border-2 border-primary shadow-sm" 
-                      : "border-2 border-gray-300 shadow-sm"
-                  } h-8 w-8`}>
+                  <Avatar className={`${message.role === "assistant" ? "border-2 border-primary" : "border-2 border-gray-300"}`}>
                     {message.role === "assistant" ? (
                       <AvatarImage src="/lovable-uploads/bot.png" alt="Bot" />
                     ) : (
                       <AvatarImage src="/lovable-uploads/img1.jpeg" alt="User" />
                     )}
-                    <AvatarFallback className="text-xs">
-                      {message.role === "assistant" ? <Bot size={14} /> : "U"}
+                    <AvatarFallback>
+                      {message.role === "assistant" ? <Bot size={20} /> : "U"}
                     </AvatarFallback>
                   </Avatar>
                   
                   {/* Message bubble */}
                   <div
-                    className={`p-2.5 rounded-lg max-w-[80%] shadow-sm ${
+                    className={`p-3 rounded-lg max-w-[80%] ${
                       message.role === "user"
                         ? "bg-primary text-white rounded-tr-none"
                         : "bg-gray-100 text-gray-800 rounded-tl-none"
                     }`}
                   >
-                    <p className="text-sm">{message.content}</p>
+                    {message.content}
                   </div>
                 </div>
               ))}
@@ -121,32 +116,29 @@ export const Chatbot = () => {
             </div>
             
             {/* Input area */}
-            <form onSubmit={handleSendMessage} className="border-t p-3 bg-gray-50/80">
-              <div className="flex items-center gap-2">
+            <form onSubmit={handleSendMessage} className="border-t p-4">
+              <div className="flex gap-2">
                 <Textarea
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ask me anything..."
-                  className="flex-grow resize-none py-2 px-3 min-h-0 h-10 overflow-hidden text-sm border-gray-200 focus:border-primary"
+                  placeholder="Type your question here..."
+                  className="flex-grow resize-none"
+                  rows={1}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" && !e.shiftKey) {
                       e.preventDefault();
                       handleSendMessage(e);
                     }
                   }}
-                  style={{ height: '40px' }}  /* Fixed height */
                 />
                 <Button 
                   type="submit" 
-                  size="sm"
-                  className={`h-10 bg-primary hover:bg-primary/90 text-white flex items-center gap-2 transition-all duration-300 ${
-                    isSendHovered ? 'scale-105 shadow-md' : ''
-                  }`}
+                  className={`bg-primary hover:bg-primary/80 text-white flex items-center gap-2 transition-all duration-300 ${isSendHovered ? 'scale-110 shadow-lg' : ''}`}
                   disabled={isLoading}
                   onMouseEnter={() => setIsSendHovered(true)}
                   onMouseLeave={() => setIsSendHovered(false)}
                 >
-                  <Send size={16} className={`transition-transform duration-300 ${isSendHovered ? 'translate-x-0.5' : ''}`} />
+                  <Send size={18} className={`transition-transform duration-300 ${isSendHovered ? 'translate-x-1' : ''}`} />
                   {isLoading ? "Sending..." : "Send"}
                 </Button>
               </div>
