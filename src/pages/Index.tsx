@@ -109,7 +109,7 @@ export default function Index() {
   return (
     <div className="min-h-screen overflow-x-hidden">
       {/* Hero Section with Animated Background */}
-      <div className="relative h-screen overflow-hidden bg-gradient-to-br from-violet-900 via-purple-800 to-indigo-900">
+      <div className="relative h-screen overflow-hidden bg-gradient-to-br from-primary/90 via-blue-500 to-indigo-700">
         <div className="absolute inset-0 w-full h-full">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_600px,rgba(120,119,198,0.3)_0%,rgba(255,255,255,0)_60%)]"></div>
           <svg className="absolute bottom-0 left-0 right-0 opacity-20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -133,10 +133,10 @@ export default function Index() {
                 transition={{ delay: 0.2, duration: 0.8 }}
                 className="mb-6"
               >
-                <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent mb-3 tracking-tight">
+                <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent mb-3 tracking-tight">
                   EduTrack
                 </h1>
-                <div className="h-1 w-32 md:w-48 bg-gradient-to-r from-purple-400 to-indigo-300 mx-auto rounded-full mb-4"></div>
+                <div className="h-1 w-24 md:w-32 bg-gradient-to-r from-blue-400 to-indigo-300 mx-auto rounded-full mb-4"></div>
               </motion.div>
               
               <motion.div
@@ -144,16 +144,16 @@ export default function Index() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.5 }}
               >
-                <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
+                <h2 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
                   {heroSlides[currentSlide].heading}
                 </h2>
-                <p className="mt-4 text-lg text-purple-100">
+                <p className="mt-3 text-md md:text-lg text-blue-100">
                   {heroSlides[currentSlide].subheading}
                 </p>
               </motion.div>
 
               <motion.div 
-                className="mt-8"
+                className="mt-6 md:mt-8"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6, duration: 0.5 }}
@@ -161,7 +161,7 @@ export default function Index() {
                 <Link to="/login">
                   <Button 
                     size="lg" 
-                    className="bg-white text-purple-900 hover:bg-purple-100 hover:scale-105 transform transition-all duration-200 group"
+                    className="bg-white text-primary hover:bg-blue-100 hover:scale-105 transform transition-all duration-200 group"
                   >
                     Get Started
                     <ChevronRight className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
@@ -170,35 +170,35 @@ export default function Index() {
               </motion.div>
 
               <motion.div
-                className="pt-8 flex gap-10 justify-center"
+                className="pt-6 md:pt-8 flex gap-6 md:gap-8 justify-center"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.8, duration: 0.5 }}
               >
                 <div className="flex flex-col items-center">
                   <div className="flex items-center">
-                    <GraduationCap className="h-5 w-5 mr-2 text-purple-300" />
-                    <span className="text-white font-semibold">3 Roles</span>
+                    <GraduationCap className="h-4 w-4 mr-1 md:h-5 md:w-5 md:mr-2 text-blue-300" />
+                    <span className="text-white font-semibold text-sm md:text-base">3 Roles</span>
                   </div>
-                  <p className="text-xs text-purple-300">Students, Teachers, Parents</p>
+                  <p className="text-xs text-blue-300">Students, Teachers, Parents</p>
                 </div>
                 <div className="flex flex-col items-center">
                   <div className="flex items-center">
-                    <Clock className="h-5 w-5 mr-2 text-purple-300" />
-                    <span className="text-white font-semibold">24/7</span>
+                    <Clock className="h-4 w-4 mr-1 md:h-5 md:w-5 md:mr-2 text-blue-300" />
+                    <span className="text-white font-semibold text-sm md:text-base">24/7</span>
                   </div>
-                  <p className="text-xs text-purple-300">Access Anytime</p>
+                  <p className="text-xs text-blue-300">Access Anytime</p>
                 </div>
               </motion.div>
             </motion.div>
           </AnimatePresence>
 
-          <div className="absolute bottom-8 left-0 right-0 flex justify-center gap-2">
+          <div className="absolute bottom-16 left-0 right-0 flex justify-center gap-2">
             {heroSlides.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all duration-300 ${
                   currentSlide === index ? "bg-white scale-125" : "bg-white/40"
                 }`}
                 aria-label={`Go to slide ${index + 1}`}
@@ -209,15 +209,15 @@ export default function Index() {
       </div>
 
       {/* Stats Section */}
-      <section ref={statsRef} className="py-16 bg-gradient-to-r from-violet-900 to-indigo-800 text-white relative overflow-hidden">
+      <section ref={statsRef} className="py-16 bg-gradient-to-r from-primary to-blue-600 text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute right-0 bottom-0 w-72 h-72 bg-white rounded-full blur-3xl -mr-20 -mb-20"></div>
-          <div className="absolute left-0 top-0 w-72 h-72 bg-purple-400 rounded-full blur-3xl -ml-20 -mt-20"></div>
+          <div className="absolute left-0 top-0 w-72 h-72 bg-blue-400 rounded-full blur-3xl -ml-20 -mt-20"></div>
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Impact on Educational Management</h2>
-            <p className="text-purple-200 max-w-2xl mx-auto">
+            <p className="text-blue-200 max-w-2xl mx-auto">
               See how EduTrack is transforming educational institutions
             </p>
           </div>
@@ -243,11 +243,11 @@ export default function Index() {
                     stiffness: 100, 
                     delay: 0.1 * index 
                   }}
-                  className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent mb-2"
+                  className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent mb-2"
                 >
                   {stat.value}
                 </motion.div>
-                <p className="text-purple-200">{stat.label}</p>
+                <p className="text-blue-200">{stat.label}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -255,7 +255,7 @@ export default function Index() {
       </section>
 
       {/* Testimonials */}
-      <section ref={testimonialRef} className="py-20 bg-gradient-to-b from-white to-purple-50">
+      <section ref={testimonialRef} className="py-20 bg-gradient-to-b from-white to-blue-50">
         <div className="container mx-auto px-4">
           <motion.div
             initial="hidden"
@@ -282,18 +282,18 @@ export default function Index() {
                 key={index}
                 variants={itemVariants}
                 whileHover={{ y: -5, boxShadow: "0 10px 30px rgba(0,0,0,0.1)" }}
-                className="bg-white rounded-xl p-8 shadow-lg border border-purple-100"
+                className="bg-white rounded-xl p-8 shadow-lg border border-blue-100"
               >
                 <div className="flex flex-col h-full">
                   <div className="mb-4">
-                    <svg className="h-8 w-8 text-purple-500" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                    <svg className="h-8 w-8 text-primary" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
                       <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104-6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
                     </svg>
                   </div>
                   <p className="text-gray-600 mb-4 flex-grow">{testimonial.comment}</p>
                   <div className="mt-6">
                     <p className="font-semibold text-gray-900">{testimonial.name}</p>
-                    <p className="text-purple-600 text-sm">{testimonial.role}</p>
+                    <p className="text-primary text-sm">{testimonial.role}</p>
                   </div>
                 </div>
               </motion.div>
@@ -303,9 +303,9 @@ export default function Index() {
       </section>
 
       {/* Developers Section */}
-      <section ref={developerRef} className="py-20 bg-gradient-to-r from-violet-900 via-purple-800 to-indigo-900 text-white relative overflow-hidden">
+      <section ref={developerRef} className="py-20 bg-gradient-to-r from-primary/90 via-blue-500 to-indigo-700 text-white relative overflow-hidden">
         <div className="absolute inset-0 w-full h-full">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(139,92,246,0.3)_0%,rgba(255,255,255,0)_60%)]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(99,162,230,0.3)_0%,rgba(255,255,255,0)_60%)]"></div>
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
@@ -317,7 +317,7 @@ export default function Index() {
             className="max-w-3xl mx-auto text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Meet Our Developers</h2>
-            <p className="text-lg text-purple-200">
+            <p className="text-lg text-blue-200">
               The talented team behind EduTrack's development
             </p>
           </motion.div>
@@ -336,13 +336,13 @@ export default function Index() {
                 className="bg-white/10 backdrop-blur-md rounded-xl p-8 border border-white/20"
               >
                 <div className="flex flex-col items-center text-center">
-                  <div className="w-24 h-24 rounded-full bg-gradient-to-r from-purple-400 to-indigo-400 flex items-center justify-center mb-4">
-                    <span className="text-3xl font-bold">{dev.name[0]}</span>
+                  <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-r from-blue-400 to-indigo-400 flex items-center justify-center mb-4">
+                    <span className="text-2xl md:text-3xl font-bold">{dev.name[0]}</span>
                   </div>
                   <h3 className="text-xl font-bold text-white mb-1">{dev.name}</h3>
-                  <p className="text-purple-200 mb-1">{dev.role}</p>
-                  <p className="text-purple-300 text-sm mb-3">{dev.university}</p>
-                  <p className="text-purple-300 text-sm mb-4">{dev.email}</p>
+                  <p className="text-blue-200 mb-1">{dev.role}</p>
+                  <p className="text-blue-300 text-sm mb-2">{dev.university}</p>
+                  <p className="text-blue-300 text-sm mb-3">{dev.email}</p>
                   <div className="flex justify-center space-x-4">
                     <a href={dev.github} target="_blank" rel="noopener noreferrer" 
                       className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors">
@@ -361,9 +361,9 @@ export default function Index() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-b from-indigo-900 to-gray-900 text-white relative overflow-hidden">
+      <section className="py-20 bg-gradient-to-b from-indigo-700 to-blue-900 text-white relative overflow-hidden">
         <div className="absolute inset-0 w-full h-full">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(139,92,246,0.3)_0%,rgba(255,255,255,0)_60%)]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(99,162,230,0.3)_0%,rgba(255,255,255,0)_60%)]"></div>
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
@@ -375,13 +375,13 @@ export default function Index() {
             className="max-w-3xl mx-auto text-center"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to transform your school management?</h2>
-            <p className="text-lg text-purple-200 mb-8">
+            <p className="text-lg text-blue-200 mb-8">
               Join thousands of educational institutions already using EduTrack to streamline their operations.
             </p>
             <Link to="/login">
               <Button 
                 size="lg" 
-                className="bg-white text-purple-900 hover:bg-purple-100 hover:scale-105 transform transition-all duration-200"
+                className="bg-white text-primary hover:bg-blue-100 hover:scale-105 transform transition-all duration-200"
               >
                 Get Started Today
               </Button>
@@ -391,15 +391,15 @@ export default function Index() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
+      <footer className="bg-blue-900 text-white py-12">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div>
               <h3 className="text-lg font-semibold mb-2">EduTrack</h3>
-              <p className="text-gray-400 text-sm">Smart School Management System</p>
+              <p className="text-blue-300 text-sm">Smart School Management System</p>
             </div>
             <div className="mt-4 md:mt-0">
-              <p className="text-gray-500 text-sm">
+              <p className="text-blue-400 text-sm">
                 © 2025 EduTrack. All rights reserved.
               </p>
             </div>
