@@ -323,7 +323,7 @@ export default function Index() {
               >
                 <div className="flex flex-col items-center text-center">
                   <div className="w-24 h-24 rounded-full bg-gradient-to-r from-purple-400 to-indigo-400 flex items-center justify-center mb-4">
-                    <span className="text-3xl font-bold">{dev.name[0]}</span>
+                    <img src={`/lovable-uploads/${dev.name.toLowerCase()}.jpeg`} alt={dev.name} className="w-full h-full object-cover rounded-full" />
                   </div>
                   <h3 className="text-xl font-bold text-white mb-1">{dev.name}</h3>
                   <p className="text-purple-200 mb-1">{dev.role}</p>
