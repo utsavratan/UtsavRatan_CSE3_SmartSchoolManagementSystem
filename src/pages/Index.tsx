@@ -1,25 +1,23 @@
+
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  BookOpen, 
-  Users, 
-  BarChart3, 
-  Calendar, 
-  Bell, 
-  CheckCircle, 
   ChevronRight,
   GraduationCap,
-  Clock
+  Clock,
+  Github,
+  Linkedin
 } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
+import AnimatedBackground from '../components/AnimatedBackground';
 
 export default function Index() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const { ref: featuresRef, inView: featuresVisible } = useInView({ threshold: 0.2, triggerOnce: true });
   const { ref: statsRef, inView: statsVisible } = useInView({ threshold: 0.2, triggerOnce: true });
   const { ref: testimonialRef, inView: testimonialVisible } = useInView({ threshold: 0.2, triggerOnce: true });
+  const { ref: developerRef, inView: developerVisible } = useInView({ threshold: 0.2, triggerOnce: true });
 
   const heroSlides = [
     {
@@ -34,15 +32,6 @@ export default function Index() {
       heading: "Efficient Administration",
       subheading: "Simplify administrative tasks with automated workflows",
     }
-  ];
-
-  const features = [
-    { icon: <BookOpen className="h-8 w-8 text-primary" />, title: "Comprehensive Learning Management", description: "Manage assignments, resources, and student progress in one place" },
-    { icon: <Users className="h-8 w-8 text-primary" />, title: "Multi-Role System", description: "Tailored dashboards for students, parents, teachers, and administrators" },
-    { icon: <BarChart3 className="h-8 w-8 text-primary" />, title: "Performance Analytics", description: "Track academic progress with detailed visual reports and insights" },
-    { icon: <Calendar className="h-8 w-8 text-primary" />, title: "Smart Scheduling", description: "Manage timetables, exams, and events efficiently" },
-    { icon: <Bell className="h-8 w-8 text-primary" />, title: "Real-time Notifications", description: "Keep everyone informed with instant updates and alerts" },
-    { icon: <CheckCircle className="h-8 w-8 text-primary" />, title: "Attendance Tracking", description: "Monitor and manage student attendance with ease" },
   ];
 
   const stats = [
@@ -67,6 +56,25 @@ export default function Index() {
       name: "Prof. Kumar",
       role: "Teacher",
       comment: "The grading and assessment tools have made my job much easier. I can focus more on teaching and less on paperwork."
+    }
+  ];
+
+  const developers = [
+    {
+      name: "Utsav Ratan",
+      role: "Full Stack Developer",
+      university: "K.R. Mangalam University",
+      email: "2401010046@krmu.edu.in",
+      github: "https://github.com/utsavratan",
+      linkedin: "https://linkedin.com/in/utsavratan"
+    },
+    {
+      name: "Ishan Jha",
+      role: "Full Stack Developer",
+      university: "K.R. Mangalam University",
+      email: "2401010022@krmu.edu.in",
+      github: "https://github.com/ishanjha",
+      linkedin: "https://linkedin.com/in/ishanjha"
     }
   ];
 
@@ -109,7 +117,7 @@ export default function Index() {
           </svg>
         </div>
 
-        <div className="container mx-auto px-4 pt-20 md:pt-32 relative z-10">
+        <div className="container mx-auto px-4 pt-16 md:pt-24 relative z-10">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide}
@@ -123,12 +131,12 @@ export default function Index() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2, duration: 0.8 }}
-                className="mb-8"
+                className="mb-6"
               >
-                <h1 className="text-7xl md:text-9xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent mb-4 tracking-tight">
+                <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent mb-3 tracking-tight">
                   EduTrack
                 </h1>
-                <div className="h-1 w-40 md:w-60 bg-gradient-to-r from-purple-400 to-indigo-300 mx-auto rounded-full mb-6"></div>
+                <div className="h-1 w-32 md:w-48 bg-gradient-to-r from-purple-400 to-indigo-300 mx-auto rounded-full mb-4"></div>
               </motion.div>
               
               <motion.div
@@ -136,16 +144,16 @@ export default function Index() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.5 }}
               >
-                <h2 className="text-5xl lg:text-6xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
+                <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
                   {heroSlides[currentSlide].heading}
                 </h2>
-                <p className="mt-6 text-lg text-purple-100">
+                <p className="mt-4 text-lg text-purple-100">
                   {heroSlides[currentSlide].subheading}
                 </p>
               </motion.div>
 
               <motion.div 
-                className="mt-10"
+                className="mt-8"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6, duration: 0.5 }}
@@ -162,7 +170,7 @@ export default function Index() {
               </motion.div>
 
               <motion.div
-                className="pt-10 flex gap-6 justify-center"
+                className="pt-8 flex gap-10 justify-center"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.8, duration: 0.5 }}
@@ -199,47 +207,6 @@ export default function Index() {
           </div>
         </div>
       </div>
-
-      {/* Features Section */}
-      <section ref={featuresRef} className="py-20 bg-gradient-to-b from-purple-50 to-white">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial="hidden"
-            animate={featuresVisible ? "visible" : "hidden"}
-            variants={containerVariants}
-            className="text-center mb-16"
-          >
-            <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Powerful Features for Modern Education
-            </motion.h2>
-            <motion.p variants={itemVariants} className="text-lg text-gray-600 max-w-2xl mx-auto">
-              EduTrack delivers comprehensive tools designed to enhance every aspect of educational management
-            </motion.p>
-          </motion.div>
-
-          <motion.div 
-            initial="hidden"
-            animate={featuresVisible ? "visible" : "hidden"}
-            variants={containerVariants}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10"
-          >
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                whileHover={{ y: -5, boxShadow: "0 10px 30px rgba(0,0,0,0.1)" }}
-                className="bg-white rounded-xl p-6 shadow-lg border border-purple-100 transition-all"
-              >
-                <div className="h-14 w-14 rounded-lg bg-purple-100 flex items-center justify-center mb-4">
-                  {feature.icon}
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
 
       {/* Stats Section */}
       <section ref={statsRef} className="py-16 bg-gradient-to-r from-violet-900 to-indigo-800 text-white relative overflow-hidden">
@@ -335,8 +302,66 @@ export default function Index() {
         </div>
       </section>
 
+      {/* Developers Section */}
+      <section ref={developerRef} className="py-20 bg-gradient-to-r from-violet-900 via-purple-800 to-indigo-900 text-white relative overflow-hidden">
+        <div className="absolute inset-0 w-full h-full">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(139,92,246,0.3)_0%,rgba(255,255,255,0)_60%)]"></div>
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="max-w-3xl mx-auto text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Meet Our Developers</h2>
+            <p className="text-lg text-purple-200">
+              The talented team behind EduTrack's development
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            animate={developerVisible ? "visible" : "hidden"}
+            variants={containerVariants}
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+          >
+            {developers.map((dev, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                whileHover={{ y: -5, boxShadow: "0 10px 30px rgba(0,0,0,0.2)" }}
+                className="bg-white/10 backdrop-blur-md rounded-xl p-8 border border-white/20"
+              >
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-24 h-24 rounded-full bg-gradient-to-r from-purple-400 to-indigo-400 flex items-center justify-center mb-4">
+                    <span className="text-3xl font-bold">{dev.name[0]}</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-1">{dev.name}</h3>
+                  <p className="text-purple-200 mb-1">{dev.role}</p>
+                  <p className="text-purple-300 text-sm mb-3">{dev.university}</p>
+                  <p className="text-purple-300 text-sm mb-4">{dev.email}</p>
+                  <div className="flex justify-center space-x-4">
+                    <a href={dev.github} target="_blank" rel="noopener noreferrer" 
+                      className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors">
+                      <Github className="w-5 h-5 text-white" />
+                    </a>
+                    <a href={dev.linkedin} target="_blank" rel="noopener noreferrer"
+                      className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors">
+                      <Linkedin className="w-5 h-5 text-white" />
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-violet-900 via-purple-800 to-indigo-900 text-white relative overflow-hidden">
+      <section className="py-20 bg-gradient-to-b from-indigo-900 to-gray-900 text-white relative overflow-hidden">
         <div className="absolute inset-0 w-full h-full">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(139,92,246,0.3)_0%,rgba(255,255,255,0)_60%)]"></div>
         </div>
@@ -368,51 +393,15 @@ export default function Index() {
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="flex flex-col md:flex-row justify-between items-center">
             <div>
-              <h3 className="text-lg font-semibold mb-4">EduTrack</h3>
+              <h3 className="text-lg font-semibold mb-2">EduTrack</h3>
               <p className="text-gray-400 text-sm">Smart School Management System</p>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Features</h3>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li>Student Management</li>
-                <li>Teacher Dashboard</li>
-                <li>Parent Portal</li>
-                <li>Admin Controls</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Resources</h3>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li>Documentation</li>
-                <li>API Reference</li>
-                <li>Support</li>
-                <li>Community</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Contact</h3>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li>2401010046@krmu.edu.in</li>
-                <li>2401010022@krmu.edu.in</li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-500 text-sm">
-              © 2025 EduTrack. All rights reserved.
-            </p>
-            <div className="flex space-x-4 mt-4 md:mt-0">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                Terms
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                Privacy
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                Cookies
-              </a>
+            <div className="mt-4 md:mt-0">
+              <p className="text-gray-500 text-sm">
+                © 2025 EduTrack. All rights reserved.
+              </p>
             </div>
           </div>
         </div>
