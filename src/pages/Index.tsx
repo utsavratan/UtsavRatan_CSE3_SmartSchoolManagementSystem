@@ -66,7 +66,7 @@ export default function Index() {
       university: "K.R. Mangalam University",
       email: "2401010046@krmu.edu.in",
       github: "https://github.com/utsavratan",
-      linkedin: "https://linkedin.com/in/utsavratan"
+      linkedin: "https://linkedin.com/in/misterutsav"
     },
     {
       name: "Ishan Jha",
@@ -175,20 +175,6 @@ export default function Index() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.8, duration: 0.5 }}
               >
-                <div className="flex flex-col items-center">
-                  <div className="flex items-center">
-                    <GraduationCap className="h-5 w-5 mr-2 text-purple-300" />
-                    <span className="text-white font-semibold">3 Roles</span>
-                  </div>
-                  <p className="text-xs text-purple-300">Students, Teachers, Parents</p>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="flex items-center">
-                    <Clock className="h-5 w-5 mr-2 text-purple-300" />
-                    <span className="text-white font-semibold">24/7</span>
-                  </div>
-                  <p className="text-xs text-purple-300">Access Anytime</p>
-                </div>
               </motion.div>
             </motion.div>
           </AnimatePresence>
