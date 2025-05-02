@@ -66,7 +66,7 @@ export default function Index() {
       university: "K.R. Mangalam University",
       email: "2401010046@krmu.edu.in",
       github: "https://github.com/utsavratan",
-      linkedin: "https://linkedin.com/in/misterutsav"
+      linkedin: "https://linkedin.com/in/utsavratan"
     },
     {
       name: "Ishan Jha",
@@ -175,6 +175,20 @@ export default function Index() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.8, duration: 0.5 }}
               >
+                <div className="flex flex-col items-center">
+                  <div className="flex items-center">
+                    <GraduationCap className="h-5 w-5 mr-2 text-purple-300" />
+                    <span className="text-white font-semibold">3 Roles</span>
+                  </div>
+                  <p className="text-xs text-purple-300">Students, Teachers, Parents</p>
+                </div>
+                <div className="flex flex-col items-center">
+                  <div className="flex items-center">
+                    <Clock className="h-5 w-5 mr-2 text-purple-300" />
+                    <span className="text-white font-semibold">24/7</span>
+                  </div>
+                  <p className="text-xs text-purple-300">Access Anytime</p>
+                </div>
               </motion.div>
             </motion.div>
           </AnimatePresence>
@@ -323,7 +337,7 @@ export default function Index() {
               >
                 <div className="flex flex-col items-center text-center">
                   <div className="w-24 h-24 rounded-full bg-gradient-to-r from-purple-400 to-indigo-400 flex items-center justify-center mb-4">
-                    <img src={`/lovable-uploads/${dev.name.toLowerCase()}.jpeg`} alt={dev.name} className="w-full h-full object-cover rounded-full" />
+                    <span className="text-3xl font-bold">{dev.name[0]}</span>
                   </div>
                   <h3 className="text-xl font-bold text-white mb-1">{dev.name}</h3>
                   <p className="text-purple-200 mb-1">{dev.role}</p>
