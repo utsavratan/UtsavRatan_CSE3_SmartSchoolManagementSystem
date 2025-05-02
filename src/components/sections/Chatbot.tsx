@@ -1,6 +1,4 @@
 
-// Removed the speakText function and its usage
-
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -16,7 +14,7 @@ interface Message {
   content: string;
 }
 
-const ChatBot = () => {
+export const Chatbot = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
@@ -67,11 +65,11 @@ const ChatBot = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-[calc(100vh-150px)] flex flex-col">
       <AnimatedBackground />
       
-      {/* Header - Removed "Back to Home" button */}
-      <header className="bg-skyBlue/90 backdrop-blur-md p-4 shadow-md relative z-10">
+      {/* Header */}
+      <header className="bg-primary/90 backdrop-blur-md p-4 shadow-md relative z-10">
         <div className="container mx-auto flex justify-center items-center">
           <h1 className="text-2xl font-bold text-white">EduTrack ChatBot</h1>
         </div>
@@ -91,11 +89,11 @@ const ChatBot = () => {
                   }`}
                 >
                   {/* Avatar */}
-                  <Avatar className={`${message.role === "assistant" ? "border-2 border-skyBlue" : "border-2 border-gray-300"}`}>
+                  <Avatar className={`${message.role === "assistant" ? "border-2 border-primary" : "border-2 border-gray-300"}`}>
                     {message.role === "assistant" ? (
-                      <AvatarImage src="/public/lovable-uploads/bot.png" alt="Bot" />
+                      <AvatarImage src="/lovable-uploads/bot.png" alt="Bot" />
                     ) : (
-                      <AvatarImage src="/public/lovable-uploads/img1.jpeg" alt="User" />
+                      <AvatarImage src="/lovable-uploads/img1.jpeg" alt="User" />
                     )}
                     <AvatarFallback>
                       {message.role === "assistant" ? <Bot size={20} /> : "U"}
@@ -106,7 +104,7 @@ const ChatBot = () => {
                   <div
                     className={`p-3 rounded-lg max-w-[80%] ${
                       message.role === "user"
-                        ? "bg-skyBlue text-white rounded-tr-none"
+                        ? "bg-primary text-white rounded-tr-none"
                         : "bg-gray-100 text-gray-800 rounded-tl-none"
                     }`}
                   >
@@ -135,7 +133,7 @@ const ChatBot = () => {
                 />
                 <Button 
                   type="submit" 
-                  className={`bg-skyBlue hover:bg-skyBlueDark text-white flex items-center gap-2 transition-all duration-300 ${isSendHovered ? 'scale-110 shadow-lg' : ''}`}
+                  className={`bg-primary hover:bg-primary/80 text-white flex items-center gap-2 transition-all duration-300 ${isSendHovered ? 'scale-110 shadow-lg' : ''}`}
                   disabled={isLoading}
                   onMouseEnter={() => setIsSendHovered(true)}
                   onMouseLeave={() => setIsSendHovered(false)}
@@ -152,4 +150,4 @@ const ChatBot = () => {
   );
 };
 
-export default ChatBot;
+export default Chatbot;

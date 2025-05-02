@@ -90,7 +90,7 @@ const StudentDashboard = () => {
             title="ChatBot"
             link="/student/chatbot"
             delay={8}
-            count={"No"}
+            count={0}
             description="New Messages"
           />
         </div>

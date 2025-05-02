@@ -1,5 +1,5 @@
 
-const API_KEY = "AIzaSyA9fMkh6lRMlVf9Mq-KVoWzQSlOkhb1lcE"; // Replace with your actual API key or use environment variables
+const API_KEY = "AIzaSyA9fMkh6lRMlVf9Mq-KVoWzQSlOkhb1lcE";
 
 interface GeminiRequest {
   contents: {
@@ -19,7 +19,7 @@ interface GeminiRequest {
 export async function getGeminiResponse(userMessage: string): Promise<string> {
   try {
     // Check if API key is provided
-    if (!API_KEY || API_KEY === "YOUR_GEMINI_API_KEY") {
+    if (!API_KEY) {
       return "Please configure your Gemini API key to use this chatbot feature.";
     }
     

@@ -75,7 +75,7 @@ const ParentDashboard = () => {
             title="ChatBot"
             link="/parent/chat"
             delay={7}
-            count={"No"}
+            count={0}
             description="New Messages"
           />
         </div>

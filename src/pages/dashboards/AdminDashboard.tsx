@@ -91,7 +91,7 @@ const AdminDashboard = () => {
             title="ChatBot"
             link="/admin/chat"
             delay={9}
-            count={"No"}
+            count={0}
             description="Active Chats"
           />
         </div>

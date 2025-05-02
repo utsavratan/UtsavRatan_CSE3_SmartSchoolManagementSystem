@@ -75,7 +75,7 @@ const TeacherDashboard = () => {
             title="ChatBot"
             link="/teacher/chat"
             delay={7}
-            count={"No"}
+            count={0}
             description="New Messages"
           />
         </div>
