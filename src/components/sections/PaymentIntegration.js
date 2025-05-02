@@ -1,6 +1,5 @@
 import React from 'react';
 import QRCode from 'qrcode.react';
-import { Fees } from '/student/Fees';
 
 export const Fees = () => {
   const fees = [
@@ -26,24 +25,24 @@ export const Fees = () => {
 
   return (
     <div className="rounded-md border">
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Type</TableHead>
-            <TableHead>Amount</TableHead>
-            <TableHead>Due Date</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Action</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
+      <table>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Due Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
           {fees.map((fee) => (
-            <TableRow key={fee.id}>
-              <TableCell className="font-medium">{fee.type}</TableCell>
-              <TableCell>{fee.amount}</TableCell>
-              <TableCell>{new Date(fee.due_date).toLocaleDateString()}</TableCell>
-              <TableCell>{fee.status}</TableCell>
-              <TableCell>
+            <tr key={fee.id}>
+              <td className="font-medium">{fee.type}</td>
+              <td>{fee.amount}</td>
+              <td>{new Date(fee.due_date).toLocaleDateString()}</td>
+              <td>{fee.status}</td>
+              <td>
                 {fee.status === 'Unpaid' && (
                   <div>
                     <button onClick={() => handlePayNow(fee.amount)} className="bg-blue-500 text-white px-4 py-2 rounded">
@@ -52,11 +51,11 @@ export const Fees = () => {
                     <QRCode value={handlePayNow(fee.amount)} size={128} />
                   </div>
                 )}
-              </TableCell>
-            </TableRow>
+              </td>
+            </tr>
           ))}
-        </TableBody>
-      </Table>
+        </tbody>
+      </table>
       <div>Total Unpaid: {calculateUnpaidFees()}</div>
     </div>
   );
