@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/button';
@@ -18,7 +17,6 @@ import { useInView } from 'react-intersection-observer';
 
 export default function Index() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
   const { ref: featuresRef, inView: featuresVisible } = useInView({ threshold: 0.2, triggerOnce: true });
   const { ref: statsRef, inView: statsVisible } = useInView({ threshold: 0.2, triggerOnce: true });
   const { ref: testimonialRef, inView: testimonialVisible } = useInView({ threshold: 0.2, triggerOnce: true });
@@ -27,17 +25,14 @@ export default function Index() {
     {
       heading: "Smart School Management",
       subheading: "Streamline your educational institution with our all-in-one platform",
-      image: "/lovable-uploads/901293c5-37b6-41ef-ac36-4640f900bcbb.png"
     },
     {
       heading: "Track Student Progress",
       subheading: "Monitor academic performance with intuitive dashboards and reports",
-      image: "/lovable-uploads/img1.jpeg"
     },
     {
       heading: "Efficient Administration",
       subheading: "Simplify administrative tasks with automated workflows",
-      image: "/public/lovable-uploads/utsav.jpeg"
     }
   ];
 
@@ -122,92 +117,70 @@ export default function Index() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
-              className="flex flex-col items-center text-center md:text-left md:flex-row md:justify-between gap-8 md:gap-12"
+              className="flex flex-col items-center justify-center h-[60vh] text-center"
             >
-              <div className="md:w-1/2 space-y-6">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2, duration: 0.5 }}
-                >
-                  <h1 className="text-5xl lg:text-6xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
-                    {heroSlides[currentSlide].heading}
-                  </h1>
-                  <p className="mt-6 text-lg text-purple-100">
-                    {heroSlides[currentSlide].subheading}
-                  </p>
-                </motion.div>
-
-                <motion.div 
-                  className="flex flex-wrap gap-4 mt-8 justify-center md:justify-start"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.6, duration: 0.5 }}
-                >
-                  <Link to="/login">
-                    <Button 
-                      size="lg" 
-                      className="bg-white text-purple-900 hover:bg-purple-100 hover:scale-105 transform transition-all duration-200 group"
-                    >
-                      Get Started
-                      <ChevronRight className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-                    </Button>
-                  </Link>
-                  <Button 
-                    variant="outline" 
-                    size="lg" 
-                    className="border-white text-white hover:bg-white/10 hover:scale-105 transform transition-all duration-200"
-                  >
-                    Learn More
-                  </Button>
-                </motion.div>
-
-                <motion.div
-                  className="pt-10 flex gap-6 justify-center md:justify-start"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.8, duration: 0.5 }}
-                >
-                  <div className="flex flex-col items-center md:items-start">
-                    <div className="flex items-center">
-                      <GraduationCap className="h-5 w-5 mr-2 text-purple-300" />
-                      <span className="text-white font-semibold">3 Roles</span>
-                    </div>
-                    <p className="text-xs text-purple-300">Students, Teachers, Parents</p>
-                  </div>
-                  <div className="flex flex-col items-center md:items-start">
-                    <div className="flex items-center">
-                      <Clock className="h-5 w-5 mr-2 text-purple-300" />
-                      <span className="text-white font-semibold">24/7</span>
-                    </div>
-                    <p className="text-xs text-purple-300">Access Anytime</p>
-                  </div>
-                </motion.div>
-              </div>
-
-              <motion.div 
-                className="md:w-1/2 flex justify-center rounded-lg overflow-hidden shadow-2xl relative group hover:-rotate-2 transition-all duration-500"
+              <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
-                onHoverStart={() => setIsHovered(true)}
-                onHoverEnd={() => setIsHovered(false)}
+                transition={{ delay: 0.2, duration: 0.8 }}
+                className="mb-8"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-indigo-500/20 backdrop-blur-sm rounded-lg transform transition-all duration-500 group-hover:backdrop-blur-none"></div>
-                <img 
-                  src={heroSlides[currentSlide].image} 
-                  alt="EduTrack Dashboard" 
-                  className="rounded-lg object-cover w-full h-full max-h-[60vh] transition-transform duration-500 group-hover:scale-105"
-                />
-                <motion.div 
-                  className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6"
-                  animate={{ y: isHovered ? 0 : 20, opacity: isHovered ? 1 : 0.7 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <p className="text-white text-sm md:text-base">
-                    Powerful dashboards for every role in your educational ecosystem
-                  </p>
-                </motion.div>
+                <h1 className="text-7xl md:text-9xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent mb-4 tracking-tight">
+                  EduTrack
+                </h1>
+                <div className="h-1 w-40 md:w-60 bg-gradient-to-r from-purple-400 to-indigo-300 mx-auto rounded-full mb-6"></div>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.5 }}
+              >
+                <h2 className="text-5xl lg:text-6xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
+                  {heroSlides[currentSlide].heading}
+                </h2>
+                <p className="mt-6 text-lg text-purple-100">
+                  {heroSlides[currentSlide].subheading}
+                </p>
+              </motion.div>
+
+              <motion.div 
+                className="mt-10"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6, duration: 0.5 }}
+              >
+                <Link to="/login">
+                  <Button 
+                    size="lg" 
+                    className="bg-white text-purple-900 hover:bg-purple-100 hover:scale-105 transform transition-all duration-200 group"
+                  >
+                    Get Started
+                    <ChevronRight className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+                  </Button>
+                </Link>
+              </motion.div>
+
+              <motion.div
+                className="pt-10 flex gap-6 justify-center"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.8, duration: 0.5 }}
+              >
+                <div className="flex flex-col items-center">
+                  <div className="flex items-center">
+                    <GraduationCap className="h-5 w-5 mr-2 text-purple-300" />
+                    <span className="text-white font-semibold">3 Roles</span>
+                  </div>
+                  <p className="text-xs text-purple-300">Students, Teachers, Parents</p>
+                </div>
+                <div className="flex flex-col items-center">
+                  <div className="flex items-center">
+                    <Clock className="h-5 w-5 mr-2 text-purple-300" />
+                    <span className="text-white font-semibold">24/7</span>
+                  </div>
+                  <p className="text-xs text-purple-300">Access Anytime</p>
+                </div>
               </motion.div>
             </motion.div>
           </AnimatePresence>
@@ -347,7 +320,7 @@ export default function Index() {
                 <div className="flex flex-col h-full">
                   <div className="mb-4">
                     <svg className="h-8 w-8 text-purple-500" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
-                      <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+                      <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104-6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
                     </svg>
                   </div>
                   <p className="text-gray-600 mb-4 flex-grow">{testimonial.comment}</p>
