@@ -26,15 +26,15 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#33C3F0",
+          DEFAULT: "#9b87f5",
           foreground: "#ffffff",
         },
         edutrack: {
-          DEFAULT: "#33C3F0",
+          DEFAULT: "#9b87f5",
           foreground: "#ffffff",
         },
         secondary: {
-          DEFAULT: "#D3E4FD",
+          DEFAULT: "#E5DEFF",
           foreground: "#1a1a1a",
         },
         destructive: {
