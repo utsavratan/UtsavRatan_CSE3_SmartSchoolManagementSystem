@@ -109,13 +109,13 @@ export default function Index() {
   return (
     <div className="min-h-screen overflow-x-hidden">
       {/* Hero Section with Updated Background */}
-      <div className="relative h-screen overflow-hidden bg-gradient-to-br from-[#FF9E7B] via-[#FFA88C] to-[#FFB89E]">
+      <div className="relative h-screen overflow-hidden bg-gradient-to-br from-[#4FACFE] via-[#33C3F0] to-[#00F2FE]">
         <div className="absolute inset-0 w-full h-full">
           {/* Animated geometric background elements */}
           <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20">
             <div className="absolute top-[10%] left-[5%] w-64 h-64 rounded-full bg-white/20 blur-3xl"></div>
-            <div className="absolute top-[50%] right-[10%] w-96 h-96 rounded-full bg-[#E5DEFF]/30 blur-3xl"></div>
-            <div className="absolute bottom-[20%] left-[30%] w-80 h-80 rounded-full bg-[#FEF7CD]/30 blur-3xl"></div>
+            <div className="absolute top-[50%] right-[10%] w-96 h-96 rounded-full bg-pink-200/20 blur-3xl"></div>
+            <div className="absolute bottom-[20%] left-[30%] w-80 h-80 rounded-full bg-purple-200/20 blur-3xl"></div>
           </div>
           
           {/* Wave SVG at the bottom */}
@@ -168,7 +168,7 @@ export default function Index() {
                 <Link to="/login">
                   <Button 
                     size="lg" 
-                    className="bg-white text-[#FF9E7B] hover:bg-white/90 hover:scale-105 transform transition-all duration-200 group"
+                    className="bg-white text-[#33C3F0] hover:bg-white/90 hover:scale-105 transform transition-all duration-200 group"
                   >
                     Get Started
                     <ChevronRight className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
@@ -202,7 +202,7 @@ export default function Index() {
       </div>
 
       {/* Stats Section - Updated with lighter colors */}
-      <section ref={statsRef} className="py-16 bg-gradient-to-r from-[#FF9E7B] via-[#FFA88C] to-[#FFC3AE] text-white relative overflow-hidden">
+      <section ref={statsRef} className="py-16 bg-gradient-to-r from-[#33C3F0] via-[#4FACFE] to-[#6CD0FF] text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute right-0 bottom-0 w-72 h-72 bg-white rounded-full blur-3xl -mr-20 -mb-20"></div>
           <div className="absolute left-0 top-0 w-72 h-72 bg-white rounded-full blur-3xl -ml-20 -mt-20"></div>
@@ -248,7 +248,7 @@ export default function Index() {
       </section>
 
       {/* Testimonials - Updated with soft colors */}
-      <section ref={testimonialRef} className="py-20 bg-gradient-to-b from-[#FFF8F5] to-[#FFE8DD]">
+      <section ref={testimonialRef} className="py-20 bg-gradient-to-b from-[#F2F9FE] to-[#E6F4FF]">
         <div className="container mx-auto px-4">
           <motion.div
             initial="hidden"
@@ -275,18 +275,18 @@ export default function Index() {
                 key={index}
                 variants={itemVariants}
                 whileHover={{ y: -5, boxShadow: "0 10px 30px rgba(0,0,0,0.1)" }}
-                className="bg-white rounded-xl p-8 shadow-lg border border-[#FDE1D3]"
+                className="bg-white rounded-xl p-8 shadow-lg border border-[#D3E4FD]"
               >
                 <div className="flex flex-col h-full">
                   <div className="mb-4">
-                    <svg className="h-8 w-8 text-[#FF9E7B]" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                    <svg className="h-8 w-8 text-[#33C3F0]" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
                       <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104-6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
                     </svg>
                   </div>
                   <p className="text-gray-600 mb-4 flex-grow">{testimonial.comment}</p>
                   <div className="mt-6">
                     <p className="font-semibold text-gray-900">{testimonial.name}</p>
-                    <p className="text-[#FF9E7B] text-sm">{testimonial.role}</p>
+                    <p className="text-[#33C3F0] text-sm">{testimonial.role}</p>
                   </div>
                 </div>
               </motion.div>
@@ -296,12 +296,12 @@ export default function Index() {
       </section>
 
       {/* Developers Section - Updated with more vibrant gradient */}
-      <section ref={developerRef} className="py-20 bg-gradient-to-r from-[#E5DEFF] via-[#EFEAFF] to-[#FEF7CD] text-gray-800 relative overflow-hidden">
+      <section ref={developerRef} className="py-20 bg-gradient-to-r from-[#4A00E0]/80 via-[#33C3F0] to-[#8E2DE2]/80 text-white relative overflow-hidden">
         <div className="absolute inset-0 w-full h-full">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.4)_0%,rgba(255,255,255,0)_60%)]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.2)_0%,rgba(255,255,255,0)_60%)]"></div>
           {/* Added geometric shapes for visual interest */}
-          <div className="absolute top-20 right-20 w-40 h-40 rounded-full bg-white/30"></div>
-          <div className="absolute bottom-40 left-20 w-60 h-60 rounded-full bg-white/30"></div>
+          <div className="absolute top-20 right-20 w-40 h-40 rounded-full bg-white/5"></div>
+          <div className="absolute bottom-40 left-20 w-60 h-60 rounded-full bg-white/5"></div>
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
@@ -313,7 +313,7 @@ export default function Index() {
             className="max-w-3xl mx-auto text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Meet Our Developers</h2>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-white/90">
               The talented team behind EduTrack's development
             </p>
           </motion.div>
@@ -328,29 +328,29 @@ export default function Index() {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                whileHover={{ y: -5, boxShadow: "0 10px 30px rgba(0,0,0,0.1)" }}
-                className="bg-white/80 backdrop-blur-md rounded-xl p-8 border border-white/50"
+                whileHover={{ y: -5, boxShadow: "0 10px 30px rgba(0,0,0,0.2)" }}
+                className="bg-white/10 backdrop-blur-md rounded-xl p-8 border border-white/20"
               >
                 <div className="flex flex-col items-center text-center">
-                  <div className="w-24 h-24 rounded-full bg-gradient-to-r from-[#FF9E7B]/20 to-[#FDE1D3]/20 flex items-center justify-center mb-4 overflow-hidden">
+                  <div className="w-24 h-24 rounded-full bg-gradient-to-r from-white/20 to-white/10 flex items-center justify-center mb-4 overflow-hidden">
                     {index === 0 ? (
                       <img src="/lovable-uploads/img1.jpeg" alt={dev.name} className="w-full h-full object-cover rounded-full" />
                     ) : (
                       <img src="/lovable-uploads/6c794da1-6b74-4ee0-8ea2-764b2353c862.png" alt={dev.name} className="w-full h-full object-cover rounded-full" />
                     )}
                   </div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-1">{dev.name}</h3>
-                  <p className="text-[#FF9E7B] mb-1">{dev.role}</p>
-                  <p className="text-gray-600 text-sm mb-3">{dev.university}</p>
-                  <p className="text-gray-600 text-sm mb-4">{dev.email}</p>
+                  <h3 className="text-xl font-bold text-white mb-1">{dev.name}</h3>
+                  <p className="text-white/90 mb-1">{dev.role}</p>
+                  <p className="text-white/80 text-sm mb-3">{dev.university}</p>
+                  <p className="text-white/80 text-sm mb-4">{dev.email}</p>
                   <div className="flex justify-center space-x-4">
                     <a href={dev.github} target="_blank" rel="noopener noreferrer" 
-                      className="p-2 rounded-full bg-[#FF9E7B]/10 hover:bg-[#FF9E7B]/20 transition-colors">
-                      <Github className="w-5 h-5 text-[#FF9E7B]" />
+                      className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors">
+                      <Github className="w-5 h-5 text-white" />
                     </a>
                     <a href={dev.linkedin} target="_blank" rel="noopener noreferrer"
-                      className="p-2 rounded-full bg-[#FF9E7B]/10 hover:bg-[#FF9E7B]/20 transition-colors">
-                      <Linkedin className="w-5 h-5 text-[#FF9E7B]" />
+                      className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors">
+                      <Linkedin className="w-5 h-5 text-white" />
                     </a>
                   </div>
                 </div>
@@ -361,12 +361,12 @@ export default function Index() {
       </section>
 
       {/* CTA Section - Updated with softer gradient */}
-      <section className="py-20 bg-gradient-to-b from-[#FEF7CD] via-[#FFF3A3] to-[#FFF0D2] text-gray-800 relative overflow-hidden">
+      <section className="py-20 bg-gradient-to-b from-[#8E2DE2]/80 via-[#6A82FB] to-[#1A2980] text-white relative overflow-hidden">
         <div className="absolute inset-0 w-full h-full">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.4)_0%,rgba(255,255,255,0)_60%)]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.2)_0%,rgba(255,255,255,0)_60%)]"></div>
           {/* Added floating elements */}
-          <div className="absolute top-10 left-10 w-20 h-20 rounded-full bg-[#FF9E7B]/20 animate-pulse" style={{animationDuration: '3s'}}></div>
-          <div className="absolute bottom-20 right-20 w-16 h-16 rounded-full bg-[#E5DEFF]/30 animate-pulse" style={{animationDuration: '4s'}}></div>
+          <div className="absolute top-10 left-10 w-20 h-20 rounded-full bg-white/5 animate-pulse" style={{animationDuration: '3s'}}></div>
+          <div className="absolute bottom-20 right-20 w-16 h-16 rounded-full bg-white/5 animate-pulse" style={{animationDuration: '4s'}}></div>
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
@@ -378,13 +378,13 @@ export default function Index() {
             className="max-w-3xl mx-auto text-center"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to transform your school management?</h2>
-            <p className="text-lg text-gray-700 mb-8">
+            <p className="text-lg text-white/90 mb-8">
               Join thousands of educational institutions already using EduTrack to streamline their operations.
             </p>
             <Link to="/login">
               <Button 
                 size="lg" 
-                className="bg-[#FF9E7B] text-white hover:bg-[#FF8A61] hover:scale-105 transform transition-all duration-200"
+                className="bg-white text-[#4A00E0] hover:bg-white/90 hover:scale-105 transform transition-all duration-200"
               >
                 Get Started Today
               </Button>
@@ -393,16 +393,16 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Footer - Updated with a softer color */}
-      <footer className="bg-[#FF9E7B] text-white py-12">
+      {/* Footer - Updated with darker color */}
+      <footer className="bg-[#1A2980] text-white py-12">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div>
               <h3 className="text-lg font-semibold mb-2">EduTrack</h3>
-              <p className="text-white/80 text-sm">Smart School Management System</p>
+              <p className="text-gray-300 text-sm">Smart School Management System</p>
             </div>
             <div className="mt-4 md:mt-0">
-              <p className="text-white/70 text-sm">
+              <p className="text-gray-400 text-sm">
                 © 2025 EduTrack. All rights reserved.
               </p>
             </div>

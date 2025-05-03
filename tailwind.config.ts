@@ -26,15 +26,15 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#FF9E7B", // Soft Peach
+          DEFAULT: "#33C3F0",
           foreground: "#ffffff",
         },
         edutrack: {
-          DEFAULT: "#FF9E7B", // Soft Peach
+          DEFAULT: "#33C3F0",
           foreground: "#ffffff",
         },
         secondary: {
-          DEFAULT: "#FDE1D3", // Lighter Peach
+          DEFAULT: "#D3E4FD",
           foreground: "#1a1a1a",
         },
         destructive: {
@@ -46,7 +46,7 @@ export default {
           foreground: "#666666",
         },
         accent: {
-          DEFAULT: "#E5DEFF", // Soft Purple
+          DEFAULT: "#eee",
           foreground: "#1a1a1a",
         },
         card: {
