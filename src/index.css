@@ -1,28 +1,29 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 210 40% 98%; /* Light Background */
+    --background: 30 60% 98%; /* Light Peach Background */
     --foreground: 222.2 84% 4.9%; /* Dark Text */
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 199 89% 57%; /* Blue Color */
-    --primary-foreground: 210 40% 98%; /* Light Text on Blue */
-    --secondary: 217 92% 91%; /* Light Blue */
+    --primary: 20 100% 74%; /* Peach Color */
+    --primary-foreground: 210 40% 98%; /* Light Text on Peach */
+    --secondary: 20 96% 91%; /* Light Peach */
     --secondary-foreground: 222.2 47.4% 11.2%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
+    --accent: 260 80% 94%; /* Soft Purple */
     --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 84.2% 60.2%; /* Red */
     --destructive-foreground: 210 40% 98%; /* Light Text on Red */
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 221 83% 53%;
+    --ring: 20 100% 74%;
     --radius: 0.75rem;
   }
 
@@ -31,7 +32,7 @@
   }
 
   body {
-    background-color: hsl(210, 40%, 98%); /* Hard-coded background */
+    background-color: hsl(30, 60%, 98%); /* Hard-coded background */
     color: hsl(222.2, 84%, 4.9%); /* Hard-coded text color */
     @apply antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
