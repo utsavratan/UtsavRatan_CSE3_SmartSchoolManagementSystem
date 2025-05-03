@@ -336,7 +336,7 @@ export default function Index() {
                     {index === 0 ? (
                       <img src="/lovable-uploads/img1.jpeg" alt={dev.name} className="w-full h-full object-cover rounded-full" />
                     ) : (
-                      <img src="/lovable-uploads/6c794da1-6b74-4ee0-8ea2-764b2353c862.png" alt={dev.name} className="w-full h-full object-cover rounded-full" />
+                      <img src="/lovable-uploads/ishan.jpeg" alt={dev.name} className="w-full h-full object-cover rounded-full" />
                     )}
                   </div>
                   <h3 className="text-xl font-bold text-white mb-1">{dev.name}</h3>
