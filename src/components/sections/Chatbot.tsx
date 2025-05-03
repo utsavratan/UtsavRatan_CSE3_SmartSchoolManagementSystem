@@ -65,16 +65,18 @@ export const Chatbot = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-[calc(100vh-200px)]">
+    <div className="flex flex-col h-full min-h-[calc(100vh-200px)]">
       <AnimatedBackground />
       
       {/* Chat Container */}
       <Card className="flex-grow flex flex-col bg-white/95 backdrop-blur-md shadow-xl overflow-hidden border border-gray-100 rounded-lg">
         {/* Header */}
         <div className="bg-gradient-to-r from-primary to-primary/80 py-3 px-4 shadow-md rounded-t-lg">
-          <div className="flex justify-center items-center">
-            <Bot className="text-white mr-2" size={22} />
-            <h1 className="text-xl font-bold text-white">EduTrack AI Assistant</h1>
+          <div className="flex justify-between items-center">
+            <div className="flex items-center">
+              <Bot className="text-white mr-2" size={22} />
+              <h1 className="text-xl font-bold text-white">EduTrack AI Assistant</h1>
+            </div>
           </div>
         </div>
 
