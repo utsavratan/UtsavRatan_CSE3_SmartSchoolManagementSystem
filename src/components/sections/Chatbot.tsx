@@ -6,18 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Bot, User, Send } from "lucide-react";
 import { useForm } from 'react-hook-form';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
-const sampleResponses = [
-  "I'd be happy to help you with your school-related queries!",
-  "You can check your exam datesheet in the exams section.",
-  "Your attendance is above 85%, which is excellent.",
-  "Your next fee payment is due on the 10th of next month.",
-  "The holiday list is available in the holidays section.",
-  "Your mid-term exams start from next Monday.",
-  "You can submit your assignments online through the assignments section.",
-  "The school timings are from 8:30 AM to 3:30 PM.",
-  "The parent-teacher meeting is scheduled for this Saturday.",
-];
+import { getGeminiResponse } from '@/services/geminiService';
 
 interface ChatMessage {
   id: string;
@@ -47,10 +36,10 @@ const Chatbot = () => {
     endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleSendMessage = (e: React.FormEvent) => {
+  const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
-
+  
     // Add user message
     const userMessage: ChatMessage = {
       id: Date.now().toString(),
@@ -58,23 +47,26 @@ const Chatbot = () => {
       sender: 'user',
       timestamp: new Date(),
     };
-
+  
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
-
-    // Simulate bot response after a short delay
-    setTimeout(() => {
-      const randomResponse = sampleResponses[Math.floor(Math.random() * sampleResponses.length)];
+  
+    // Get response from Gemini
+    try {
+      const botResponse = await getGeminiResponse(input);
       const botMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
-        content: randomResponse,
+        content: botResponse,
         sender: 'bot',
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, botMessage]);
+    } catch (error) {
+      console.error('Error getting response from Gemini:', error);
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   return (
