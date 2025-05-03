@@ -1,67 +1,80 @@
 
-import { useState, useRef, useEffect } from "react";
-import { Button } from "@/components/ui/button";
+import React, { useState, useRef, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
-import { Send, Bot } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/hooks/use-toast";
-import AnimatedBackground from "@/components/AnimatedBackground";
-import { getGeminiResponse } from "@/services/geminiService";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Bot, User, Send } from "lucide-react";
+import { useForm } from 'react-hook-form';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-interface Message {
-  role: "user" | "assistant";
+const sampleResponses = [
+  "I'd be happy to help you with your school-related queries!",
+  "You can check your exam datesheet in the exams section.",
+  "Your attendance is above 85%, which is excellent.",
+  "Your next fee payment is due on the 10th of next month.",
+  "The holiday list is available in the holidays section.",
+  "Your mid-term exams start from next Monday.",
+  "You can submit your assignments online through the assignments section.",
+  "The school timings are from 8:30 AM to 3:30 PM.",
+  "The parent-teacher meeting is scheduled for this Saturday.",
+];
+
+interface ChatMessage {
+  id: string;
   content: string;
+  sender: 'user' | 'bot';
+  timestamp: Date;
 }
 
-export const Chatbot = () => {
-  const [messages, setMessages] = useState<Message[]>([
+const Chatbot = () => {
+  const [messages, setMessages] = useState<ChatMessage[]>([
     {
-      role: "assistant",
-      content: "Hello! I'm EduTrack's AI assistant. How can I help you today?",
+      id: 'welcome',
+      content: "Hello! I'm your EduTrack assistant. How can I help you today?",
+      sender: 'bot',
+      timestamp: new Date(),
     },
   ]);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [isSendHovered, setIsSendHovered] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const { toast } = useToast();
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  const endOfMessagesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
 
-  const handleSendMessage = async (e: React.FormEvent) => {
+  const scrollToBottom = () => {
+    endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (!input.trim()) return;
-    
-    // Add user message to the chat
-    const userMessage = { role: "user" as const, content: input };
+
+    // Add user message
+    const userMessage: ChatMessage = {
+      id: Date.now().toString(),
+      content: input,
+      sender: 'user',
+      timestamp: new Date(),
+    };
+
     setMessages((prev) => [...prev, userMessage]);
-    setInput("");
+    setInput('');
     setIsLoading(true);
-    
-    try {
-      // Get response from Gemini API
-      const response = await getGeminiResponse(input);
-      
-      // Add assistant message to the chat
-      setMessages((prev) => [...prev, { role: "assistant", content: response }]);
-    } catch (error) {
-      console.error("Error fetching response:", error);
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Failed to get response. Please try again.",
-      });
-    } finally {
+
+    // Simulate bot response after a short delay
+    setTimeout(() => {
+      const randomResponse = sampleResponses[Math.floor(Math.random() * sampleResponses.length)];
+      const botMessage: ChatMessage = {
+        id: (Date.now() + 1).toString(),
+        content: randomResponse,
+        sender: 'bot',
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, botMessage]);
       setIsLoading(false);
-    }
+    }, 1000);
   };
 
   return (
@@ -73,39 +86,51 @@ export const Chatbot = () => {
             {messages.map((message, i) => (
               <div
                 key={i}
-                className={`flex items-start gap-3 ${
-                  message.role === "user" ? "flex-row-reverse" : "flex-row"
+                className={`flex ${
+                  message.sender === 'user' ? 'justify-end' : 'justify-start'
                 } animate-fade-in`}
               >
-                {/* Avatar */}
-                <Avatar className={`${
-                  message.role === "assistant" 
-                    ? "border-2 border-primary shadow-sm" 
-                    : "border-2 border-gray-300 shadow-sm"
-                } h-8 w-8`}>
-                  {message.role === "assistant" ? (
-                    <AvatarImage src="/lovable-uploads/bot.png" alt="Bot" />
-                  ) : (
-                    <AvatarImage src="/lovable-uploads/img1.jpeg" alt="User" />
-                  )}
-                  <AvatarFallback className="text-xs">
-                    {message.role === "assistant" ? <Bot size={14} /> : "U"}
-                  </AvatarFallback>
-                </Avatar>
-                
-                {/* Message bubble */}
                 <div
-                  className={`p-2.5 rounded-lg max-w-[80%] shadow-sm ${
-                    message.role === "user"
-                      ? "bg-primary text-white rounded-tr-none"
-                      : "bg-gray-100 text-gray-800 rounded-tl-none"
+                  className={`max-w-[80%] rounded-lg px-4 py-2 ${
+                    message.sender === 'user'
+                      ? 'bg-edutrack text-white'
+                      : 'bg-gray-100 text-gray-800'
                   }`}
                 >
-                  <p className="text-sm">{message.content}</p>
+                  <div className="flex items-center gap-2 mb-1">
+                    {message.sender === 'bot' ? (
+                      <>
+                        <Avatar className="h-6 w-6">
+                          <AvatarImage src="/lovable-uploads/bot.png" alt="Bot" />
+                          <AvatarFallback><Bot size={16} /></AvatarFallback>
+                        </Avatar>
+                        <span className="text-xs text-gray-600 font-semibold">EduTrack Bot</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="text-xs text-white font-semibold">You</span>
+                        <Avatar className="h-6 w-6">
+                          <AvatarFallback><User size={16} /></AvatarFallback>
+                        </Avatar>
+                      </>
+                    )}
+                  </div>
+                  <p>{message.content}</p>
                 </div>
               </div>
             ))}
-            <div ref={messagesEndRef} />
+            {isLoading && (
+              <div className="flex justify-start">
+                <div className="bg-gray-100 text-gray-800 rounded-lg px-4 py-2">
+                  <div className="flex space-x-2">
+                    <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce"></div>
+                    <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                    <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+                  </div>
+                </div>
+              </div>
+            )}
+            <div ref={endOfMessagesRef} />
           </div>
           
           {/* Input area */}
@@ -114,28 +139,22 @@ export const Chatbot = () => {
               <Textarea
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask me anything..."
-                className="flex-grow resize-none py-2 px-3 min-h-0 h-10 overflow-hidden text-sm border-gray-200 focus:border-primary"
+                placeholder="Type your message here..."
+                className="min-h-[50px] max-h-[120px] text-base resize-none"
                 onKeyDown={(e) => {
-                  if (e.key === "Enter" && !e.shiftKey) {
+                  if (e.key === 'Enter' && !e.shiftKey) {
                     e.preventDefault();
                     handleSendMessage(e);
                   }
                 }}
-                style={{ height: '40px' }}
               />
               <Button 
-                type="submit" 
-                size="sm"
-                className={`h-10 bg-primary hover:bg-primary/90 text-white flex items-center gap-2 transition-all duration-300 ${
-                  isSendHovered ? 'scale-105 shadow-md' : ''
-                }`}
-                disabled={isLoading}
-                onMouseEnter={() => setIsSendHovered(true)}
-                onMouseLeave={() => setIsSendHovered(false)}
+                type="submit"
+                className="h-[50px] bg-edutrack hover:bg-edutrack/90"
+                disabled={!input.trim() || isLoading}
               >
-                <Send size={16} className={`transition-transform duration-300 ${isSendHovered ? 'translate-x-0.5' : ''}`} />
-                {isLoading ? "Sending..." : "Send"}
+                <Send className="h-5 w-5" />
+                <span className="sr-only">Send message</span>
               </Button>
             </div>
           </form>
