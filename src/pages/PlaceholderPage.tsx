@@ -18,8 +18,30 @@ const PlaceholderPage = () => {
   const role = location.pathname.split('/')[1];
   
   const getPageTitle = () => {
-    const path = location.pathname.split('/').pop();
-    return path ? path.charAt(0).toUpperCase() + path.slice(1) : 'Unknown';
+    switch(section) {
+      case 'student-details':
+        return 'Student Details';
+      case 'exams':
+        return 'Exams Datesheet';
+      case 'results':
+        return 'Results';
+      case 'fees':
+        return 'Fees';
+      case 'assignments':
+        return 'Assignments';
+      case 'timetable':
+        return 'Timetable';
+      case 'holidays':
+        return 'Holidays';
+      case 'attendance':
+        return 'Attendance';
+      case 'chatbot':
+        return 'Chatbot';
+      case 'chat':
+        return 'Chatbot';
+      default:
+        return section ? section.charAt(0).toUpperCase() + section.slice(1) : 'Unknown';
+    }
   };
 
   const renderSection = () => {
@@ -63,9 +85,7 @@ const PlaceholderPage = () => {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
           <h2 className="text-3xl font-bold tracking-tight">{getPageTitle()}</h2>
         </div>
-        <div className="container mx-auto py-6">
-          {renderSection()}
-        </div>
+        {renderSection()}
       </div>
     </DashboardLayout>
   );

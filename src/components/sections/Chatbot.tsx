@@ -65,24 +65,11 @@ export const Chatbot = () => {
   };
 
   return (
-    <div className="flex flex-col h-full min-h-[calc(100vh-200px)]">
-      <AnimatedBackground />
-      
-      {/* Chat Container */}
-      <Card className="flex-grow flex flex-col bg-white/95 backdrop-blur-md shadow-xl overflow-hidden border border-gray-100 rounded-lg">
-        {/* Header */}
-        <div className="bg-gradient-to-r from-primary to-primary/80 py-3 px-4 shadow-md rounded-t-lg">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center">
-              <Bot className="text-white mr-2" size={22} />
-              <h1 className="text-xl font-bold text-white">EduTrack AI Assistant</h1>
-            </div>
-          </div>
-        </div>
-
-        <CardContent className="p-0 flex flex-col h-full">
-          {/* Messages area */}
-          <div className="flex-grow p-4 overflow-y-auto space-y-4 max-h-[calc(100vh-300px)]">
+    <div className="container mx-auto py-4">
+      <Card className="flex-grow flex flex-col bg-white shadow-md overflow-hidden border border-gray-100 rounded-lg">
+        {/* Chat Messages */}
+        <CardContent className="flex-grow p-0 flex flex-col h-[calc(100vh-220px)]">
+          <div className="flex-grow p-4 overflow-y-auto space-y-4">
             {messages.map((message, i) => (
               <div
                 key={i}
@@ -122,7 +109,7 @@ export const Chatbot = () => {
           </div>
           
           {/* Input area */}
-          <form onSubmit={handleSendMessage} className="border-t p-3 bg-gray-50/80">
+          <form onSubmit={handleSendMessage} className="border-t p-3 bg-gray-50/80 mt-auto">
             <div className="flex items-center gap-2">
               <Textarea
                 value={input}
