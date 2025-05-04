@@ -14,7 +14,7 @@ export const Attendance = () => {
     
     // Student names from StudentDetailsTable
     const students = [
-      "Aisha Sharma", "Rahul Kapoor", "Priya Singh", "Arjun Patel", "Neha Gupta",
+      "Utsav Ratan", "Rahul Kapoor", "Priya Singh", "Arjun Patel", "Neha Gupta",
       "Vikram Malhotra", "Ananya Reddy", "Rohan Joshi", "Meera Choudhary", "Karan Mehta",
       "Divya Sharma", "Sanjay Kumar", "Pooja Verma", "Rajat Khanna", "Anjali Desai"
     ];
