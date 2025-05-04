@@ -5,21 +5,21 @@ import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@
 export const StudentDetailsTable = () => {
   // Generate 15 random students data
   const students = [
-    { name: "Aisha Sharma", rollNo: "2023001", course: "Science", phone: "91-9876543210", address: "123 Park Street, Delhi", parentsName: "Rahul & Priya Sharma" },
-    { name: "Rahul Kapoor", rollNo: "2023002", course: "Commerce", phone: "91-9876543211", address: "456 Lake Road, Mumbai", parentsName: "Vikram & Meera Kapoor" },
-    { name: "Priya Singh", rollNo: "2023003", course: "Arts", phone: "91-9876543212", address: "789 Hill Avenue, Bangalore", parentsName: "Ajay & Sunita Singh" },
-    { name: "Arjun Patel", rollNo: "2023004", course: "Science", phone: "91-9876543213", address: "101 River Lane, Ahmedabad", parentsName: "Nikhil & Anjali Patel" },
-    { name: "Neha Gupta", rollNo: "2023005", course: "Commerce", phone: "91-9876543214", address: "202 Valley Drive, Jaipur", parentsName: "Sanjay & Pooja Gupta" },
-    { name: "Vikram Malhotra", rollNo: "2023006", course: "Science", phone: "91-9876543215", address: "303 Mountain View, Chennai", parentsName: "Raj & Anita Malhotra" },
-    { name: "Ananya Reddy", rollNo: "2023007", course: "Arts", phone: "91-9876543216", address: "404 Beach Road, Hyderabad", parentsName: "Krishna & Lakshmi Reddy" },
-    { name: "Rohan Joshi", rollNo: "2023008", course: "Science", phone: "91-9876543217", address: "505 Forest Path, Pune", parentsName: "Mohan & Radha Joshi" },
-    { name: "Meera Choudhary", rollNo: "2023009", course: "Commerce", phone: "91-9876543218", address: "606 Garden Street, Kolkata", parentsName: "Suresh & Geeta Choudhary" },
-    { name: "Karan Mehta", rollNo: "2023010", course: "Arts", phone: "91-9876543219", address: "707 Sky Avenue, Lucknow", parentsName: "Dinesh & Kavita Mehta" },
-    { name: "Divya Sharma", rollNo: "2023011", course: "Science", phone: "91-9876543220", address: "808 Star Road, Chandigarh", parentsName: "Rajesh & Sunita Sharma" },
-    { name: "Sanjay Kumar", rollNo: "2023012", course: "Commerce", phone: "91-9876543221", address: "909 Moon Lane, Bhopal", parentsName: "Vinod & Radha Kumar" },
-    { name: "Pooja Verma", rollNo: "2023013", course: "Arts", phone: "91-9876543222", address: "110 Sun Street, Indore", parentsName: "Rakesh & Neeta Verma" },
-    { name: "Rajat Khanna", rollNo: "2023014", course: "Science", phone: "91-9876543223", address: "211 Cloud Drive, Nagpur", parentsName: "Vikash & Seema Khanna" },
-    { name: "Anjali Desai", rollNo: "2023015", course: "Commerce", phone: "91-9876543224", address: "312 Rain Avenue, Surat", parentsName: "Prakash & Meena Desai" },
+    { name: "Utsav Ratan", rollNo: "1", course: "Science", phone: "91-98XXXXXXXX", address: "123 Park Street, Delhi", parentsName: "Rahul & Priya Sharma" },
+    { name: "Rahul Kapoor", rollNo: "2", course: "Science", phone: "91-98XXXXXXXX", address: "456 Lake Road, Delhi", parentsName: "Vikram & Meera Kapoor" },
+    { name: "Priya Singh", rollNo: "3", course: "Science", phone: "91-98XXXXXXXX", address: "789 Hill Avenue, Delhi", parentsName: "Ajay & Sunita Singh" },
+    { name: "Arjun Patel", rollNo: "4", course: "Science", phone: "91-98XXXXXXXX", address: "101 River Lane, Delhi", parentsName: "Nikhil & Anjali Patel" },
+    { name: "Neha Gupta", rollNo: "5", course: "Science", phone: "91-98XXXXXXXX", address: "202 Valley Drive, Delhi", parentsName: "Sanjay & Pooja Gupta" },
+    { name: "Vikram Malhotra", rollNo: "6", course: "Science", phone: "91-98XXXXXXXX", address: "303 Mountain View, Delhi", parentsName: "Raj & Anita Malhotra" },
+    { name: "Ananya Reddy", rollNo: "7", course: "Science", phone: "91-98XXXXXXXX", address: "404 Beach Road, Delhi", parentsName: "Krishna & Lakshmi Reddy" },
+    { name: "Rohan Joshi", rollNo: "8", course: "Science", phone: "91-98XXXXXXXX", address: "505 Forest Path, Delhi", parentsName: "Mohan & Radha Joshi" },
+    { name: "Meera Choudhary", rollNo: "9", course: "Science", phone: "91-98XXXXXXXX", address: "606 Garden Street, Delhi", parentsName: "Suresh & Geeta Choudhary" },
+    { name: "Karan Mehta", rollNo: "10", course: "Science", phone: "91-98XXXXXXXX", address: "707 Sky Avenue, Delhi", parentsName: "Dinesh & Kavita Mehta" },
+    { name: "Divya Sharma", rollNo: "11", course: "Science", phone: "91-98XXXXXXXX", address: "808 Star Road, Delhi", parentsName: "Rajesh & Sunita Sharma" },
+    { name: "Sanjay Kumar", rollNo: "12", course: "Science", phone: "91-98XXXXXXXX", address: "909 Moon Lane, Delhi", parentsName: "Vinod & Radha Kumar" },
+    { name: "Pooja Verma", rollNo: "13", course: "Science", phone: "91-98XXXXXXXX", address: "110 Sun Street, Delhi", parentsName: "Rakesh & Neeta Verma" },
+    { name: "Rajat Khanna", rollNo: "14", course: "Science", phone: "91-98XXXXXXXX", address: "211 Cloud Drive, Delhi", parentsName: "Vikash & Seema Khanna" },
+    { name: "Anjali Desai", rollNo: "15", course: "Science", phone: "91-98XXXXXXXX", address: "312 Rain Avenue, Delhi", parentsName: "Prakash & Meena Desai" },
   ];
 
   return (
