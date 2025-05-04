@@ -39,10 +39,18 @@ const AdminDashboard = () => {
             description="Total Parents"
           />
           <DashboardCard
+            icon={<Users size={32} />}
+            title="Teachers Details"
+            link="/admin/teachers"
+            delay={3}
+            count={10}
+            description="Total Faculty"
+          />
+          <DashboardCard
             icon={<Calendar size={32} />}
             title="Holidays"
             link="/admin/holidays"
-            delay={3}
+            delay={4}
             count={45}
             description="This Year"
           />
@@ -50,7 +58,7 @@ const AdminDashboard = () => {
             icon={<FileText size={32} />}
             title="Exams Datesheet"
             link="/admin/exams"
-            delay={4}
+            delay={5}
             count={6}
             description="Upcoming Exams"
           />
@@ -58,7 +66,7 @@ const AdminDashboard = () => {
             icon={<FileText size={32} />}
             title="Results"
             link="/admin/results"
-            delay={5}
+            delay={6}
             count={6}
             description="Classes Published"
           />
@@ -66,7 +74,7 @@ const AdminDashboard = () => {
             icon={<FileText size={32} />}
             title="Fees"
             link="/admin/fees"
-            delay={6}
+            delay={7}
             count={3}
             description="Total Payment Complete"
           />
@@ -74,7 +82,7 @@ const AdminDashboard = () => {
             icon={<Calendar size={32} />}
             title="Assignments"
             link="/admin/assignments"
-            delay={7}
+            delay={8}
             count={6}
             description="This Week"
           />
@@ -82,7 +90,7 @@ const AdminDashboard = () => {
             icon={<Clock size={32} />}
             title="TimeTable"
             link="/admin/timetable"
-            delay={8}
+            delay={9}
             count={4}
             description="Classes Per Day"
           />
@@ -90,7 +98,7 @@ const AdminDashboard = () => {
             icon={<MessageSquare size={32} />}
             title="ChatBot"
             link="/admin/chat"
-            delay={9}
+            delay={10}
             count={0}
             description="Active Chats"
           />

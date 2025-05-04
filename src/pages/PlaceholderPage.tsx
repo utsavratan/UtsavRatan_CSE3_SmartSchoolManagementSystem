@@ -11,6 +11,9 @@ import { Timetable } from '@/components/sections/Timetable';
 import { Holidays } from '@/components/sections/Holidays';
 import { Attendance } from '@/components/sections/Attendance';
 import Chatbot from '@/components/sections/Chatbot';
+import { StudentDetailsTable } from '@/components/sections/StudentDetailsTable';
+import { ParentsDetailsTable } from '@/components/sections/ParentsDetailsTable';
+import { TeachersDetailsTable } from '@/components/sections/TeachersDetailsTable';
 
 const PlaceholderPage = () => {
   const { section } = useParams<{ section: string }>();
@@ -20,6 +23,7 @@ const PlaceholderPage = () => {
   const getPageTitle = () => {
     switch(section) {
       case 'student-details':
+      case 'students':
         return 'Student Details';
       case 'exams':
         return 'Exams Datesheet';
@@ -39,6 +43,10 @@ const PlaceholderPage = () => {
         return 'Chatbot';
       case 'chat':
         return 'Chatbot';
+      case 'parents':
+        return 'Parents Details';
+      case 'teachers':
+        return 'Teachers Details';
       default:
         return section ? section.charAt(0).toUpperCase() + section.slice(1) : 'Unknown';
     }
@@ -48,6 +56,8 @@ const PlaceholderPage = () => {
     switch(section) {
       case 'student-details':
         return <StudentDetails />;
+      case 'students':
+        return <StudentDetailsTable />;
       case 'exams':
         return <ExamDatesheet />;
       case 'results':
@@ -65,6 +75,10 @@ const PlaceholderPage = () => {
       case 'chatbot':
       case 'chat':
         return <Chatbot />;
+      case 'parents':
+        return <ParentsDetailsTable />;
+      case 'teachers':
+        return <TeachersDetailsTable />;
       default:
         return (
           <div className="text-center">
