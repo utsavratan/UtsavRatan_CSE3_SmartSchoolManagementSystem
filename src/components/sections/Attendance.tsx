@@ -10,7 +10,7 @@ export const Attendance = () => {
     const statuses = ['Present', 'Absent', 'Late'];
     const subjects = ['Mathematics', 'Science', 'English', 'Computer'];
     const teachers = ['Dr. Pankaj Sharma', 'Prof. Rupesh Kumar', 'Dr. Mayank Singh', 'Prof. Rahul Gupta'];
-    const rooms = ['101', '102', '103', '104'];
+    const rooms = ['101', '101', '101', '101'];
     
     // Student names from StudentDetailsTable
     const students = [
@@ -24,16 +24,17 @@ export const Attendance = () => {
       // Each student has 1-4 classes per day with random attendance
       const classesCount = Math.floor(Math.random() * 4) + 1;
       for (let classNum = 0; classNum < classesCount; classNum++) {
+        const status = statuses[Math.floor(Math.random() * statuses.length)];
         data.push({
           id: `${studentIndex}-${classNum}`,
           date: new Date(startDate),
           student_name: student,
-          status: statuses[Math.floor(Math.random() * statuses.length)],
+          status: status,
           subject: subjects[classNum % subjects.length],
           teacher: teachers[classNum % teachers.length],
           room: rooms[classNum % rooms.length],
-          grade: Math.floor(Math.random() * 31) + 70, // Random grade between 70-100
-          notes: Math.random() > 0.7 ? 'Needs improvement' : 'Good performance'
+          grade: status !== 'Absent' ? Math.floor(Math.random() * 31) + 70 : null, // Assign grade only if not absent
+          notes: status === 'Absent' ? 'Needs improvement' : 'Good performance' // Set notes based on status
         });
       }
     });
