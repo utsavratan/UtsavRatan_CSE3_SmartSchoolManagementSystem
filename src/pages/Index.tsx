@@ -245,16 +245,16 @@ export default function Index() {
         </div>
       </div>
 
-      {/* Features Section - Blue Theme */}
-      <section ref={featuresRef} className="py-16 bg-gradient-to-r from-[#1A2980] to-[#6A82FB] relative overflow-hidden">
+      {/* Features Section - Light Blue and White Theme */}
+      <section ref={featuresRef} className="py-16 bg-gradient-to-r from-[#E0F2FE] to-[#F0F9FF] relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-white rounded-full blur-3xl"></div>
-          <div className="absolute -top-20 -right-20 w-80 h-80 bg-white rounded-full blur-3xl"></div>
+          <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-[#33C3F0] rounded-full blur-3xl"></div>
+          <div className="absolute -top-20 -right-20 w-80 h-80 bg-[#33C3F0] rounded-full blur-3xl"></div>
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Key Features</h2>
-            <p className="text-white/80 max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#0369A1]">Key Features</h2>
+            <p className="text-[#0369A1]/80 max-w-2xl mx-auto">
               Discover how EduTrack can transform your educational institution
             </p>
           </div>
@@ -270,14 +270,14 @@ export default function Index() {
                 key={index}
                 variants={itemVariants}
                 whileHover={{ y: -5 }}
-                className="bg-white/10 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-white/20"
+                className="bg-white rounded-xl p-8 shadow-lg border border-[#BAE6FD]"
               >
                 <div className="flex flex-col items-center text-center">
-                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white/20 text-white mb-4">
+                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-[#E0F2FE] text-[#0369A1] mb-4">
                     {feature.icon}
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
-                  <p className="text-white/80">{feature.description}</p>
+                  <h3 className="text-xl font-bold text-[#0369A1] mb-3">{feature.title}</h3>
+                  <p className="text-[#0369A1]/70">{feature.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -285,16 +285,16 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Stats Section - Blue Theme */}
-      <section ref={statsRef} className="py-16 bg-gradient-to-r from-[#6A82FB] to-[#4A00E0] text-white relative overflow-hidden">
+      {/* Stats Section - Light Blue and White Theme */}
+      <section ref={statsRef} className="py-16 bg-gradient-to-r from-[#DBEAFE] to-[#EFF6FF] text-[#1E40AF] relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute right-0 bottom-0 w-72 h-72 bg-white rounded-full blur-3xl -mr-20 -mb-20"></div>
-          <div className="absolute left-0 top-0 w-72 h-72 bg-white rounded-full blur-3xl -ml-20 -mt-20"></div>
+          <div className="absolute right-0 bottom-0 w-72 h-72 bg-[#33C3F0] rounded-full blur-3xl -mr-20 -mb-20"></div>
+          <div className="absolute left-0 top-0 w-72 h-72 bg-[#33C3F0] rounded-full blur-3xl -ml-20 -mt-20"></div>
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Impact on Educational Management</h2>
-            <p className="text-white/90 max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#1E40AF]">Impact on Educational Management</h2>
+            <p className="text-[#1E40AF]/80 max-w-2xl mx-auto">
               See how EduTrack is transforming educational institutions
             </p>
           </div>
@@ -320,19 +320,19 @@ export default function Index() {
                     stiffness: 100, 
                     delay: 0.1 * index 
                   }}
-                  className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-white to-white/90 bg-clip-text text-transparent mb-2"
+                  className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-[#1E40AF] to-[#2563EB] bg-clip-text text-transparent mb-2"
                 >
                   {stat.value}
                 </motion.div>
-                <p className="text-white/90">{stat.label}</p>
+                <p className="text-[#1E40AF]/80">{stat.label}</p>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* Testimonials - Blue Theme */}
-      <section ref={testimonialRef} className="py-20 bg-gradient-to-b from-[#1A2980] to-[#6A82FB]">
+      {/* Testimonials - Light Blue and White Theme */}
+      <section ref={testimonialRef} className="py-20 bg-gradient-to-b from-[#F0F9FF] to-[#E0F2FE]">
         <div className="container mx-auto px-4">
           <motion.div
             initial="hidden"
@@ -340,10 +340,10 @@ export default function Index() {
             variants={containerVariants}
             className="text-center mb-16"
           >
-            <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-bold text-[#0369A1] mb-4">
               What Our Users Say
             </motion.h2>
-            <motion.p variants={itemVariants} className="text-lg text-white/80 max-w-2xl mx-auto">
+            <motion.p variants={itemVariants} className="text-lg text-[#0369A1]/80 max-w-2xl mx-auto">
               EduTrack is making a difference in educational institutions across the country
             </motion.p>
           </motion.div>
@@ -359,18 +359,18 @@ export default function Index() {
                 key={index}
                 variants={itemVariants}
                 whileHover={{ y: -5, boxShadow: "0 10px 30px rgba(0,0,0,0.1)" }}
-                className="bg-white/10 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-white/20"
+                className="bg-white rounded-xl p-8 shadow-lg border border-[#BAE6FD]"
               >
                 <div className="flex flex-col h-full">
                   <div className="mb-4">
-                    <svg className="h-8 w-8 text-white" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                    <svg className="h-8 w-8 text-[#0369A1]" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
                       <path d="M9,4C4.456,7.456,1,13.12,1,19.36c0,5.088,3.072,8.064,6.624,8.064,3.36,0,5.856-2.688,5.856-5.856,0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104-6.624-9.024L9,4zm16.512,0c-4.8,3.456-8.256,9.12-8.256,15.36 0,5.088,3.072,8.064,6.624,8.064,3.264,0,5.856-2.688,5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864,4z" />
                     </svg>
                   </div>
-                  <p className="text-white/80 mb-4 flex-grow">{testimonial.comment}</p>
+                  <p className="text-[#0369A1]/70 mb-4 flex-grow">{testimonial.comment}</p>
                   <div className="mt-6">
-                    <p className="font-semibold text-white">{testimonial.name}</p>
-                    <p className="text-white/70 text-sm">{testimonial.role}</p>
+                    <p className="font-semibold text-[#0369A1]">{testimonial.name}</p>
+                    <p className="text-[#0369A1]/60 text-sm">{testimonial.role}</p>
                   </div>
                 </div>
               </motion.div>
@@ -379,13 +379,13 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Developers Section - Blue Theme */}
-      <section ref={developerRef} className="py-20 bg-gradient-to-r from-[#4A00E0] via-[#6A82FB] to-[#1A2980] text-white relative overflow-hidden">
+      {/* Developers Section - Mixed Dark and Light Theme */}
+      <section ref={developerRef} className="py-20 bg-gradient-to-r from-[#1E293B] via-[#334155] to-[#475569] text-white relative overflow-hidden">
         <div className="absolute inset-0 w-full h-full">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.2)_0%,rgba(255,255,255,0)_60%)]"></div>
-          {/* Added geometric shapes for visual interest with blue tones */}
-          <div className="absolute top-20 right-20 w-40 h-40 rounded-full bg-white/10"></div>
-          <div className="absolute bottom-40 left-20 w-60 h-60 rounded-full bg-white/10"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(203,213,225,0.15)_0%,rgba(203,213,225,0)_60%)]"></div>
+          {/* Added geometric shapes for visual interest with mixed tones */}
+          <div className="absolute top-20 right-20 w-40 h-40 rounded-full bg-[#94A3B8]/10"></div>
+          <div className="absolute bottom-40 left-20 w-60 h-60 rounded-full bg-[#94A3B8]/10"></div>
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
@@ -413,10 +413,10 @@ export default function Index() {
                 key={index}
                 variants={itemVariants}
                 whileHover={{ y: -5, boxShadow: "0 10px 30px rgba(0,0,0,0.2)" }}
-                className="bg-white/10 backdrop-blur-md rounded-xl p-8 border border-white/20"
+                className="bg-gradient-to-br from-[#334155]/80 to-[#475569] backdrop-blur-md rounded-xl p-8 border border-[#94A3B8]/20"
               >
                 <div className="flex flex-col items-center text-center">
-                  <div className="w-24 h-24 rounded-full bg-gradient-to-r from-[#1A2980] to-[#6A82FB] flex items-center justify-center mb-4 overflow-hidden">
+                  <div className="w-24 h-24 rounded-full bg-gradient-to-r from-[#60A5FA] to-[#818CF8] flex items-center justify-center mb-4 overflow-hidden">
                     {index === 0 ? (
                       <img src="/lovable-uploads/img1.jpeg" alt={dev.name} className="w-full h-full object-cover rounded-full" />
                     ) : (
@@ -424,16 +424,16 @@ export default function Index() {
                     )}
                   </div>
                   <h3 className="text-xl font-bold text-white mb-1">{dev.name}</h3>
-                  <p className="text-white/80 mb-1">{dev.role}</p>
+                  <p className="text-[#BAE6FD] mb-1">{dev.role}</p>
                   <p className="text-white/70 text-sm mb-3">{dev.university}</p>
                   <p className="text-white/70 text-sm mb-4">{dev.email}</p>
                   <div className="flex justify-center space-x-4">
                     <a href={dev.github} target="_blank" rel="noopener noreferrer" 
-                      className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors">
+                      className="p-2 rounded-full bg-[#94A3B8]/20 hover:bg-[#94A3B8]/30 transition-colors">
                       <Github className="w-5 h-5 text-white" />
                     </a>
                     <a href={dev.linkedin} target="_blank" rel="noopener noreferrer"
-                      className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors">
+                      className="p-2 rounded-full bg-[#94A3B8]/20 hover:bg-[#94A3B8]/30 transition-colors">
                       <Linkedin className="w-5 h-5 text-white" />
                     </a>
                   </div>
@@ -444,7 +444,7 @@ export default function Index() {
         </div>
       </section>
 
-      {/* CTA Section - Blue Gradient (Already has the desired theme) */}
+      {/* CTA Section - Blue Gradient */}
       <section className="py-20 bg-gradient-to-b from-[#FBCFE8] via-[#6A82FB] to-[#1A2980] text-white relative overflow-hidden">
         <div className="absolute inset-0 w-full h-full">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.2)_0%,rgba(255,255,255,0)_60%)]"></div>
