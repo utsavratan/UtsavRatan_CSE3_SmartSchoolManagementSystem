@@ -1,37 +1,44 @@
+
 import React from 'react';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 
 export const Attendance = () => {
-  // Generate one week of attendance data with 4 classes per day for a specific student
+  // Generate attendance data for all 15 students
   const generateAttendanceData = () => {
     const data = [];
     const startDate = new Date('2024-03-11'); // Starting from a Monday
     const statuses = ['Present', 'Absent', 'Late'];
     const subjects = ['Mathematics', 'Science', 'English', 'Computer'];
-    const teachers = ['Rupesh Sir', 'Pankaj Sir', 'Mayank Sir', 'Rahul Sir'];
-    const rooms = ['101', '101', '101', '101'];
-    const studentName = 'Utsav Ratan'; // Specific student name
+    const teachers = ['Dr. Pankaj Sharma', 'Prof. Rupesh Kumar', 'Dr. Mayank Singh', 'Prof. Rahul Gupta'];
+    const rooms = ['101', '102', '103', '104'];
     
-    for (let day = 0; day < 7; day++) {
-      const currentDate = new Date(startDate);
-      currentDate.setDate(startDate.getDate() + day);
-      
-      // 4 classes per day
-      for (let classNum = 1; classNum <= 4; classNum++) {
+    // Student names from StudentDetailsTable
+    const students = [
+      "Aisha Sharma", "Rahul Kapoor", "Priya Singh", "Arjun Patel", "Neha Gupta",
+      "Vikram Malhotra", "Ananya Reddy", "Rohan Joshi", "Meera Choudhary", "Karan Mehta",
+      "Divya Sharma", "Sanjay Kumar", "Pooja Verma", "Rajat Khanna", "Anjali Desai"
+    ];
+    
+    // Generate one day of attendance data for all students
+    students.forEach((student, studentIndex) => {
+      // Each student has 1-4 classes per day with random attendance
+      const classesCount = Math.floor(Math.random() * 4) + 1;
+      for (let classNum = 0; classNum < classesCount; classNum++) {
         data.push({
-          id: `${day}-${classNum}`,
-          date: currentDate,
-          student_name: studentName,
+          id: `${studentIndex}-${classNum}`,
+          date: new Date(startDate),
+          student_name: student,
           status: statuses[Math.floor(Math.random() * statuses.length)],
-          subject: subjects[classNum - 1],
-          teacher: teachers[classNum - 1],
-          room: rooms[classNum - 1],
+          subject: subjects[classNum % subjects.length],
+          teacher: teachers[classNum % teachers.length],
+          room: rooms[classNum % rooms.length],
           grade: Math.floor(Math.random() * 31) + 70, // Random grade between 70-100
           notes: Math.random() > 0.7 ? 'Needs improvement' : 'Good performance'
         });
       }
-    }
-    return data;
+    });
+    
+    return data.sort((a, b) => a.student_name.localeCompare(b.student_name));
   };
 
   const attendance = generateAttendanceData();
@@ -53,7 +60,11 @@ export const Attendance = () => {
         </TableHeader>
         <TableBody>
           {attendance.map((record) => (
-            <TableRow key={record.id} className={record.status === 'Absent' ? 'bg-red-100' : record.status === 'Present' ? 'bg-green-100' : ''}>
+            <TableRow key={record.id} className={
+              record.status === 'Absent' ? 'bg-red-100' : 
+              record.status === 'Present' ? 'bg-green-100' : 
+              record.status === 'Late' ? 'bg-yellow-100' : ''
+            }>
               <TableCell className="font-medium">{record.date.toLocaleDateString()}</TableCell>
               <TableCell>{record.student_name}</TableCell>
               <TableCell>{record.subject}</TableCell>
