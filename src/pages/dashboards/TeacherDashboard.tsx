@@ -7,18 +7,46 @@ import {
   FileText, 
   Calendar, 
   Clock, 
-  MessageSquare 
+  MessageSquare,
+  FilePlus
 } from "lucide-react";
+import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 const TeacherDashboard = () => {
+  const navigate = useNavigate();
+  
+  const handleAddAssignment = () => {
+    navigate('/teacher/add-assignment');
+  };
+
+  const handleAddDatesheet = () => {
+    navigate('/teacher/add-datesheet');
+  };
+  
+  const handleAddResult = () => {
+    navigate('/teacher/add-result');
+  };
+  
   return (
     <DashboardLayout userRole="teacher">
       <div className="space-y-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
           <h2 className="text-3xl font-bold tracking-tight">Teacher Dashboard</h2>
-          <p className="text-muted-foreground">
-            Manage your classes and student information
-          </p>
+          <div className="flex flex-wrap gap-2 mt-4 md:mt-0">
+            <Button onClick={handleAddAssignment} className="flex items-center gap-1">
+              <FilePlus size={16} />
+              Add Assignment
+            </Button>
+            <Button onClick={handleAddDatesheet} className="flex items-center gap-1">
+              <FilePlus size={16} />
+              Add Datesheet
+            </Button>
+            <Button onClick={handleAddResult} className="flex items-center gap-1">
+              <FilePlus size={16} />
+              Add Result
+            </Button>
+          </div>
         </div>
         
         <div className="dashboard-grid">

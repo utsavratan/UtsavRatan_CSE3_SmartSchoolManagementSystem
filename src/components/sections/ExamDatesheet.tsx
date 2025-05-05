@@ -1,53 +1,10 @@
 
 import React from 'react';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
+import { useData } from '@/context/DataContext';
 
 export const ExamDatesheet = () => {
-  const exams = [
-    {
-      id: 1,
-      subject: 'Mathematics',
-      exam_date: '2025-06-01',
-      duration_minutes: 90,
-      exam_type: 'Final',
-    },
-    {
-      id: 2,
-      subject: 'Science',
-      exam_date: '2025-06-02',
-      duration_minutes: 90,
-      exam_type: 'Final',
-    },
-    {
-      id: 3,
-      subject: 'Computer',
-      exam_date: '2025-06-03',
-      duration_minutes: 90,
-      exam_type: 'Final',
-    },
-    {
-      id: 4,
-      subject: 'Hindi',
-      exam_date: '2025-06-04',
-      duration_minutes: 90,
-      exam_type: 'Final',
-    },
-    {
-      id: 5,
-      subject: 'English',
-      exam_date: '2025-06-05',
-      duration_minutes: 90,
-      exam_type: 'Final',
-    },
-    {
-      id: 6,
-      subject: 'Social Science',
-      exam_date: '2025-06-06',
-      duration_minutes: 90,
-      exam_type: 'Final',
-    },
-    // Add more sample exams if needed
-  ];
+  const { examDatesheets } = useData();
 
   return (
     <div className="rounded-md border">
@@ -61,7 +18,7 @@ export const ExamDatesheet = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {exams.map((exam) => (
+          {examDatesheets.map((exam) => (
             <TableRow key={exam.id}>
               <TableCell className="font-medium">{exam.subject}</TableCell>
               <TableCell>{new Date(exam.exam_date).toLocaleDateString()}</TableCell>

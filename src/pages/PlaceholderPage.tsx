@@ -14,6 +14,9 @@ import Chatbot from '@/components/sections/Chatbot';
 import { StudentDetailsTable } from '@/components/sections/StudentDetailsTable';
 import { ParentsDetailsTable } from '@/components/sections/ParentsDetailsTable';
 import { TeachersDetailsTable } from '@/components/sections/TeachersDetailsTable';
+import { AddAssignmentForm } from '@/components/sections/AddAssignmentForm';
+import { AddDatesheetForm } from '@/components/sections/AddDatesheetForm';
+import { AddResultForm } from '@/components/sections/AddResultForm';
 import { DataProvider } from '@/context/DataContext';
 
 const PlaceholderPage = () => {
@@ -48,6 +51,12 @@ const PlaceholderPage = () => {
         return 'Parents Details';
       case 'teachers':
         return 'Teachers Details';
+      case 'add-assignment':
+        return 'Add Assignment';
+      case 'add-datesheet':
+        return 'Add Datesheet';
+      case 'add-result':
+        return 'Add Result';
       default:
         return section ? section.charAt(0).toUpperCase() + section.slice(1) : 'Unknown';
     }
@@ -80,6 +89,12 @@ const PlaceholderPage = () => {
         return <ParentsDetailsTable />;
       case 'teachers':
         return <TeachersDetailsTable />;
+      case 'add-assignment':
+        return <AddAssignmentForm />;
+      case 'add-datesheet':
+        return <AddDatesheetForm />;
+      case 'add-result':
+        return <AddResultForm />;
       default:
         return (
           <div className="text-center">

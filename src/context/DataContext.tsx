@@ -1,4 +1,3 @@
-
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
 // Define types for our data
@@ -38,15 +37,47 @@ interface AttendanceRecord {
   notes: string;
 }
 
+interface Assignment {
+  id: number;
+  title: string;
+  subject: string;
+  due_date: string;
+  description: string;
+}
+
+interface ExamDatesheet {
+  id: number;
+  subject: string;
+  exam_date: string;
+  duration_minutes: number;
+  exam_type: string;
+}
+
+interface Result {
+  id: number;
+  student_name: string;
+  subject: string;
+  marks: number;
+  total_marks: number;
+  exam_type: string;
+  exam_date: string;
+}
+
 interface DataContextType {
   students: Student[];
   parents: Parent[];
   teachers: Teacher[];
   attendance: AttendanceRecord[];
+  assignments: Assignment[];
+  examDatesheets: ExamDatesheet[];
+  results: Result[];
   addStudent: (student: Student) => void;
   addParent: (parent: Parent) => void;
   addTeacher: (teacher: Teacher) => void;
   updateAttendance: (record: AttendanceRecord) => void;
+  addAssignment: (assignment: Assignment) => void;
+  addExamDatesheet: (datesheet: ExamDatesheet) => void;
+  addResult: (result: Result) => void;
 }
 
 // Create the context
@@ -161,12 +192,147 @@ const initialAttendance: AttendanceRecord[] = [
   }
 ];
 
+// Initial assignments
+const initialAssignments: Assignment[] = [
+  {
+    id: 1,
+    title: 'Chapter 5 Exercises',
+    subject: 'Mathematics',
+    due_date: '2023-11-15',
+    description: 'Complete the exercises on page 42',
+  },
+  {
+    id: 2,
+    title: 'Chapter 3 Review',
+    subject: 'Science',
+    due_date: '2023-11-16',
+    description: 'Write answers for the review questions at the end of Chapter 3',
+  },
+  {
+    id: 3,
+    title: 'Chapter 2 Summary',
+    subject: 'Hindi',
+    due_date: '2023-11-17',
+    description: 'Summarize the poem from Chapter 2 in your own words',
+  },
+  {
+    id: 4,
+    title: 'Grammar Worksheet',
+    subject: 'English',
+    due_date: '2023-11-18',
+    description: 'Complete the grammar worksheet on tenses',
+  },
+  {
+    id: 5,
+    title: 'Basic Programming Task',
+    subject: 'Computer',
+    due_date: '2023-11-19',
+    description: 'Write a simple program to add two numbers in Python',
+  },
+  {
+    id: 6,
+    title: 'Map Work Assignment',
+    subject: 'Social Science',
+    due_date: '2023-11-20',
+    description: 'Mark major rivers of India on the provided map',
+  },
+];
+
+// Initial exam datesheets
+const initialExamDatesheets: ExamDatesheet[] = [
+  {
+    id: 1,
+    subject: 'Mathematics',
+    exam_date: '2025-06-01',
+    duration_minutes: 90,
+    exam_type: 'Final',
+  },
+  {
+    id: 2,
+    subject: 'Science',
+    exam_date: '2025-06-02',
+    duration_minutes: 90,
+    exam_type: 'Final',
+  },
+  {
+    id: 3,
+    subject: 'Computer',
+    exam_date: '2025-06-03',
+    duration_minutes: 90,
+    exam_type: 'Final',
+  },
+  {
+    id: 4,
+    subject: 'Hindi',
+    exam_date: '2025-06-04',
+    duration_minutes: 90,
+    exam_type: 'Final',
+  },
+  {
+    id: 5,
+    subject: 'English',
+    exam_date: '2025-06-05',
+    duration_minutes: 90,
+    exam_type: 'Final',
+  },
+  {
+    id: 6,
+    subject: 'Social Science',
+    exam_date: '2025-06-06',
+    duration_minutes: 90,
+    exam_type: 'Final',
+  },
+];
+
+// Initial results
+const initialResults: Result[] = [
+  {
+    id: 1,
+    student_name: 'Utsav Ratan',
+    subject: 'Mathematics',
+    marks: 85,
+    total_marks: 100,
+    exam_type: 'Mid Term',
+    exam_date: '2025-04-15',
+  },
+  {
+    id: 2,
+    student_name: 'Rahul Kapoor',
+    subject: 'Mathematics',
+    marks: 78,
+    total_marks: 100,
+    exam_type: 'Mid Term',
+    exam_date: '2025-04-15',
+  },
+  {
+    id: 3,
+    student_name: 'Utsav Ratan',
+    subject: 'Science',
+    marks: 92,
+    total_marks: 100,
+    exam_type: 'Mid Term',
+    exam_date: '2025-04-16',
+  },
+  {
+    id: 4,
+    student_name: 'Rahul Kapoor',
+    subject: 'Science',
+    marks: 88,
+    total_marks: 100,
+    exam_type: 'Mid Term',
+    exam_date: '2025-04-16',
+  },
+];
+
 // Create the provider component
 export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [students, setStudents] = useState<Student[]>(initialStudents);
   const [parents, setParents] = useState<Parent[]>(initialParents);
   const [teachers, setTeachers] = useState<Teacher[]>(initialTeachers);
   const [attendance, setAttendance] = useState<AttendanceRecord[]>(initialAttendance);
+  const [assignments, setAssignments] = useState<Assignment[]>(initialAssignments);
+  const [examDatesheets, setExamDatesheets] = useState<ExamDatesheet[]>(initialExamDatesheets);
+  const [results, setResults] = useState<Result[]>(initialResults);
 
   const addStudent = (student: Student) => {
     console.log("DataProvider: Adding student", student);
@@ -201,16 +367,46 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     });
   };
 
+  const addAssignment = (assignment: Assignment) => {
+    console.log("DataProvider: Adding assignment", assignment);
+    // Generate a new ID (highest ID + 1)
+    const newId = Math.max(0, ...assignments.map(a => a.id)) + 1;
+    const newAssignment = { ...assignment, id: newId };
+    setAssignments((prev) => [...prev, newAssignment]);
+  };
+
+  const addExamDatesheet = (datesheet: ExamDatesheet) => {
+    console.log("DataProvider: Adding datesheet", datesheet);
+    // Generate a new ID (highest ID + 1)
+    const newId = Math.max(0, ...examDatesheets.map(d => d.id)) + 1;
+    const newDatesheet = { ...datesheet, id: newId };
+    setExamDatesheets((prev) => [...prev, newDatesheet]);
+  };
+
+  const addResult = (result: Result) => {
+    console.log("DataProvider: Adding result", result);
+    // Generate a new ID (highest ID + 1)
+    const newId = Math.max(0, ...results.map(r => r.id)) + 1;
+    const newResult = { ...result, id: newId };
+    setResults((prev) => [...prev, newResult]);
+  };
+
   // Creating a value object that will be provided to consumers
   const value = {
     students,
     parents,
     teachers,
     attendance,
+    assignments,
+    examDatesheets,
+    results,
     addStudent,
     addParent,
     addTeacher,
     updateAttendance,
+    addAssignment,
+    addExamDatesheet,
+    addResult,
   };
 
   // Return the context provider with the value
