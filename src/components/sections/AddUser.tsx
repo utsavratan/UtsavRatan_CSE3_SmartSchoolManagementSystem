@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import {
   Dialog,
@@ -75,14 +76,21 @@ export const AddUser = () => {
   });
 
   const handleAddStudent = (data: StudentFormData) => {
-    addStudent({
+    // Generate a roll number if not provided
+    const rollNo = data.rollNo || String(Math.floor(Math.random() * 1000) + 100);
+    
+    const newStudent = {
       name: data.name,
-      rollNo: String(Math.max(16, Math.floor(Math.random() * 100))), // Generate roll number if not provided
+      rollNo: rollNo,
       course: data.course || "Science",
       phone: data.phone || "91-98XXXXXXXX",
       address: data.address || "New Delhi, India",
-      parentsName: data.parentsName,
-    });
+      parentsName: data.parentsName || "Parent Name",
+    };
+    
+    addStudent(newStudent);
+    
+    console.log("Adding student:", newStudent);
     
     toast({
       title: "Student Added",
@@ -94,12 +102,16 @@ export const AddUser = () => {
   };
 
   const handleAddParent = (data: ParentFormData) => {
-    addParent({
+    const newParent = {
       childName: data.childName,
       fatherName: data.fatherName,
       motherName: data.motherName,
       phone: data.phone || "91-98XXXXXXXX",
-    });
+    };
+    
+    addParent(newParent);
+    
+    console.log("Adding parent:", newParent);
     
     toast({
       title: "Parent Added",
@@ -111,13 +123,17 @@ export const AddUser = () => {
   };
 
   const handleAddTeacher = (data: TeacherFormData) => {
-    addTeacher({
+    const newTeacher = {
       name: data.name,
       qualification: data.qualification,
       specialization: data.specialization,
       phone: data.phone || "91-98XXXXXXXX",
       address: data.address || "Staff Housing, Campus",
-    });
+    };
+    
+    addTeacher(newTeacher);
+    
+    console.log("Adding teacher:", newTeacher);
     
     toast({
       title: "Teacher Added",
@@ -159,7 +175,7 @@ export const AddUser = () => {
                   id="student-name"
                   placeholder="Enter student name"
                   required
-                  {...studentForm.register("name")}
+                  {...studentForm.register("name", { required: true })}
                 />
               </div>
               
@@ -177,6 +193,7 @@ export const AddUser = () => {
                 <Input
                   id="student-course"
                   placeholder="Science"
+                  defaultValue="Science"
                   {...studentForm.register("course")}
                 />
               </div>
@@ -222,7 +239,7 @@ export const AddUser = () => {
                   id="child-name"
                   placeholder="Enter child's name"
                   required
-                  {...parentForm.register("childName")}
+                  {...parentForm.register("childName", { required: true })}
                 />
               </div>
               
@@ -232,7 +249,7 @@ export const AddUser = () => {
                   id="father-name"
                   placeholder="Enter father's name"
                   required
-                  {...parentForm.register("fatherName")}
+                  {...parentForm.register("fatherName", { required: true })}
                 />
               </div>
               
@@ -242,7 +259,7 @@ export const AddUser = () => {
                   id="mother-name"
                   placeholder="Enter mother's name"
                   required
-                  {...parentForm.register("motherName")}
+                  {...parentForm.register("motherName", { required: true })}
                 />
               </div>
               
@@ -269,7 +286,7 @@ export const AddUser = () => {
                   id="teacher-name"
                   placeholder="Enter teacher name"
                   required
-                  {...teacherForm.register("name")}
+                  {...teacherForm.register("name", { required: true })}
                 />
               </div>
               
@@ -279,7 +296,7 @@ export const AddUser = () => {
                   id="qualification"
                   placeholder="Ph.D., M.Tech., etc."
                   required
-                  {...teacherForm.register("qualification")}
+                  {...teacherForm.register("qualification", { required: true })}
                 />
               </div>
               

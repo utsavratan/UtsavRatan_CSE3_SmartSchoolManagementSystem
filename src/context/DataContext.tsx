@@ -1,3 +1,4 @@
+
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
 // Define types for our data
@@ -101,10 +102,10 @@ const initialTeachers: Teacher[] = [
   { name: "Prof. Seema Choudhary", qualification: "M.Tech in Electronics", specialization: "Digital Systems, Microprocessors", phone: "91-98XXXXXXXX", address: "707 Tech Tower, Lucknow" },
 ];
 
-// Initial attendance data
+// Initial attendance data for different subjects
 const initialAttendance: AttendanceRecord[] = [
   {
-    id: "1-0",
+    id: "Utsav Ratan-2024-05-05-Mathematics",
     date: new Date('2024-05-05'),
     student_name: "Utsav Ratan",
     status: "Present",
@@ -115,7 +116,7 @@ const initialAttendance: AttendanceRecord[] = [
     notes: "Good performance"
   },
   {
-    id: "2-0",
+    id: "Rahul Kapoor-2024-05-05-Mathematics",
     date: new Date('2024-05-05'),
     student_name: "Rahul Kapoor",
     status: "Absent",
@@ -123,10 +124,10 @@ const initialAttendance: AttendanceRecord[] = [
     teacher: "Dr. Pankaj Sharma",
     room: "101",
     grade: null,
-    notes: "Needs improvement"
+    notes: "Absent"
   },
   {
-    id: "3-0",
+    id: "Priya Singh-2024-05-05-Mathematics",
     date: new Date('2024-05-05'),
     student_name: "Priya Singh",
     status: "Late",
@@ -134,7 +135,29 @@ const initialAttendance: AttendanceRecord[] = [
     teacher: "Dr. Pankaj Sharma",
     room: "101",
     grade: 75,
-    notes: "Good performance"
+    notes: "Arrived late"
+  },
+  {
+    id: "Utsav Ratan-2024-05-05-Science",
+    date: new Date('2024-05-05'),
+    student_name: "Utsav Ratan",
+    status: "Present",
+    subject: "Science",
+    teacher: "Dr. Anita Verma",
+    room: "102",
+    grade: 90,
+    notes: "Excellent performance"
+  },
+  {
+    id: "Rahul Kapoor-2024-05-05-Science",
+    date: new Date('2024-05-05'),
+    student_name: "Rahul Kapoor",
+    status: "Present",
+    subject: "Science",
+    teacher: "Dr. Anita Verma",
+    room: "102",
+    grade: 78,
+    notes: "Good"
   }
 ];
 
@@ -146,18 +169,22 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [attendance, setAttendance] = useState<AttendanceRecord[]>(initialAttendance);
 
   const addStudent = (student: Student) => {
+    console.log("DataProvider: Adding student", student);
     setStudents((prev) => [...prev, student]);
   };
 
   const addParent = (parent: Parent) => {
+    console.log("DataProvider: Adding parent", parent);
     setParents((prev) => [...prev, parent]);
   };
 
   const addTeacher = (teacher: Teacher) => {
+    console.log("DataProvider: Adding teacher", teacher);
     setTeachers((prev) => [...prev, teacher]);
   };
 
   const updateAttendance = (record: AttendanceRecord) => {
+    console.log("DataProvider: Updating attendance", record);
     setAttendance(prev => {
       // Check if we already have a record with this ID
       const existingIndex = prev.findIndex(item => item.id === record.id);
@@ -174,17 +201,21 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     });
   };
 
+  // Creating a value object that will be provided to consumers
+  const value = {
+    students,
+    parents,
+    teachers,
+    attendance,
+    addStudent,
+    addParent,
+    addTeacher,
+    updateAttendance,
+  };
+
+  // Return the context provider with the value
   return (
-    <DataContext.Provider value={{
-      students,
-      parents,
-      teachers,
-      attendance,
-      addStudent,
-      addParent,
-      addTeacher,
-      updateAttendance,
-    }}>
+    <DataContext.Provider value={value}>
       {children}
     </DataContext.Provider>
   );

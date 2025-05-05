@@ -21,7 +21,7 @@ export const StudentDetailsTable = () => {
         </TableHeader>
         <TableBody>
           {students.map((student, index) => (
-            <TableRow key={index}>
+            <TableRow key={`student-${student.name}-${index}`}>
               <TableCell className="font-medium">{student.name}</TableCell>
               <TableCell>{student.rollNo}</TableCell>
               <TableCell>{student.course}</TableCell>

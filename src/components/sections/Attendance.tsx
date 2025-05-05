@@ -18,6 +18,7 @@ export const Attendance = () => {
   const [selectedDate, setSelectedDate] = useState(today.toISOString().split('T')[0]);
   const [editMode, setEditMode] = useState(false);
   const [studentAttendance, setStudentAttendance] = useState<Record<string, string>>({});
+  const [selectedSubject, setSelectedSubject] = useState('Mathematics');
   
   // Subjects for attendance
   const subjects = ['Mathematics', 'Science', 'English', 'Computer'];
@@ -26,17 +27,18 @@ export const Attendance = () => {
     // Initialize student attendance statuses
     const initialAttendance: Record<string, string> = {};
     students.forEach(student => {
-      // Check if there's an existing attendance record for this student on this date
+      // Check if there's an existing attendance record for this student on this date and subject
       const existingRecord = attendance.find(
         record => record.student_name === student.name && 
-        new Date(record.date).toISOString().split('T')[0] === selectedDate
+        new Date(record.date).toISOString().split('T')[0] === selectedDate &&
+        record.subject === selectedSubject
       );
       
       initialAttendance[student.name] = existingRecord ? existingRecord.status : 'Present';
     });
     
     setStudentAttendance(initialAttendance);
-  }, [students, attendance, selectedDate]);
+  }, [students, attendance, selectedDate, selectedSubject]);
 
   const handleStatusChange = (studentName: string, status: string) => {
     setStudentAttendance(prev => ({
@@ -50,14 +52,15 @@ export const Attendance = () => {
     students.forEach(student => {
       const status = studentAttendance[student.name] || 'Present';
       const selectedDateObj = new Date(selectedDate);
+      const attendanceId = `${student.name}-${selectedDate}-${selectedSubject}`;
       
       // Create or update attendance record
       updateAttendance({
-        id: `${student.name}-${selectedDate}`,
+        id: attendanceId,
         date: selectedDateObj,
         student_name: student.name,
         status: status,
-        subject: subjects[0], // Default to first subject
+        subject: selectedSubject,
         teacher: 'Dr. Pankaj Sharma',
         room: '101',
         grade: status !== 'Absent' ? Math.floor(Math.random() * 31) + 70 : null,
@@ -67,11 +70,19 @@ export const Attendance = () => {
     
     toast({
       title: "Attendance Saved",
-      description: `Attendance for ${selectedDate} has been updated successfully.`,
+      description: `Attendance for ${selectedDate} (${selectedSubject}) has been updated successfully.`,
     });
     
     setEditMode(false);
   };
+
+  // Filter attendance based on selected date or all dates for non-teachers
+  const filteredAttendance = userRole !== 'teacher' 
+    ? attendance 
+    : attendance.filter(record => 
+        new Date(record.date).toISOString().split('T')[0] === selectedDate &&
+        record.subject === selectedSubject
+      );
 
   const renderAttendanceTable = () => {
     if (isTeacher && editMode) {
@@ -82,6 +93,25 @@ export const Attendance = () => {
             <Button onClick={handleSaveAttendance} className="bg-green-600 hover:bg-green-700">
               Save Attendance
             </Button>
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="subject-select" className="block text-sm font-medium mb-1">
+              Subject:
+            </label>
+            <Select 
+              value={selectedSubject}
+              onValueChange={setSelectedSubject}
+            >
+              <SelectTrigger className="w-full md:w-48" id="subject-select">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {subjects.map(subject => (
+                  <SelectItem key={subject} value={subject}>{subject}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
           
           <Table>
@@ -121,8 +151,8 @@ export const Attendance = () => {
       return (
         <div className="space-y-4">
           {isTeacher && (
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
+            <div className="flex flex-col md:flex-row md:items-end gap-4 mb-4">
+              <div className="flex flex-col gap-1">
                 <label htmlFor="attendance-date" className="text-sm font-medium">
                   Date:
                 </label>
@@ -134,7 +164,27 @@ export const Attendance = () => {
                   className="px-2 py-1 border rounded"
                 />
               </div>
-              <Button onClick={() => setEditMode(true)} className="bg-primary">
+              
+              <div className="flex flex-col gap-1">
+                <label htmlFor="subject-select" className="text-sm font-medium">
+                  Subject:
+                </label>
+                <Select 
+                  value={selectedSubject}
+                  onValueChange={setSelectedSubject}
+                >
+                  <SelectTrigger className="w-full md:w-48" id="subject-select">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {subjects.map(subject => (
+                      <SelectItem key={subject} value={subject}>{subject}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <Button onClick={() => setEditMode(true)} className="bg-primary mt-4 md:mt-0">
                 Edit Attendance
               </Button>
             </div>
@@ -154,7 +204,7 @@ export const Attendance = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {attendance.map((record) => (
+              {filteredAttendance.map((record) => (
                 <TableRow key={record.id} className={
                   record.status === 'Absent' ? 'bg-red-100' : 
                   record.status === 'Present' ? 'bg-green-100' : 

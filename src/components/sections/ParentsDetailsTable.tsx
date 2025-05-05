@@ -19,7 +19,7 @@ export const ParentsDetailsTable = () => {
         </TableHeader>
         <TableBody>
           {parents.map((parent, index) => (
-            <TableRow key={index}>
+            <TableRow key={`parent-${parent.childName}-${index}`}>
               <TableCell className="font-medium">{parent.childName}</TableCell>
               <TableCell>{parent.fatherName}</TableCell>
               <TableCell>{parent.motherName}</TableCell>
