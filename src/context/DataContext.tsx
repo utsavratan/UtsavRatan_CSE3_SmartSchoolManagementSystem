@@ -1,4 +1,3 @@
-
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
 // Define types for our data
@@ -26,13 +25,27 @@ interface Teacher {
   address: string;
 }
 
+interface AttendanceRecord {
+  id: string;
+  date: Date;
+  student_name: string;
+  status: string;
+  subject: string;
+  teacher: string;
+  room: string;
+  grade: number | null;
+  notes: string;
+}
+
 interface DataContextType {
   students: Student[];
   parents: Parent[];
   teachers: Teacher[];
+  attendance: AttendanceRecord[];
   addStudent: (student: Student) => void;
   addParent: (parent: Parent) => void;
   addTeacher: (teacher: Teacher) => void;
+  updateAttendance: (record: AttendanceRecord) => void;
 }
 
 // Create the context
@@ -88,11 +101,49 @@ const initialTeachers: Teacher[] = [
   { name: "Prof. Seema Choudhary", qualification: "M.Tech in Electronics", specialization: "Digital Systems, Microprocessors", phone: "91-98XXXXXXXX", address: "707 Tech Tower, Lucknow" },
 ];
 
+// Initial attendance data
+const initialAttendance: AttendanceRecord[] = [
+  {
+    id: "1-0",
+    date: new Date('2024-05-05'),
+    student_name: "Utsav Ratan",
+    status: "Present",
+    subject: "Mathematics",
+    teacher: "Dr. Pankaj Sharma",
+    room: "101",
+    grade: 85,
+    notes: "Good performance"
+  },
+  {
+    id: "2-0",
+    date: new Date('2024-05-05'),
+    student_name: "Rahul Kapoor",
+    status: "Absent",
+    subject: "Mathematics",
+    teacher: "Dr. Pankaj Sharma",
+    room: "101",
+    grade: null,
+    notes: "Needs improvement"
+  },
+  {
+    id: "3-0",
+    date: new Date('2024-05-05'),
+    student_name: "Priya Singh",
+    status: "Late",
+    subject: "Mathematics",
+    teacher: "Dr. Pankaj Sharma",
+    room: "101",
+    grade: 75,
+    notes: "Good performance"
+  }
+];
+
 // Create the provider component
 export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [students, setStudents] = useState<Student[]>(initialStudents);
   const [parents, setParents] = useState<Parent[]>(initialParents);
   const [teachers, setTeachers] = useState<Teacher[]>(initialTeachers);
+  const [attendance, setAttendance] = useState<AttendanceRecord[]>(initialAttendance);
 
   const addStudent = (student: Student) => {
     setStudents((prev) => [...prev, student]);
@@ -106,14 +157,33 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setTeachers((prev) => [...prev, teacher]);
   };
 
+  const updateAttendance = (record: AttendanceRecord) => {
+    setAttendance(prev => {
+      // Check if we already have a record with this ID
+      const existingIndex = prev.findIndex(item => item.id === record.id);
+      
+      if (existingIndex >= 0) {
+        // Update existing record
+        const updated = [...prev];
+        updated[existingIndex] = record;
+        return updated;
+      } else {
+        // Add new record
+        return [...prev, record];
+      }
+    });
+  };
+
   return (
     <DataContext.Provider value={{
       students,
       parents,
       teachers,
+      attendance,
       addStudent,
       addParent,
       addTeacher,
+      updateAttendance,
     }}>
       {children}
     </DataContext.Provider>
