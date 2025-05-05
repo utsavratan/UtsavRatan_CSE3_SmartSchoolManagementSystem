@@ -1,23 +1,20 @@
 
 import React from 'react';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
+import { useData } from '@/context/DataContext';
 
 export const Attendance = () => {
-  // Generate attendance data for all 15 students
+  // Get students from context
+  const { students } = useData();
+  
+  // Generate attendance data for all students
   const generateAttendanceData = () => {
     const data = [];
     const startDate = new Date('2024-03-11'); // Starting from a Monday
     const statuses = ['Present', 'Absent', 'Late'];
     const subjects = ['Mathematics', 'Science', 'English', 'Computer'];
     const teachers = ['Dr. Pankaj Sharma', 'Prof. Rupesh Kumar', 'Dr. Mayank Singh', 'Prof. Rahul Gupta'];
-    const rooms = ['101', '101', '101', '101'];
-    
-    // Student names from StudentDetailsTable
-    const students = [
-      "Utsav Ratan", "Rahul Kapoor", "Priya Singh", "Arjun Patel", "Neha Gupta",
-      "Vikram Malhotra", "Ananya Reddy", "Rohan Joshi", "Meera Choudhary", "Karan Mehta",
-      "Divya Sharma", "Sanjay Kumar", "Pooja Verma", "Rajat Khanna", "Anjali Desai"
-    ];
+    const rooms = ['101', '102', '103', '104'];
     
     // Generate one day of attendance data for all students
     students.forEach((student, studentIndex) => {
@@ -28,7 +25,7 @@ export const Attendance = () => {
         data.push({
           id: `${studentIndex}-${classNum}`,
           date: new Date(startDate),
-          student_name: student,
+          student_name: student.name,
           status: status,
           subject: subjects[classNum % subjects.length],
           teacher: teachers[classNum % teachers.length],

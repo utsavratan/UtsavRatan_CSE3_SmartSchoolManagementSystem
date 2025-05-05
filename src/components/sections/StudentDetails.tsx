@@ -1,21 +1,19 @@
+
 import React from 'react';
+import { useData } from '@/context/DataContext';
 
 export const StudentDetails = () => {
-  const student = {
-    name: 'Utsav Ratan',
-    rollNumber: '2401010046',
-    phoneNumber: '98*******5',
-    email: 'ratan.utsav1@gmail.com',
-    course: 'B.Tech CSE',
-    address: 'New Delhi , India',
-    parentsDetails: 'Mr. Rajeev Kumar and Mrs. Priyanka Kumari',
-    profileImage: '/lovable-uploads/utsav.jpeg', // Replace with actual image path
-  };
+  const { students } = useData();
+  const student = students[0]; // Display the first student's details
+  
+  if (!student) {
+    return <div>No student data available</div>;
+  }
 
   return (
     <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-md">
       <img
-        src={student.profileImage}
+        src="/lovable-uploads/utsav.jpeg"
         alt="Profile"
         className="w-32 h-32 rounded-full mb-4"
       />
@@ -24,13 +22,13 @@ export const StudentDetails = () => {
           <strong>Name:</strong> {student.name}
         </div>
         <div className="p-4 border rounded">
-          <strong>Roll Number:</strong> {student.rollNumber}
+          <strong>Roll Number:</strong> {student.rollNo}
         </div>
         <div className="p-4 border rounded">
-          <strong>Phone Number:</strong> {student.phoneNumber}
+          <strong>Phone Number:</strong> {student.phone}
         </div>
         <div className="p-4 border rounded">
-          <strong>Email:</strong> {student.email}
+          <strong>Email:</strong> {student.name.toLowerCase().replace(' ', '.') + '@example.com'}
         </div>
         <div className="p-4 border rounded">
           <strong>Course:</strong> {student.course}
@@ -39,7 +37,7 @@ export const StudentDetails = () => {
           <strong>Address:</strong> {student.address}
         </div>
         <div className="p-4 border rounded">
-          <strong>Parents Details:</strong> {student.parentsDetails}
+          <strong>Parents Details:</strong> {student.parentsName}
         </div>
       </div>
     </div>

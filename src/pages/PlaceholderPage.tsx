@@ -14,6 +14,7 @@ import Chatbot from '@/components/sections/Chatbot';
 import { StudentDetailsTable } from '@/components/sections/StudentDetailsTable';
 import { ParentsDetailsTable } from '@/components/sections/ParentsDetailsTable';
 import { TeachersDetailsTable } from '@/components/sections/TeachersDetailsTable';
+import { DataProvider } from '@/context/DataContext';
 
 const PlaceholderPage = () => {
   const { section } = useParams<{ section: string }>();
@@ -95,12 +96,14 @@ const PlaceholderPage = () => {
   
   return (
     <DashboardLayout userRole={role}>
-      <div className="space-y-6">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-          <h2 className="text-3xl font-bold tracking-tight">{getPageTitle()}</h2>
+      <DataProvider>
+        <div className="space-y-6">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+            <h2 className="text-3xl font-bold tracking-tight">{getPageTitle()}</h2>
+          </div>
+          {renderSection()}
         </div>
-        {renderSection()}
-      </div>
+      </DataProvider>
     </DashboardLayout>
   );
 };
