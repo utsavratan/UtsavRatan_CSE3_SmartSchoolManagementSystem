@@ -11,10 +11,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { UserPlus } from "lucide-react";
-import { Form, FormField, FormItem, FormLabel, FormControl } from "@/components/ui/form";
+import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { toast } from "@/components/ui/use-toast";
+import { useData } from '@/context/DataContext';
 
 interface StudentFormData {
   name: string;
@@ -40,13 +41,8 @@ interface TeacherFormData {
   address: string;
 }
 
-interface AddUserProps {
-  onAddStudent: (student: any) => void;
-  onAddParent: (parent: any) => void;
-  onAddTeacher: (teacher: any) => void;
-}
-
-export const AddUser = ({ onAddStudent, onAddParent, onAddTeacher }: AddUserProps) => {
+export const AddUser = () => {
+  const { addStudent, addParent, addTeacher } = useData();
   const [open, setOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("student");
   
@@ -81,7 +77,7 @@ export const AddUser = ({ onAddStudent, onAddParent, onAddTeacher }: AddUserProp
   });
 
   const handleAddStudent = (data: StudentFormData) => {
-    onAddStudent({
+    addStudent({
       name: data.name,
       rollNo: String(Math.max(16, Math.floor(Math.random() * 100))), // Generate roll number if not provided
       course: data.course || "Science",
@@ -100,9 +96,7 @@ export const AddUser = ({ onAddStudent, onAddParent, onAddTeacher }: AddUserProp
   };
 
   const handleAddParent = (data: ParentFormData) => {
-    const [firstName, lastName] = data.fatherName.split(' ');
-    
-    onAddParent({
+    addParent({
       childName: data.childName,
       fatherName: data.fatherName,
       motherName: data.motherName,
@@ -119,7 +113,7 @@ export const AddUser = ({ onAddStudent, onAddParent, onAddTeacher }: AddUserProp
   };
 
   const handleAddTeacher = (data: TeacherFormData) => {
-    onAddTeacher({
+    addTeacher({
       name: data.name,
       qualification: data.qualification,
       specialization: data.specialization,
@@ -161,83 +155,60 @@ export const AddUser = ({ onAddStudent, onAddParent, onAddTeacher }: AddUserProp
           
           <TabsContent value="student">
             <form onSubmit={studentForm.handleSubmit(handleAddStudent)} className="space-y-3">
-              <FormField
-                control={studentForm.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Full Name *</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter student name" required {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
+              <div className="space-y-2">
+                <label className="text-sm font-medium" htmlFor="student-name">Full Name *</label>
+                <Input
+                  id="student-name"
+                  placeholder="Enter student name"
+                  required
+                  {...studentForm.register("name")}
+                />
+              </div>
               
-              <FormField
-                control={studentForm.control}
-                name="rollNo"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Roll Number</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter roll number (optional)" {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
+              <div className="space-y-2">
+                <label className="text-sm font-medium" htmlFor="student-roll">Roll Number</label>
+                <Input
+                  id="student-roll"
+                  placeholder="Enter roll number (optional)"
+                  {...studentForm.register("rollNo")}
+                />
+              </div>
               
-              <FormField
-                control={studentForm.control}
-                name="course"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Course</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Science" {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
+              <div className="space-y-2">
+                <label className="text-sm font-medium" htmlFor="student-course">Course</label>
+                <Input
+                  id="student-course"
+                  placeholder="Science"
+                  {...studentForm.register("course")}
+                />
+              </div>
               
-              <FormField
-                control={studentForm.control}
-                name="phone"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Phone Number</FormLabel>
-                    <FormControl>
-                      <Input placeholder="91-98XXXXXXXX" {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
+              <div className="space-y-2">
+                <label className="text-sm font-medium" htmlFor="student-phone">Phone Number</label>
+                <Input
+                  id="student-phone"
+                  placeholder="91-98XXXXXXXX"
+                  {...studentForm.register("phone")}
+                />
+              </div>
               
-              <FormField
-                control={studentForm.control}
-                name="address"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Address</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter address" {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
+              <div className="space-y-2">
+                <label className="text-sm font-medium" htmlFor="student-address">Address</label>
+                <Input
+                  id="student-address"
+                  placeholder="Enter address"
+                  {...studentForm.register("address")}
+                />
+              </div>
               
-              <FormField
-                control={studentForm.control}
-                name="parentsName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Parents' Names</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Father & Mother Name" {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
+              <div className="space-y-2">
+                <label className="text-sm font-medium" htmlFor="student-parents">Parents' Names</label>
+                <Input
+                  id="student-parents"
+                  placeholder="Father & Mother Name"
+                  {...studentForm.register("parentsName")}
+                />
+              </div>
               
               <div className="flex justify-end">
                 <Button type="submit">Add Student</Button>
@@ -247,57 +218,44 @@ export const AddUser = ({ onAddStudent, onAddParent, onAddTeacher }: AddUserProp
           
           <TabsContent value="parent">
             <form onSubmit={parentForm.handleSubmit(handleAddParent)} className="space-y-3">
-              <FormField
-                control={parentForm.control}
-                name="childName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Child's Name *</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter child's name" required {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
+              <div className="space-y-2">
+                <label className="text-sm font-medium" htmlFor="child-name">Child's Name *</label>
+                <Input
+                  id="child-name"
+                  placeholder="Enter child's name"
+                  required
+                  {...parentForm.register("childName")}
+                />
+              </div>
               
-              <FormField
-                control={parentForm.control}
-                name="fatherName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Father's Name *</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter father's name" required {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
+              <div className="space-y-2">
+                <label className="text-sm font-medium" htmlFor="father-name">Father's Name *</label>
+                <Input
+                  id="father-name"
+                  placeholder="Enter father's name"
+                  required
+                  {...parentForm.register("fatherName")}
+                />
+              </div>
               
-              <FormField
-                control={parentForm.control}
-                name="motherName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Mother's Name *</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter mother's name" required {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
+              <div className="space-y-2">
+                <label className="text-sm font-medium" htmlFor="mother-name">Mother's Name *</label>
+                <Input
+                  id="mother-name"
+                  placeholder="Enter mother's name"
+                  required
+                  {...parentForm.register("motherName")}
+                />
+              </div>
               
-              <FormField
-                control={parentForm.control}
-                name="phone"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Phone Number</FormLabel>
-                    <FormControl>
-                      <Input placeholder="91-98XXXXXXXX" {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
+              <div className="space-y-2">
+                <label className="text-sm font-medium" htmlFor="parent-phone">Phone Number</label>
+                <Input
+                  id="parent-phone"
+                  placeholder="91-98XXXXXXXX"
+                  {...parentForm.register("phone")}
+                />
+              </div>
               
               <div className="flex justify-end">
                 <Button type="submit">Add Parent</Button>
@@ -307,70 +265,52 @@ export const AddUser = ({ onAddStudent, onAddParent, onAddTeacher }: AddUserProp
           
           <TabsContent value="teacher">
             <form onSubmit={teacherForm.handleSubmit(handleAddTeacher)} className="space-y-3">
-              <FormField
-                control={teacherForm.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Full Name *</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter teacher name" required {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
+              <div className="space-y-2">
+                <label className="text-sm font-medium" htmlFor="teacher-name">Full Name *</label>
+                <Input
+                  id="teacher-name"
+                  placeholder="Enter teacher name"
+                  required
+                  {...teacherForm.register("name")}
+                />
+              </div>
               
-              <FormField
-                control={teacherForm.control}
-                name="qualification"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Qualification *</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Ph.D., M.Tech., etc." required {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
+              <div className="space-y-2">
+                <label className="text-sm font-medium" htmlFor="qualification">Qualification *</label>
+                <Input
+                  id="qualification"
+                  placeholder="Ph.D., M.Tech., etc."
+                  required
+                  {...teacherForm.register("qualification")}
+                />
+              </div>
               
-              <FormField
-                control={teacherForm.control}
-                name="specialization"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Specialization</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Subject specialization" {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
+              <div className="space-y-2">
+                <label className="text-sm font-medium" htmlFor="specialization">Specialization</label>
+                <Input
+                  id="specialization"
+                  placeholder="Subject specialization"
+                  {...teacherForm.register("specialization")}
+                />
+              </div>
               
-              <FormField
-                control={teacherForm.control}
-                name="phone"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Phone Number</FormLabel>
-                    <FormControl>
-                      <Input placeholder="91-98XXXXXXXX" {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
+              <div className="space-y-2">
+                <label className="text-sm font-medium" htmlFor="teacher-phone">Phone Number</label>
+                <Input
+                  id="teacher-phone"
+                  placeholder="91-98XXXXXXXX"
+                  {...teacherForm.register("phone")}
+                />
+              </div>
               
-              <FormField
-                control={teacherForm.control}
-                name="address"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Address</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter address" {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
+              <div className="space-y-2">
+                <label className="text-sm font-medium" htmlFor="teacher-address">Address</label>
+                <Input
+                  id="teacher-address"
+                  placeholder="Enter address"
+                  {...teacherForm.register("address")}
+                />
+              </div>
               
               <div className="flex justify-end">
                 <Button type="submit">Add Teacher</Button>
