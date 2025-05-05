@@ -15,12 +15,26 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const formSchema = z.object({
+  title: z.string().min(1, "Title is required"),
+  subject: z.string().min(1, "Subject is required"),
+  due_date: z.string().min(1, "Due date is required"),
+  description: z.string().min(1, "Description is required"),
+});
+
+type FormValues = z.infer<typeof formSchema>;
 
 export const AddAssignmentForm = () => {
   const navigate = useNavigate();
   const { addAssignment } = useData();
+  
+  console.log("Rendering AddAssignmentForm");
 
-  const form = useForm({
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
     defaultValues: {
       title: '',
       subject: '',
@@ -29,12 +43,22 @@ export const AddAssignmentForm = () => {
     },
   });
 
-  const onSubmit = (data: any) => {
-    addAssignment(data);
+  const onSubmit = (data: FormValues) => {
+    console.log("Form submitted with data:", data);
+    
+    addAssignment({
+      id: 0, // This will be replaced by the addAssignment function
+      title: data.title,
+      subject: data.subject,
+      due_date: data.due_date,
+      description: data.description,
+    });
+    
     toast({
       title: "Assignment Added",
       description: "The assignment has been successfully added.",
     });
+    
     navigate('/teacher/assignments');
   };
 

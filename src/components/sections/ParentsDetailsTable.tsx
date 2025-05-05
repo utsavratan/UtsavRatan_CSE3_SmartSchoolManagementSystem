@@ -5,6 +5,8 @@ import { useData } from '@/context/DataContext';
 
 export const ParentsDetailsTable = () => {
   const { parents } = useData();
+  
+  console.log("Rendering ParentsDetailsTable with data:", parents);
 
   return (
     <div className="rounded-md border">
@@ -18,7 +20,7 @@ export const ParentsDetailsTable = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {parents.length > 0 ? (
+          {parents && parents.length > 0 ? (
             parents.map((parent, index) => (
               <TableRow key={`parent-${parent.childName}-${index}`}>
                 <TableCell className="font-medium">{parent.childName}</TableCell>

@@ -21,12 +21,26 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const formSchema = z.object({
+  subject: z.string().min(1, "Subject is required"),
+  exam_date: z.string().min(1, "Exam date is required"),
+  duration_minutes: z.coerce.number().min(30, "Duration must be at least 30 minutes"),
+  exam_type: z.string().min(1, "Exam type is required"),
+});
+
+type FormValues = z.infer<typeof formSchema>;
 
 export const AddDatesheetForm = () => {
   const navigate = useNavigate();
   const { addExamDatesheet } = useData();
+  
+  console.log("Rendering AddDatesheetForm");
 
-  const form = useForm({
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
     defaultValues: {
       subject: '',
       exam_date: '',
@@ -35,18 +49,25 @@ export const AddDatesheetForm = () => {
     },
   });
 
-  const onSubmit = (data: any) => {
-    // Convert duration to number
+  const onSubmit = (data: FormValues) => {
+    console.log("Form submitted with data:", data);
+    
     const formattedData = {
-      ...data,
-      duration_minutes: parseInt(data.duration_minutes, 10),
+      id: 0, // This will be replaced by the addExamDatesheet function
+      subject: data.subject,
+      exam_date: data.exam_date,
+      duration_minutes: data.duration_minutes,
+      exam_type: data.exam_type,
     };
     
+    console.log("Adding exam datesheet with data:", formattedData);
     addExamDatesheet(formattedData);
+    
     toast({
       title: "Exam Datesheet Added",
       description: "The exam datesheet has been successfully added.",
     });
+    
     navigate('/teacher/exams');
   };
 

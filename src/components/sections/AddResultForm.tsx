@@ -21,12 +21,28 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const formSchema = z.object({
+  student_name: z.string().min(1, "Student name is required"),
+  subject: z.string().min(1, "Subject is required"),
+  marks: z.coerce.number().min(0, "Marks must be a non-negative number"),
+  total_marks: z.coerce.number().min(1, "Total marks must be at least 1"),
+  exam_type: z.string().min(1, "Exam type is required"),
+  exam_date: z.string().min(1, "Exam date is required"),
+});
+
+type FormValues = z.infer<typeof formSchema>;
 
 export const AddResultForm = () => {
   const navigate = useNavigate();
   const { addResult, students } = useData();
+  
+  console.log("Rendering AddResultForm with students:", students);
 
-  const form = useForm({
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
     defaultValues: {
       student_name: '',
       subject: '',
@@ -37,19 +53,27 @@ export const AddResultForm = () => {
     },
   });
 
-  const onSubmit = (data: any) => {
-    // Convert marks to number
+  const onSubmit = (data: FormValues) => {
+    console.log("Form submitted with data:", data);
+    
     const formattedData = {
-      ...data,
-      marks: parseInt(data.marks, 10),
-      total_marks: parseInt(data.total_marks, 10),
+      id: 0, // This will be replaced by the addResult function
+      student_name: data.student_name,
+      subject: data.subject,
+      marks: data.marks,
+      total_marks: data.total_marks,
+      exam_type: data.exam_type,
+      exam_date: data.exam_date,
     };
     
+    console.log("Adding result with data:", formattedData);
     addResult(formattedData);
+    
     toast({
       title: "Result Added",
       description: "The student result has been successfully added.",
     });
+    
     navigate('/teacher/results');
   };
 
