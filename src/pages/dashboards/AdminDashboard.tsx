@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { DashboardLayout } from '@/components/DashboardLayout';
 import { DashboardCard } from '@/components/DashboardCard';
@@ -13,8 +12,6 @@ import {
 } from "lucide-react";
 
 const AdminDashboardContent = () => {
-  const { addStudent, addParent, addTeacher } = useData();
-  
   return (
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between">
@@ -23,11 +20,7 @@ const AdminDashboardContent = () => {
           <p className="text-muted-foreground mr-4">
             Manage your school's digital ecosystem
           </p>
-          <AddUser 
-            onAddStudent={addStudent}
-            onAddParent={addParent}
-            onAddTeacher={addTeacher}
-          />
+          <AddUser />
         </div>
       </div>
       
