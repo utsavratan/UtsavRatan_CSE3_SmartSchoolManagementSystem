@@ -14,6 +14,7 @@ interface FeeReceiptProps {
     type: string;
     amount: number;
     due_date: string;
+    status?: string; // Make status optional
   }>;
 }
 
