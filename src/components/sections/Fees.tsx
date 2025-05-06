@@ -39,14 +39,14 @@ export const Fees = () => {
       type: 'Tuition',
       amount: 5000,
       due_date: '2025-04-01',
-      status: 'Unpaid',
+      status: 'Paid',
     },
     {
       id: 2,
       type: 'Bus',
       amount: 3000,
       due_date: '2025-04-01',
-      status: 'Unpaid',
+      status: 'Paid',
     },
     {
       id: 3,
@@ -56,6 +56,13 @@ export const Fees = () => {
       status: 'Paid',
       payment_date: '2025-03-15',
       transaction_id: 'TXN7890123'
+    },
+    {
+      id:4,
+      type: 'Check',
+      amount : 1,
+      due_date : 'Na/-',
+      status:'Unpaid',
     },
   ]);
 
