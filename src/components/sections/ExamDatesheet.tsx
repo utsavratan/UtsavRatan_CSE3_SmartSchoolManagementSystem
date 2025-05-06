@@ -1,12 +1,19 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 import { useData } from '@/context/DataContext';
+import { useLocation } from 'react-router-dom';
 
 export const ExamDatesheet = () => {
   const { examDatesheets } = useData();
+  const location = useLocation();
+  const userRole = location.pathname.split('/')[1];
   
-  console.log("Rendering ExamDatesheet component with data:", examDatesheets);
+  console.log(`Rendering ExamDatesheet with ${examDatesheets?.length || 0} datesheets for ${userRole} dashboard`);
+  
+  useEffect(() => {
+    console.log("ExamDatesheet mounted with data:", examDatesheets);
+  }, [examDatesheets]);
 
   return (
     <div className="rounded-md border">
@@ -31,7 +38,12 @@ export const ExamDatesheet = () => {
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={4} className="text-center py-4">No exam datesheets available</TableCell>
+              <TableCell colSpan={4} className="text-center py-4">
+                {userRole === 'teacher' || userRole === 'admin' ? 
+                  "No exam datesheets available. Add datesheets from the 'Add Datesheet' button on the dashboard." : 
+                  "No exam datesheets available yet."
+                }
+              </TableCell>
             </TableRow>
           )}
         </TableBody>

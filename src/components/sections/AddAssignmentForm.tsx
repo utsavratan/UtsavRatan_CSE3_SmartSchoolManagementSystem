@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -42,6 +42,10 @@ export const AddAssignmentForm = () => {
       description: '',
     },
   });
+
+  useEffect(() => {
+    console.log("AddAssignmentForm mounted");
+  }, []);
 
   const onSubmit = (data: FormValues) => {
     console.log("Form submitted with data:", data);

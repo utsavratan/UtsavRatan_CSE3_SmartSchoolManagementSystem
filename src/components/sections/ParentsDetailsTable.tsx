@@ -1,12 +1,19 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 import { useData } from '@/context/DataContext';
+import { useLocation } from 'react-router-dom';
 
 export const ParentsDetailsTable = () => {
   const { parents } = useData();
+  const location = useLocation();
+  const userRole = location.pathname.split('/')[1];
   
-  console.log("Rendering ParentsDetailsTable with data:", parents);
+  console.log(`Rendering ParentsDetailsTable with ${parents?.length || 0} parents for ${userRole} dashboard`);
+  
+  useEffect(() => {
+    console.log("ParentsDetailsTable mounted with data:", parents);
+  }, [parents]);
 
   return (
     <div className="rounded-md border">
@@ -31,7 +38,12 @@ export const ParentsDetailsTable = () => {
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={4} className="text-center py-4">No parents data available</TableCell>
+              <TableCell colSpan={4} className="text-center py-4">
+                {userRole === 'admin' ? 
+                  "No parents data available. Add parents using the 'Add User' button on the dashboard." : 
+                  "No parents data available yet."
+                }
+              </TableCell>
             </TableRow>
           )}
         </TableBody>

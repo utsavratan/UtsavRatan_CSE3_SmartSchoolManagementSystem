@@ -1,12 +1,19 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 import { useData } from '@/context/DataContext';
+import { useLocation } from 'react-router-dom';
 
 export const Assignments = () => {
   const { assignments } = useData();
+  const location = useLocation();
+  const userRole = location.pathname.split('/')[1];
   
-  console.log("Rendering Assignments component with data:", assignments);
+  console.log(`Rendering Assignments component with ${assignments?.length || 0} assignments for ${userRole} dashboard`);
+  
+  useEffect(() => {
+    console.log("Assignments component mounted with data:", assignments);
+  }, [assignments]);
 
   return (
     <div className="rounded-md border">
@@ -31,7 +38,12 @@ export const Assignments = () => {
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={4} className="text-center py-4">No assignments available</TableCell>
+              <TableCell colSpan={4} className="text-center py-4">
+                {userRole === 'teacher' || userRole === 'admin' ? 
+                  "No assignments available. Add assignments from the 'Add Assignment' button on the dashboard." : 
+                  "No assignments available yet."
+                }
+              </TableCell>
             </TableRow>
           )}
         </TableBody>

@@ -1,13 +1,20 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 import { useData } from '@/context/DataContext';
+import { useLocation } from 'react-router-dom';
 
 export const Results = () => {
   const { results } = useData();
+  const location = useLocation();
+  const userRole = location.pathname.split('/')[1];
   
-  console.log("Rendering Results component with data:", results);
+  console.log(`Rendering Results component with ${results.length} results for ${userRole} dashboard`);
 
+  useEffect(() => {
+    console.log("Results component mounted with data:", results);
+  }, [results]);
+  
   return (
     <div className="rounded-md border">
       <Table>
@@ -39,7 +46,12 @@ export const Results = () => {
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={7} className="text-center py-4">No results available</TableCell>
+              <TableCell colSpan={7} className="text-center py-4">
+                {userRole === 'teacher' || userRole === 'admin' ? 
+                  "No results available. Add results from the 'Add Result' button on the dashboard." :
+                  "No results available yet."
+                }
+              </TableCell>
             </TableRow>
           )}
         </TableBody>

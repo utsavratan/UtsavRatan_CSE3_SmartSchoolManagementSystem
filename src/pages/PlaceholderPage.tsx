@@ -24,6 +24,8 @@ const PlaceholderPage = () => {
   const location = useLocation();
   const role = location.pathname.split('/')[1];
   
+  console.log(`Rendering PlaceholderPage with section: ${section}, role: ${role}`);
+  
   const getPageTitle = () => {
     switch(section) {
       case 'student-details':
