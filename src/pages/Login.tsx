@@ -28,10 +28,10 @@ const Login = () => {
 
   // Predefined credentials for each role
   const credentials = {
-    admin: { username: 'admin', password: '4' },
-    teacher: { username: 'teacher', password: '3' },
+    admin: { username: 'admin', password: '1' },
+    teacher: { username: 'teacher', password: '1' },
     student: { username: 'student', password: '1' },
-    parent: { username: 'parent', password: '2' }
+    parent: { username: 'parent', password: '1' }
   };
 
   const handleLogin = (e: React.FormEvent) => {
