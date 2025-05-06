@@ -4,7 +4,7 @@ import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@
 import { Button } from "@/components/ui/button";
 import { useData } from '@/context/DataContext';
 import { useLocation } from 'react-router-dom';
-import QRCode from 'qrcode.react';
+import { QRCodeSVG } from 'qrcode.react'; // Fixed import
 import { DollarSign, CreditCard, AlertTriangle } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
@@ -126,12 +126,11 @@ export const Fees = () => {
                 </DialogHeader>
                 <div className="flex flex-col items-center justify-center p-6">
                   <div className="bg-white p-4 rounded-lg shadow-md">
-                    <QRCode 
+                    <QRCodeSVG 
                       value={generateUpiUrl(totalUnpaid)} 
                       size={200} 
                       level="H" 
                       includeMargin={true}
-                      renderAs="svg"
                     />
                   </div>
                   <p className="mt-4 text-sm text-center text-gray-500">
