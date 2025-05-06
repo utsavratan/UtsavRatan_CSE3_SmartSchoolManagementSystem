@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { DashboardLayout } from '@/components/DashboardLayout';
@@ -64,6 +63,7 @@ const PlaceholderPage = () => {
     }
   };
 
+  // Always wrap the content in DataProvider to ensure data is available
   const renderSection = () => {
     switch(section) {
       case 'student-details':
