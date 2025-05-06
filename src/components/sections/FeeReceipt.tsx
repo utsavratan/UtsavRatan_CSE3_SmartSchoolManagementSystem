@@ -103,6 +103,18 @@ export const FeeReceipt: React.FC<FeeReceiptProps> = ({
               margin-top: 40px;
               text-align: right;
             }
+            .digital-note {
+              font-size: 0.8em;
+              font-style: italic;
+              text-align: center;
+              margin-top: 20px;
+              color: #666;
+            }
+            .signature-img {
+              width: 150px;
+              height: auto;
+              margin-top: 10px;
+            }
             @media print {
               .no-print {
                 display: none;
@@ -182,8 +194,16 @@ export const FeeReceipt: React.FC<FeeReceiptProps> = ({
           </div>
           <div className="text-right">
             <p className="font-bold">Authorized Signature</p>
-            <div className="mt-10">__________________________</div>
+            <img 
+              src="/lovable-uploads/1b7856cf-887e-42ab-864f-1465e0f50e39.png" 
+              alt="Digital Signature" 
+              className="ml-auto mt-2 h-16 w-auto"
+            />
           </div>
+        </div>
+        
+        <div className="mt-6 text-center text-gray-500 text-sm italic">
+          <p>This is a digitally generated receipt. No physical signature required.</p>
         </div>
       </div>
       

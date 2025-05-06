@@ -5,7 +5,7 @@ import { useData } from '@/context/DataContext';
 import { useLocation } from 'react-router-dom';
 import { QRCodeSVG } from 'qrcode.react'; 
 import { DollarSign, CreditCard, AlertTriangle, FileText, Loader2 } from "lucide-react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { FeeReceipt } from './FeeReceipt';
 import { toast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
@@ -30,7 +30,7 @@ export const Fees = () => {
   const [currentStudent, setCurrentStudent] = useState<string>("Utsav Ratan");
   const [currentRollNo, setCurrentRollNo] = useState<string>("1");
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
-  const [paymentVerificationAttempts, setPaymentVerificationAttempts] = useState(0);
+  const [paymentVerified, setPaymentVerified] = useState(false);
   
   console.log(`Rendering Fees component for ${userRole} dashboard`);
   
@@ -80,8 +80,8 @@ export const Fees = () => {
   const handlePayNow = () => {
     console.log("Pay now button clicked for amount:", totalUnpaid);
     setShowQR(true);
-    // Reset verification attempts when payment is initiated
-    setPaymentVerificationAttempts(0);
+    setIsProcessingPayment(false);
+    setPaymentVerified(false);
   };
 
   const generateUpiUrl = (amount: number) => {
@@ -89,71 +89,52 @@ export const Fees = () => {
     return `upi://pay?pa=misterutsav@fam&pn=School Fees&am=${amount}&cu=INR`;
   };
   
-  // This function would typically be called by a webhook from a payment provider
-  // For this demo, we'll simulate a verification process that happens automatically
-  const verifyPayment = useCallback(() => {
-    if (paymentVerificationAttempts >= 3) {
-      // After 3 attempts, consider the payment successful (for demo purposes)
-      const currentDate = new Date().toISOString();
-      const transactionId = 'TXN' + Math.floor(Math.random() * 10000000);
-      
-      // Update all unpaid fees to paid
-      const updatedFees = studentFees.map(fee => {
-        if (fee.status === 'Unpaid') {
-          return {
-            ...fee,
-            status: 'Paid',
-            payment_date: currentDate,
-            transaction_id: transactionId
-          };
-        }
-        return fee;
-      });
-      
-      setStudentFees(updatedFees);
-      setTotalUnpaid(0);
-      setShowQR(false);
-      setIsProcessingPayment(false);
-      setShowReceipt(true);
-      
-      toast({
-        title: "Payment Successful",
-        description: `Payment of ₹${totalUnpaid} completed successfully.`,
-      });
-      
-      // In a real app, this would update the database
-      // simulateUpdateDatabase(updatedFees);
-      return;
-    }
-    
-    // Increment the verification attempt counter
-    setPaymentVerificationAttempts(prev => prev + 1);
+  // Mark payment as completed when the user clicks "Done"
+  const handlePaymentDone = () => {
     setIsProcessingPayment(true);
     
-    // In a real app, this would check with a payment gateway API
-    // For demo, we'll use a timeout to simulate network request
+    // Simulate payment verification
     setTimeout(() => {
-      console.log(`Payment verification attempt ${paymentVerificationAttempts + 1}`);
+      const success = true; // In a real app, this would be determined by a server verification
       
-      // After the first attempt, keep checking...
-      if (paymentVerificationAttempts < 3) {
-        // Schedule another verification attempt
-        setTimeout(verifyPayment, 2000);
+      if (success) {
+        // Update all unpaid fees to paid
+        const currentDate = new Date().toISOString();
+        const transactionId = 'TXN' + Math.floor(Math.random() * 10000000);
+        
+        const updatedFees = studentFees.map(fee => {
+          if (fee.status === 'Unpaid') {
+            return {
+              ...fee,
+              status: 'Paid',
+              payment_date: currentDate,
+              transaction_id: transactionId
+            };
+          }
+          return fee;
+        });
+        
+        setStudentFees(updatedFees);
+        setTotalUnpaid(0);
+        setShowQR(false);
+        setIsProcessingPayment(false);
+        setPaymentVerified(true);
+        setShowReceipt(true);
+        
+        toast({
+          title: "Payment Successful",
+          description: `Payment of ₹${totalUnpaid} completed successfully.`,
+        });
+      } else {
+        setIsProcessingPayment(false);
+        toast({
+          variant: "destructive",
+          title: "Payment Failed",
+          description: "We couldn't verify your payment. Please try again or contact support.",
+        });
       }
-    }, 1500);
-  }, [paymentVerificationAttempts, studentFees, totalUnpaid]);
-  
-  // Start verification process when QR code is shown
-  useEffect(() => {
-    if (showQR && !isProcessingPayment && paymentVerificationAttempts === 0) {
-      // Start the verification process after a short delay (giving user time to scan)
-      const timer = setTimeout(() => {
-        verifyPayment();
-      }, 2000);
-      
-      return () => clearTimeout(timer);
-    }
-  }, [showQR, isProcessingPayment, paymentVerificationAttempts, verifyPayment]);
+    }, 2000);
+  };
 
   // View for students and parents
   if (userRole === 'student' || userRole === 'parent') {
@@ -226,7 +207,7 @@ export const Fees = () => {
               setShowQR(open);
               if (!open) {
                 setIsProcessingPayment(false);
-                setPaymentVerificationAttempts(0);
+                setPaymentVerified(false);
               }
             }}>
               <DialogTrigger asChild>
@@ -276,11 +257,21 @@ export const Fees = () => {
                         Scan this QR code with any UPI app to pay ₹{totalUnpaid}
                       </p>
                       <p className="text-xs text-center text-gray-400 mt-2">
-                        Payment will be processed immediately
+                        After completing payment, click the Done button below
                       </p>
                     </>
                   )}
                 </div>
+                <DialogFooter className="flex justify-center">
+                  {!isProcessingPayment && (
+                    <Button 
+                      onClick={handlePaymentDone}
+                      className="w-full"
+                    >
+                      Done
+                    </Button>
+                  )}
+                </DialogFooter>
               </DialogContent>
             </Dialog>
 
