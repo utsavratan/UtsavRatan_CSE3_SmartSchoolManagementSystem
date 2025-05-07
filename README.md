@@ -10,6 +10,14 @@
 | **ISHAN JHA** | B.Tech Computer Science Engineering | K.R. Mangalam University | 2401010022@krmu.edu.in    |
 
 ---
+## 🎓 Guidance & Mentorship
+
+This project was made possible under the valuable guidance of:
+
+**Dr. Rupesh Kumar Tipu Sir**  
+<sub>Department of Computer Science & Engineering</sub>  
+<sub>His support, mentorship, and technical insights were instrumental in shaping this project into a success.</sub>
+---
 
 ## 🌐 Visit the Website
 
@@ -19,7 +27,19 @@
   </a>
 </p>
 
+
 > 🚀 Experience EduTrack in action! Click the badge above to explore the full system.
+
+---
+## 🎥 EduTrack Demo Video
+
+Experience **EduTrack** in action! Click the badge below to watch a full walkthrough of its features, UI, and user experience:
+<p align="center">
+  <a href="https://drive.google.com/file/d/1K8OFq39-OFF90R9tv40GiogpnN5Stmy-/view?usp=sharing" target="_blank">
+    <img src="https://img.shields.io/badge/▶️%20Watch%20Demo%20Video-EduTrack-blue?style=for-the-badge&logo=youtube" alt="Badge">
+
+> 🚀 **EduTrack** is your ultimate solution for efficient student tracking and academic management.
+
 
 ---
 
