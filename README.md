@@ -11,6 +11,18 @@
 
 ---
 
+## 🌐 Visit the Website
+
+<p align="center">
+  <a href="https://edutrackia.netlify.app" target="_blank">
+    <img src="https://img.shields.io/badge/Explore%20EduTrack-Live%20Demo-blue?style=for-the-badge&logo=netlify" alt="Live Demo Badge">
+  </a>
+</p>
+
+> 🚀 Experience EduTrack in action! Click the badge above to explore the full system.
+
+---
+
 ## 🚀 Project Overview
 
 **EduTrack** is a full-fledged Smart School Management System built with **React.js**. It provides efficient access to students' academic and administrative data through role-based dashboards for **Students**, **Teachers**, **Parents**, and **Admins**.
