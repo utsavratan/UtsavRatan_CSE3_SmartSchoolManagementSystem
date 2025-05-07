@@ -39,10 +39,16 @@ Experience **EduTrack** in action! Click the badge below to watch a full walkthr
     <img src="https://img.shields.io/badge/▶️%20Watch%20Demo%20Video-EduTrack-blue?style=for-the-badge&logo=youtube" alt="Badge">
 
 > 🚀 **EduTrack** is your ultimate solution for efficient student tracking and academic management.
-
-
 ---
+## 📑 Project Report
 
+Explore the detailed **EduTrack** project report! Click the badge below to access the full report:
+<p align="center">
+  <a href="https://github.com/utsavratan/UtsavRatan_CSE3_SmartSchoolManagementSystem/blob/de8177d11cb6bea050b30850a4ad204cca538d13/EduTrack%20-%20Project%20Report.pdf" target="_blank">
+    <img src="https://img.shields.io/badge/📑%20Read%20Project%20Report-EduTrack-blue?style=for-the-badge&logo=readme" alt="badge">
+    
+> 📚 The project report provides an in-depth analysis of the EduTrack platform, including technical details, architecture, and implementatio
+---
 ## 🚀 Project Overview
 
 **EduTrack** is a full-fledged Smart School Management System built with **React.js**. It provides efficient access to students' academic and administrative data through role-based dashboards for **Students**, **Teachers**, **Parents**, and **Admins**.
